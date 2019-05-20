@@ -1,0 +1,58 @@
+/*  Specifically for EnumC.com
+    Created by Eric Qian Copyright 2019 
+*/
+
+.bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 1vw;
+    /* margin-left: auto;
+    margin-right: 0;
+    float: right; */
+}
+
+.top-right {
+    position: absolute;
+    top: 0;
+    right: 1vw;
+}
+
+.top-right h4 {
+    font-family: monospace;
+}
+
+h4 {
+    font-family: monospace;
+}
+
+a {
+    font-family: monospace;
+}
+
+.colorA {
+    color: #7B0000;
+}
+
+#info-section {
+    /* border: 1px solid red; */
+    width: 25vw;
+    height: 10vw;
+}
+
+a svg rect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+}
+
+a svg rect {
+    stroke: #000;
+    stroke-width: 4;
+    transition: 1.5s;
+    stroke-dasharray: 750;
+    stroke-dashoffset: 750;
+
+}
