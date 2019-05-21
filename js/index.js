@@ -39,6 +39,11 @@ $(document).ready(function() {
             [0, height],
             [0, 0]
         ],
+
+        // [
+        //     [width / 2, 0],
+        //     [width / 2, height]
+        // ]
     ];
 
     // set some style
@@ -51,19 +56,20 @@ $(document).ready(function() {
     ctx.globalCompositeOperation = "lighter";
     ctx.textBaseline = "top";
 
-    points = calcWaypoints(lines);
-
-
     // extend the line from start to finish with animation
     // Check out https://stackoverflow.com/questions/23939588/how-to-animate-drawing-lines-on-canvas
     // if you would like to try something similar.
-    animate();
+    drawLine(lines);
 
     infoText = "This site is undergoing a complete redesign, and therefore might be very incomplete. Please see https://bananiumlabs.com for past content.";
     type(infoText, 25, 25, 50, 10);
 
 });
 
+function drawLine(input) {
+    points = calcWaypoints(input);
+    animate();
+}
 
 // Adapted from https://codepen.io/tmrDevelops/pen/EaaBYB
 // remember to fix method asap
