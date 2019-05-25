@@ -62,3 +62,11 @@ a svg rect {
     stroke-dashoffset: 750;
 
 }
+
+@media screen and (orientation:portrait) {
+    #info-section {
+        /* border: 1px solid red; */
+        width: 40vw;
+        height: 40vw;
+    }
+}

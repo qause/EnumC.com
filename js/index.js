@@ -11,12 +11,24 @@ let typeSpeed = 15;
 $(document).ready(function() {
     canvas = document.getElementById("info-section");
 
-    // Set canvas resolution. The actual size can be configured
-    // in custom.css.
-    canvas.width = 1000;
-    canvas.height = 400;
+    
+   
     ctx = canvas.getContext("2d");
     ctx.lineCap = "round";
+
+    // Set canvas resolution. The actual size can be configured
+    // in custom.css.
+    if (window.innerHeight > window.innerWidth) {
+        //portrait
+        canvas.width = 1000;
+        canvas.height = 1000;
+        ctx.lineWidth = 5;
+    }
+    else {
+        canvas.width = 1000;
+        canvas.height = 400;
+        ctx.lineWidth = 2;
+    }
 
     let width = canvas.width;
     let height = canvas.height;
@@ -47,7 +59,7 @@ $(document).ready(function() {
     ];
 
     // set some style
-    ctx.lineWidth = 2;
+    
     ctx.strokeStyle = "#7B0000";
     ctx.font = "48px monospace";
     ctx.shadowColor = "rgba(0,255,0,0.8)";
