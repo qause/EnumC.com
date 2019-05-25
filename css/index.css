@@ -63,10 +63,25 @@ a svg rect {
 
 }
 
+.portrait-warning {
+    display: none;
+}
+
 @media screen and (orientation:portrait) {
     #info-section {
         /* border: 1px solid red; */
         width: 40vw;
         height: 40vw;
+    }
+
+    .portrait-warning {
+        display: block;
+        z-index: 1;
+        top: 15vw;
+        left: 10vw;
+        right: 10vw;
+        width: 80vw;
+        position: relative;
+        background: rgba(255, 255, 255, 1);
     }
 }
