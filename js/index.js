@@ -99,7 +99,7 @@ function type(str, startX, startY, lineHeight, padding) {
     var lineHeight = lineHeight || 32;
     padding = padding || 10;
     var i = 0;
-    ctx_inter = setInterval(function () {
+    let ctx_inter = setInterval(function () {
         var rem = str.substr(i);
         var space = rem.indexOf(' ');
         space = (space === -1) ? str.length : space;
