@@ -31,10 +31,19 @@ const scene = new ScrollMagic.Scene({
 const startScrollAnimation = () => {
     scene
         .addTo(controller)
-        .duration(long.clientHeight)
+        .duration(long.clientHeight - window.innerHeight)
+        .offset(window.innerHeight/2)
         .on("progress", (e) => {
             scrollpos = e.progress;
+        })
+        .on("leave", (e) => {
+            $('#video').fadeOut();
+        })
+        .on("enter", (e) => {
+            $('#video').fadeIn();
         });
+        
+    scene.addIndicators({ name: "main animate", colorEnd: "#CCCC00" });
 
     setInterval(() => {
         if (lastpos === scrollpos) return;
@@ -80,6 +89,13 @@ preloadVideo(video, startScrollAnimation);
 
 // On DOM ready.
 $(document).ready(function() {
+    $("#autoSc").click(function () {
+        console.log("Start auto scroll");
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#end").offset().top
+        }, document.documentElement.scrollHeight);
+    });
+    
     canvas = document.getElementById("info-section");
 
     
@@ -93,12 +109,12 @@ $(document).ready(function() {
         //portrait
         canvas.width = 1000;
         canvas.height = 1000;
-        ctx.lineWidth = 5;
+        ctx.lineWidth = 8;
     }
     else {
         canvas.width = 1000;
         canvas.height = 400;
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 5;
     }
 
     let width = canvas.width;
