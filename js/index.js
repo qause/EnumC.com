@@ -163,6 +163,15 @@ $(document).ready(function() {
     infoText = "This site is undergoing a complete redesign, and therefore might be very incomplete. Please see https://bananiumlabs.com for past content.";
     type(infoText, 25, 25, 50, 10);
 
+    $.getJSON('https://api.github.com/repos/EnumC/EnumC.com/git/refs/heads/master', function (data) {
+        console.info(data);
+        console.info("link: " , data.object.url);
+        $.getJSON(data.object.url, function (commit) {
+            console.info("commit: ", JSON.stringify(commit, null, 2));
+            $("#commitData").text(JSON.stringify(commit, null, 2));
+        });
+    });
+    
 });
 
 function drawLine(input) {
