@@ -27,6 +27,20 @@
   <!-- Javascript
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!-- <script type="text/javascript" src="node_modules/vivus/dist/vivus.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> -->
+  <script src="node_modules/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
+  <script src="node_modules/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+  <script src="node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
+  <!-- <script src="node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js"></script> -->
+  <div class="video-container">
+    <video id="video" style="position: fixed;" muted="muted" src="https://drive.google.com/uc?export=download&id=1oVgmsnP5dfiT2hQzpGUGbMGGB_L02n9q">
+    </video>
+  </div>
+  
+  
+  <div id="long" style="height: 20000px;"></div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="js/index.js"></script>
@@ -43,9 +57,9 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container" style="height:98vh;">
+  <div class="container" style="height:98vh; position: absolute; top: 0px;">
     <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
+      <div class="one-half column" style="margin-top: 25%; margin-left: 10%">
         <h4 class="hero-heading"><b>Hello World.</b></h4>
         <a class="button button-primary" href="#">See schematic</a>
       </div>
@@ -53,7 +67,7 @@
   </div>
 
   <div class="top-right">
-    <h4 style="margin-bottom: 0px">Eric Qian</h4>
+    <h4 style="margin-bottom: 0px; margin-top: 5%">Eric Qian</h4>
     <h4>©2019</h4> 
   </div>
   <div class="bottom-right">
@@ -65,7 +79,6 @@
     </a>   -->
     <canvas id="info-section"></canvas>
   </div>
-
 
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
