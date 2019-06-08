@@ -23,7 +23,7 @@ const video = document.getElementById('video');
 const long = document.getElementById('long');
 let scrollpos = 0;
 let lastpos;
-const controller = new ScrollMagic.Controller();
+const controller = new ScrollMagic.Controller({ container: "#video-container"});
 const scene = new ScrollMagic.Scene({
     triggerElement: long,
     triggerHook: "onEnter"
@@ -32,7 +32,7 @@ const startScrollAnimation = () => {
     scene
         .addTo(controller)
         .duration(long.clientHeight - window.innerHeight)
-        .offset(window.innerHeight/2)
+        .offset(window.innerHeight)
         .on("progress", (e) => {
             scrollpos = e.progress;
         })
