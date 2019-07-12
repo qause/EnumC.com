@@ -25,10 +25,20 @@ body {
 
 .top-right h4 {
     font-family: monospace;
+    /* color:white; */
 }
 
 h4 {
     font-family: monospace;
+    color: white;
+}
+
+h3 {
+    color: white;
+}
+
+p {
+    color: white;
 }
 
 a {

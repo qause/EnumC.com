@@ -7,7 +7,8 @@ let global_animate_numPoints = 100;
 
 // Higher = faster text render.
 let typeSpeed = 15;
-
+// const textColor = "#7B0000";
+const textColor = "#FFFFFF";
 
 
 /**
@@ -23,6 +24,8 @@ const video = document.getElementById('video');
 const long = document.getElementById('long');
 let scrollpos = 0;
 let lastpos;
+
+console.log("init");
 // const controller = new ScrollMagic.Controller({ container: "#video-container"});
 const controller = new ScrollMagic.Controller({ });
 const scene = new ScrollMagic.Scene({
@@ -148,11 +151,11 @@ $(document).ready(function() {
 
     // set some style
     
-    ctx.strokeStyle = "#7B0000";
+    ctx.strokeStyle = textColor;
+    ctx.fillStyle = textColor;
     ctx.font = "48px monospace";
     ctx.shadowColor = "rgba(0,255,0,0.8)";
     ctx.shadowBlur = 0;
-    ctx.fillStyle = '#7B0000';
     ctx.globalCompositeOperation = "lighter";
     ctx.textBaseline = "top";
 
