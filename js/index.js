@@ -23,7 +23,8 @@ const video = document.getElementById('video');
 const long = document.getElementById('long');
 let scrollpos = 0;
 let lastpos;
-const controller = new ScrollMagic.Controller({ container: "#video-container"});
+// const controller = new ScrollMagic.Controller({ container: "#video-container"});
+const controller = new ScrollMagic.Controller({ });
 const scene = new ScrollMagic.Scene({
     triggerElement: long,
     triggerHook: "onEnter"
