@@ -170,7 +170,10 @@ a svg rect {
         left: 10vw;
         right: 10vw;
         width: 80vw;
-        position: relative;
-        background: rgba(255, 255, 255, 1);
+        /* position: relative; */
+        position: -webkit-sticky;
+        position: sticky;
+        /* background: rgba(255, 255, 255, 1); */
+        background: black;
     }
 }
