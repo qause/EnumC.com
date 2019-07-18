@@ -88,11 +88,31 @@ preloadVideo(video, startScrollAnimation);
 // startScrollAnimation();
 
 
-
-
+let fadeInOutStatus = true;
+function fadeinandout(element) {
+    
+    $(element).delay(200).animate(
+        { opacity: 'toggle' },
+        1000,
+        function () {
+            // Stop fade in out if status is false.
+            if(fadeInOutStatus)
+                fadeinandout(element);
+        }
+    );
+}
 
 // On DOM ready.
 $(document).ready(function() {
+    fadeinandout(".fadeinout");
+    $(".main-center-header").fadeTo(5000, 1, function() {
+        fadeInOutStatus = false;
+    });
+    $("#autoSc").fadeTo(5000, 1);
+    $("#commitData").fadeTo(5000, 1);
+    
+    
+
     $("#autoSc").click(function () {
         console.log("Start auto scroll");
         $([document.documentElement, document.body]).animate({
