@@ -170,7 +170,7 @@ a svg rect {
     .portrait-warning {
         display: block;
         z-index: 1;
-        top: 15vw;
+        top: 50vw;
         left: 10vw;
         right: 10vw;
         width: 80vw;
