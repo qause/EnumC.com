@@ -96,8 +96,14 @@ function fadeinandout(element) {
         1000,
         function () {
             // Stop fade in out if status is false.
-            if(fadeInOutStatus)
+            if(fadeInOutStatus) {
                 fadeinandout(element);
+            }
+            else {
+                delete fadeInOutStatus;
+                $(element).fadeOut();
+            }
+                
         }
     );
 }
