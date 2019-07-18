@@ -184,7 +184,6 @@ function drawLine(input) {
 }
 
 // Adapted from https://codepen.io/tmrDevelops/pen/EaaBYB
-// remember to fix method asap
 /* type method
 * str - string to type on the canvas
 * startX - position X of the point to start from
