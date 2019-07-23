@@ -20,8 +20,8 @@ const textColor = "#FFFFFF";
  * and here: https://bugs.chromium.org/p/chromium/issues/detail?id=121765
  */
 
-const video = document.getElementById('video');
-const long = document.getElementById('long');
+let video = document.getElementById('video');
+let long = document.getElementById('long');
 let scrollpos = 0;
 let lastpos;
 
@@ -83,7 +83,7 @@ const preloadVideo = (v, callback) => {
     }
 };
 
-preloadVideo(video, startScrollAnimation);
+
 
 // startScrollAnimation();
 
@@ -110,21 +110,32 @@ function fadeinandout(element) {
 
 // On DOM ready.
 $(document).ready(function() {
-    fadeinandout(".fadeinout");
-    $(".main-center-header").fadeTo(5000, 1, function() {
-        fadeInOutStatus = false;
-    });
-    $("#autoSc").fadeTo(5000, 1);
-    $("#commitData").fadeTo(5000, 1);
-    
-    
+    $("#loaded-content").load("html/placeholder.html", function(data) {
 
-    $("#autoSc").click(function () {
-        console.log("Start auto scroll");
-        $([document.documentElement, document.body]).animate({
-            scrollTop: $("#end").offset().top
-        }, document.documentElement.scrollHeight);
+        video = document.getElementById('video');
+        // console.log(document.getElementById('video'));
+        long = document.getElementById('long');
+
+        preloadVideo(video, startScrollAnimation);
+
+        fadeinandout(".fadeinout");
+        $(".main-center-header").fadeTo(5000, 1, function () {
+            fadeInOutStatus = false;
+        });
+        $("#autoSc").fadeTo(5000, 1);
+        $("#commitData").fadeTo(5000, 1);
+
+
+
+        $("#autoSc").click(function () {
+            console.log("Start auto scroll");
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#end").offset().top
+            }, document.documentElement.scrollHeight);
+        });
     });
+
+    
     
     canvas = document.getElementById("info-section");
 
