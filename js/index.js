@@ -22,6 +22,7 @@ const textColor = "#FFFFFF";
 
 let video = document.getElementById('video');
 let long = document.getElementById('long');
+let title = document.getElementById('title-section');
 let scrollpos = 0;
 let lastpos;
 
@@ -35,8 +36,9 @@ const scene = new ScrollMagic.Scene({
 const startScrollAnimation = () => {
     scene
         .addTo(controller)
-        .duration(long.clientHeight - window.innerHeight)
-        .offset(window.innerHeight)
+        .duration(long.clientHeight - title.clientHeight - window.innerHeight * 2)
+        //.offset(window.innerHeight)
+        .offset(window.innerHeight / 5)
         .on("progress", (e) => {
             scrollpos = e.progress;
         })
