@@ -4,10 +4,7 @@
     All rights reserved.
 */
 
-let pathname = parent.location.hash;
-console.log("Current Path: " + pathname);
-
-
+const entryPath = "menu";
 function placeholderPrep() {
     fadeinandout(".fadeinout");
     // video = document.getElementById('video');
@@ -43,12 +40,22 @@ function placeholderPrep() {
 }
 
 function loadPath(path, funct) {
+    var origPath = parent.location.hash;
     if (path.charAt(0) == '#') {
         path = path.substr(1);
     }
-    console.log("Switching to path: " + path);
+    if (origPath.charAt(0) == '#') {
+        origPath = origPath.substr(1);
+    }
+    console.log("Switching to path: " + path + " from path: " + origPath);
     console.log("with callback: ");
     console.log(funct);
+
+    if (origPath == "menu") {
+        console.warn("destroying scrollmagic controller");
+        controller.destroy(true);
+        // Remove scrollmagic controller when navigating away.
+    }
     switch (path) {
         case "":
             $("#loaded-content").load("html/menu.html", placeholderPrep);
@@ -69,4 +76,4 @@ function loadPath(path, funct) {
     $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
 }
 
-loadPath(pathname, function() {});
+loadPath(entryPath, function() {});
