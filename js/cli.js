@@ -5,7 +5,6 @@
 */
 
 console.log("CLI loading stated.");
-parent.location.hash = "#cli";
 window.scrollTo(0, 0);
 
 try {
@@ -18,7 +17,7 @@ catch (err) {
 function initCLI() {
     let validDirectories = ['SYSTEM', '/', '~/', '~/HOME'];
 
-    let currentDirectory = "SYSTEM";
+    //CURRENTDIRECTORY MOVED TO INDEX.JS
     $('#mark').text("$ [" + currentDirectory + "]");
     
     $('.commandline').keypress(function (event) {
@@ -37,7 +36,7 @@ function initCLI() {
 
             switch (command) {
                 case "help":
-                    $('.log').append('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, echo, time, clear, exit</div>');
+                    $('.log').append('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, echo, fetch, time, clear, exit</div>');
                     break;
                 case "cd":
                     console.log("valid dir: " + args.trim());
@@ -70,12 +69,19 @@ function initCLI() {
                     break;
                 case "ls":
                     $('.log').append("<div class='blinking cli-text'>Access Denied.</div>");
+                    $('.log').append("<img src='https://httpstatusdogs.com/img/401.jpg' style='height:20em' class='blinking'></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
+                    break;
+                case "fetch":
+                    $.getJSON('https://dog.ceo/api/breeds/image/random', function (data) {
+                        console.info(data.message);
+                        $('.log').append("<img src='" + data.message + "' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://dog.ceo/dog-api/ <3</p>");
+                    });
                     break;
                 case "clear":
                     $('.log').html("");
                     break;
                 case "exit":
-                    loadPath("placeholder", function() {});
+                    loadPath("menu", function() {});
                     break;
                 default:
                     $('.log').append("<div class='cli-text'>cd: " + command + ": command not found" + ".</div>");
@@ -86,6 +92,11 @@ function initCLI() {
         }
     });
 }
+
+$(".log").bind("DOMSubtreeModified", function () {
+    // Scroll to bottom whenever log is updated.
+    window.scrollTo(0, document.body.scrollHeight);
+});
 
 document.getElementsByClassName("commandline")[0].select();
 console.log("CLI loading completed.");

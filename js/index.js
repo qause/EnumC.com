@@ -7,6 +7,8 @@ let points = undefined;
 let canvas = undefined;
 let ctx = undefined;
 
+let currentDirectory = "SYSTEM";
+
 // Higher = slower animation.
 let global_animate_numPoints = 100;
 

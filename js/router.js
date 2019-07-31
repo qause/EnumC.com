@@ -51,21 +51,22 @@ function loadPath(path, funct) {
     console.log(funct);
     switch (path) {
         case "":
-            $("#loaded-content").load("html/placeholder.html", placeholderPrep);
-            parent.location.hash = "placeholder";
+            $("#loaded-content").load("html/menu.html", placeholderPrep);
+            parent.location.hash = "menu";
             break;
-        case "placeholder":
-            $("#loaded-content").load("html/placeholder.html", placeholderPrep);
-            parent.location.hash = "placeholder";
+        case "menu":
+            $("#loaded-content").load("html/menu.html", placeholderPrep);
+            parent.location.hash = "menu";
             break;
         case "cli":
             $("#loaded-content").load("html/cli.html", funct);
             parent.location.hash = "cli";
             break;
         default:
-            alert("requested path: |" + path + "| is invalid.");
+            alert("404: requested path: |" + path + "| is invalid.");
             break;
     }
+    $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
 }
 
 loadPath(pathname, function() {});
