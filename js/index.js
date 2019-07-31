@@ -3,7 +3,6 @@
     <https://enumc.com/>
     All rights reserved.
 */
-
 let points = undefined;
 let canvas = undefined;
 let ctx = undefined;
@@ -17,144 +16,50 @@ let typeSpeed = 15;
 const textColor = "#FFFFFF";
 
 
-/**
- * Frame-by-frame video animation with ScrollMagic and GSAP
- * 
- * Note that your web server must support byte ranges (most do).
- * Otherwise currentTime will always be 0 in Chrome.
- * See here: http://stackoverflow.com/a/5421205/950704
- * and here: https://bugs.chromium.org/p/chromium/issues/detail?id=121765
- */
 
-let video = document.getElementById('video');
-let long = document.getElementById('long');
-let title = document.getElementById('title-section');
-let scrollpos = 0;
-let lastpos;
-
-console.log("init");
-// const controller = new ScrollMagic.Controller({ container: "#video-container"});
-const controller = new ScrollMagic.Controller({ });
-const scene = new ScrollMagic.Scene({
-    triggerElement: long,
-    triggerHook: "onEnter"
-});
-const startScrollAnimation = () => {
-    scene
-        .addTo(controller)
-        .duration(long.clientHeight - title.clientHeight - window.innerHeight * 2)
-        //.offset(window.innerHeight)
-        .offset(window.innerHeight / 5)
-        .on("progress", (e) => {
-            scrollpos = e.progress;
-        })
-        .on("leave", (e) => {
-            $('#video').fadeOut();
-        })
-        .on("enter", (e) => {
-            $('#video').fadeIn();
-        });
-        
-    scene.addIndicators({ name: "main animate", colorEnd: "#CCCC00" });
-
-    setInterval(() => {
-        if (lastpos === scrollpos) return;
-        requestAnimationFrame(() => {
-            video.currentTime = video.duration * scrollpos;
-            video.pause();
-            lastpos = scrollpos;
-            console.log(video.currentTime, scrollpos);
-        });
-    }, 50);
-};
-
-const preloadVideo = (v, callback) => {
-    const ready = () => {
-        v.removeEventListener('canplaythrough', ready);
-
-        video.pause();
-        var i = setInterval(function () {
-            if (v.readyState > 3) {
-                clearInterval(i);
-                video.currentTime = 0;
-                callback();
-            }
-        }, 50);
-    };
-    v.addEventListener('canplaythrough', ready, false);
-    try {
-        v.play();
-    }
-    catch (e) {
-        console.warn("Error occured when calling v.play(). Stacktrace: ");
-        console.warn(e);
-    }
-};
-
-
-
-// startScrollAnimation();
-
-
-let fadeInOutStatus = true;
-function fadeinandout(element) {
-    
-    $(element).delay(200).animate(
-        { opacity: 'toggle' },
-        1000,
-        function () {
-            // Stop fade in out if status is false.
-            if(fadeInOutStatus) {
-                fadeinandout(element);
-            }
-            else {
-                delete fadeInOutStatus;
-                $(element).fadeOut();
-            }
-                
-        }
-    );
-}
 
 // On DOM ready.
-$(document).ready(function() {
-    $("#loaded-content").load("html/placeholder.html", function(data) {
+$(document).ready(function () {
+    // loadPath("placeholder", function(data) {
 
-        video = document.getElementById('video');
-        // console.log(document.getElementById('video'));
-        long = document.getElementById('long');
+    // video = document.getElementById('video');
+    // // console.log(document.getElementById('video'));
+    // long = document.getElementById('long');
 
-        preloadVideo(video, startScrollAnimation);
+    // preloadVideo(video, startScrollAnimation);
 
-        fadeinandout(".fadeinout");
-        $(".main-center-header").fadeTo(5000, 1, function () {
-            fadeInOutStatus = false;
-        });
-        $("#autoSc").fadeTo(5000, 1);
-        $("#experimental").fadeTo(5000, 1);
-        $("#commitData").fadeTo(5000, 1);
-        $(".container").fadeTo(5000, 1);
+    // fadeinandout(".fadeinout");
+    // $(".main-center-header").fadeTo(5000, 1, function () {
+    //     fadeInComplete = true;
+    // });
+    // document.getElementById("video").addEventListener("canplaythrough", function () {
+    //     videoReady = true;
+    // });
+    // $("#autoSc").fadeTo(5000, 1);
+    // $("#experimental").fadeTo(5000, 1);
+    // $("#commitData").fadeTo(5000, 1);
+    // $(".container").fadeTo(5000, 1);
 
 
-        $("#autoSc").click(function () {
-            console.log("Start auto scroll");
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $("#end").offset().top
-            }, document.documentElement.scrollHeight);
-        });
+    // $("#autoSc").click(function () {
+    //     console.log("Start auto scroll");
+    //     $([document.documentElement, document.body]).animate({
+    //         scrollTop: $("#end").offset().top
+    //     }, document.documentElement.scrollHeight);
+    // });
 
-        $("#experimental").click(function () {
-            console.log("Loading experimental elements...");
-            $("#loaded-content").load("html/cli.html", function (data) {});
-        });
-    });
+    // $("#experimental").click(function () {
+    //     console.log("Loading experimental elements...");
+    //     loadPath("cli", function (data) {});
+    // });
+    // });
 
-    
-    
+
+
     canvas = document.getElementById("info-section");
 
-    
-   
+
+
     ctx = canvas.getContext("2d");
     ctx.lineCap = "round";
 
@@ -201,7 +106,7 @@ $(document).ready(function() {
     ];
 
     // set some style
-    
+
     ctx.strokeStyle = textColor;
     ctx.fillStyle = textColor;
     ctx.font = "48px monospace";
@@ -218,15 +123,8 @@ $(document).ready(function() {
     infoText = "This site is undergoing a complete redesign, and therefore might be very incomplete. Please see https://bananiumlabs.com for past content.";
     type(infoText, 25, 25, 50, 10);
 
-    $.getJSON('https://api.github.com/repos/EnumC/EnumC.com/git/refs/heads/master', function (data) {
-        console.info(data);
-        console.info("link: " , data.object.url);
-        $.getJSON(data.object.url, function (commit) {
-            console.info("commit: ", JSON.stringify(commit, null, 2));
-            $("#commitData").text(JSON.stringify(commit, null, 2));
-        });
-    });
     
+
 });
 
 function drawLine(input) {

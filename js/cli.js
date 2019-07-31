@@ -5,6 +5,7 @@
 */
 
 console.log("CLI loading stated.");
+parent.location.hash = "#cli";
 window.scrollTo(0, 0);
 
 try {
@@ -74,7 +75,7 @@ function initCLI() {
                     $('.log').html("");
                     break;
                 case "exit":
-                    $("#loaded-content").load("html/placeholder.html");
+                    loadPath("placeholder", function() {});
                     break;
                 default:
                     $('.log').append("<div class='cli-text'>cd: " + command + ": command not found" + ".</div>");
@@ -86,5 +87,5 @@ function initCLI() {
     });
 }
 
-
+document.getElementsByClassName("commandline")[0].select();
 console.log("CLI loading completed.");
