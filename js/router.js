@@ -41,6 +41,7 @@ function placeholderPrep() {
 
 function loadPath(path, funct) {
     var origPath = parent.location.hash;
+    var validPath = true;
     if (path.charAt(0) == '#') {
         path = path.substr(1);
     }
@@ -70,10 +71,20 @@ function loadPath(path, funct) {
             parent.location.hash = "cli";
             break;
         default:
-            alert("404: requested path: |" + path + "| is invalid.");
+            // alert("404: requested path: |" + path + "| is invalid.");
+            validPath = false;
+            $("#loaded-content").load("html/cli.html", function() {
+                addLog("<div class='cli-text'>404: requested path: |" + path + "| is invalid.</div>");
+                addLog("<img src='https://httpstatusdogs.com/img/404.jpg' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
+            })
             break;
     }
-    $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
+    if (validPath) {
+        $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
+    }
+    else {
+        $('#path').text('UNKNOWN');
+    }
 }
-
-loadPath(entryPath, function() {});
+    
+loadPath(parent.location.hash, function () { });

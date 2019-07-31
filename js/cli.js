@@ -14,6 +14,9 @@ catch (err) {
     $("#cli-container").html("<p class='cli-text'>CLI runtime error: " + err + ".</p>");
 }
 
+function addLog(content) {
+    $('.log').append(content);
+}
 function initCLI() {
     let validDirectories = ['SYSTEM', '/', '~/', '~/HOME'];
 
@@ -32,11 +35,11 @@ function initCLI() {
             }
             console.log("command: " + command);
             console.log("args: " + args);
-            $('.log').append("$ [" + currentDirectory + "] " + command + " " + args + "<br>");
+            addLog("$ [" + currentDirectory + "] " + command + " " + args + "<br>");
 
             switch (command) {
                 case "help":
-                    $('.log').append('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, echo, fetch, time, clear, exit</div>');
+                    addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, clear, exit</div>');
                     break;
                 case "cd":
                     console.log("valid dir: " + args.trim());
@@ -44,7 +47,7 @@ function initCLI() {
                         currentDirectory = args.toUpperCase();
                     }
                     else {
-                        $('.log').append("<div class='cli-text'>cd: " + args + ": No such file or directory" + ".</div>");
+                        addLog("<div class='cli-text'>cd: " + args + ": No such file or directory" + ".</div>");
                     }
                     $('#mark').text("$ [" + currentDirectory + "]");
                     switch(currentDirectory) {
@@ -58,25 +61,100 @@ function initCLI() {
                             $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\');
                     }
                     
-                    // $('.log').append("");
+                    // addLog("");
                     break;
 
                 case "time":
-                    $('.log').append(Date());
+                    addLog(Date());
                     break;
                 case "echo":
-                    $('.log').append("<div class='cli-text'>" + args + "</div>");
+                    addLog("<div class='cli-text'>" + args + "</div>");
                     break;
                 case "ls":
-                    $('.log').append("<div class='blinking cli-text'>Access Denied.</div>");
-                    $('.log').append("<img src='https://httpstatusdogs.com/img/401.jpg' style='height:20em' class='blinking'></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
+                    addLog("<div class='blinking cli-text'>Access Denied.</div>");
+                    addLog("<img src='https://httpstatusdogs.com/img/401.jpg' style='height:20em' class='blinking'></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
                     break;
                 case "fetch":
                     $.getJSON('https://dog.ceo/api/breeds/image/random', function (data) {
                         console.info(data.message);
-                        $('.log').append("<img src='" + data.message + "' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://dog.ceo/dog-api/ <3</p>");
+                        addLog("<img src='" + data.message + "' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://dog.ceo/dog-api/ <3</p>");
                     });
                     break;
+                case "open":
+                    loadPath(args, function() {});
+                    break;
+                case "man":
+                    switch(args) {
+                        case "help":
+                            addLog("<div class='cli-text'>Display help page</div>");
+                            addLog("<div class='cli-text'>Usage: help</div>");
+                            break;
+                        case "cd":
+                            addLog("<div class='cli-text'>Set directory</div>");
+                            addLog("<div class='cli-text'>Usage: cd [directoryname]</div>");
+                            break;
+                        case "time":
+                            addLog("<div class='cli-text'>Display current time</div>");
+                            addLog("<div class='cli-text'>Usage: time</div>");
+                            break;
+                        case "echo":
+                            addLog("<div class='cli-text'>Echo arg</div>");
+                            addLog("<div class='cli-text'>Usage: echo [arg]</div>");
+                            break;
+                        case "ls":
+                            addLog("<div class='cli-text'>List files in current directory</div>");
+                            addLog("<div class='cli-text'>Usage: ls</div>");
+                            break;
+                        case "fetch":
+                            addLog("<div class='cli-text'>:3</div>");
+                            addLog("<div class='cli-text'>Usage: fetch</div>");
+                            break;
+                        case "open":
+                            addLog("<div class='cli-text'>Open file</div>");
+                            addLog("<div class='cli-text'>Usage: open [filename]</div>");
+                            break;
+                        case "man":
+                            addLog("<div class='cli-text'>Get command usage</div>");
+                            addLog("<div class='cli-text'>Usage: man [commandname]</div>");
+                            break;
+
+                        case "login":
+                            break;
+                        case "su":
+                            break;
+                        case "whoami":
+                            break;
+                        case "command_name_here":
+                            addLog("<div class='cli-text'>What did your instructor say about blindly copy pasting commands?!</div>");
+                            addLog("<div class='cli-text'>To request the manual for a command, use an actual command name.</div>");
+                            break;
+                        case "clear":
+                            addLog("<div class='cli-text'>Clear terminal</div>");
+                            addLog("<div class='cli-text'>Usage: clear</div>");
+                            break;
+                        case "exit":
+                            addLog("<div class='cli-text'>Exit terminal</div>");
+                            addLog("<div class='cli-text'>Usage: exit</div>");
+                            break;
+                        default:
+                            addLog("<div class='cli-text'>man page for " + args + " does not exist.</div>")
+                            break;
+                    }
+                    // addLog("not implemented");
+                    break;
+
+                // Server-side requests
+                case "login":
+                    addLog("not implemented");
+                    break;
+                case "su":
+                    addLog("not implemented");
+                    break;
+                case "whoami":
+                    addLog("not implemented");
+                    break;
+                // End server-side requests
+
                 case "clear":
                     $('.log').html("");
                     break;
@@ -84,9 +162,9 @@ function initCLI() {
                     loadPath("menu", function() {});
                     break;
                 default:
-                    $('.log').append("<div class='cli-text'>cd: " + command + ": command not found" + ".</div>");
+                    addLog("<div class='cli-text'>cd: " + command + ": command not found" + ".</div>");
             }
-            $('.log').append('<br><br>');
+            addLog('<br><br>');
 
             $('.commandline').val("");
         }
