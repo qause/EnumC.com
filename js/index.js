@@ -1,3 +1,9 @@
+/*
+    Copyright (C) 2019 Eric Qian.
+    <https://enumc.com/>
+    All rights reserved.
+*/
+
 let points = undefined;
 let canvas = undefined;
 let ctx = undefined;
@@ -125,8 +131,9 @@ $(document).ready(function() {
             fadeInOutStatus = false;
         });
         $("#autoSc").fadeTo(5000, 1);
+        $("#experimental").fadeTo(5000, 1);
         $("#commitData").fadeTo(5000, 1);
-
+        $(".container").fadeTo(5000, 1);
 
 
         $("#autoSc").click(function () {
@@ -134,6 +141,11 @@ $(document).ready(function() {
             $([document.documentElement, document.body]).animate({
                 scrollTop: $("#end").offset().top
             }, document.documentElement.scrollHeight);
+        });
+
+        $("#experimental").click(function () {
+            console.log("Loading experimental elements...");
+            $("#loaded-content").load("html/cli.html", function (data) {});
         });
     });
 

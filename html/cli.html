@@ -1,5 +1,36 @@
 <!-- Welcome to the CLI component.
-    Copyright -Eric Qian- 2019
+    Copyright (C) 2019 Eric Qian. 
+    <https://enumc.com/>
     This component manages the
     menu/command interface. 
 -->
+
+<div class="container" style="height:98vh; position: absolute; top: 0px; opacity: 1;">
+    <div id="cli-loading" style="">
+        <!-- <progress></progress> -->
+    </div>
+    
+    <div id="cli-container" style="color: white;">
+        <div class="log">
+            <p class="cli-text">Welcome to EnumC.com! To navigate, please enter a command.</p>
+            <p class="cli-text">Enter "help" for available commands. </p>
+            <br><br>
+        </div>
+        <div class="row">
+            <div id="mark" style="white-space: nowrap; display:inline-block;">$</div>
+            <div style="display:inline-block;">
+                <input class="commandline" style="
+                            outline: none;
+                            background-color: transparent;
+                            margin: 0;
+                            width: 100%;
+                            font: inherit;
+                            border: none;
+                            color: inherit;" onblur="this.focus()" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                </input>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/cli.js"></script>
+    <link rel="stylesheet" href="css/cli.css">
+</div>

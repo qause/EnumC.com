@@ -1,0 +1,42 @@
+/*
+    Copyright (C) 2019 Eric Qian.
+    <https://enumc.com/>
+    All rights reserved. 
+*/
+
+/* .blinking {
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0% {
+        color: white;
+    }
+
+    50% {
+        color: transparent;
+    }
+
+    100% {
+        color: white;
+    }
+} */
+
+.cli-text {
+    font-family: Inconsolata;
+    /* font-size: 24px; */
+    font-style: normal;
+    font-variant: normal;
+    /* font-weight: 700; */
+    /* line-height: 26.4px; */
+}
+
+.blinking {
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
