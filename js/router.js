@@ -76,6 +76,13 @@ function loadPath(path, funct) {
             $("#loaded-content").load("html/cli.html", funct);
             parent.location.hash = "cli";
             break;
+        case "422":
+            validPath = false;
+            $("#loaded-content").load("html/cli.html", function () {
+                addLog("<div class='cli-text'>400: requested path: |" + path + "| can not be processed. Please retry your request in the following format: https://enumc.com/requestedpath</div>");
+                addLog("<img src='https://httpstatusdogs.com/img/400.jpg' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
+            })
+            break;
         default:
             // alert("404: requested path: |" + path + "| is invalid.");
             validPath = false;
