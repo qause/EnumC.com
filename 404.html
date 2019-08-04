@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <script>
+            (function () {
+                let prevLink;
+                if (document.referrer && document.location.host && document.referrer.match(new RegExp("^https?://" + document.location.host))) {
+                    prevLink = document.referrer;
+                }
+                window.location.replace("https://enumc.com#" + prevLink);
+            })();
+        </script>
+    </body>
+</html>

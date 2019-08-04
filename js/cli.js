@@ -39,7 +39,7 @@ function initCLI() {
 
             switch (command) {
                 case "help":
-                    addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, clear, exit</div>');
+                    addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, man, clear, exit</div>');
                     break;
                 case "cd":
                     console.log("valid dir: " + args.trim());
@@ -117,7 +117,6 @@ function initCLI() {
                             addLog("<div class='cli-text'>Get command usage</div>");
                             addLog("<div class='cli-text'>Usage: man [commandname]</div>");
                             break;
-
                         case "login":
                             break;
                         case "su":

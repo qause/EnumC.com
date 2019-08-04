@@ -57,7 +57,6 @@ $(document).ready(function () {
     // });
 
 
-
     canvas = document.getElementById("info-section");
 
 

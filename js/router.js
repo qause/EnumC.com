@@ -53,9 +53,15 @@ function loadPath(path, funct) {
     console.log(funct);
 
     if (origPath == "menu") {
-        console.warn("destroying scrollmagic controller");
-        controller.destroy(true);
-        // Remove scrollmagic controller when navigating away.
+        try {
+            console.log("destroying scrollmagic controller");
+            controller.destroy(true);
+            // Remove scrollmagic controller when navigating away.
+        }
+        catch (err) {
+            console.warn("failed to destroy scrollmagic controller. This is not fatal.");
+        }
+        
     }
     switch (path) {
         case "":
