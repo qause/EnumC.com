@@ -5,8 +5,9 @@
 */
 
 const entryPath = "menu";
+let currentPath;
 function placeholderPrep() {
-    fadeinandout(".fadeinout");
+    processWaitMsg(".fadeinout");
     // video = document.getElementById('video');
     // console.log(document.getElementById('video'));
     // long = document.getElementById('long');
@@ -76,7 +77,7 @@ function loadPath(path, funct) {
             $("#loaded-content").load("html/cli.html", funct);
             parent.location.hash = "cli";
             break;
-        case "422":
+        case "400":
             validPath = false;
             $("#loaded-content").load("html/cli.html", function () {
                 addLog("<div class='cli-text'>400: requested path: |" + path + "| can not be processed. Please retry your request in the following format: https://enumc.com/requestedpath</div>");
@@ -94,10 +95,40 @@ function loadPath(path, funct) {
     }
     if (validPath) {
         $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
+        currentPath = path.toLowerCase();
     }
     else {
         $('#path').text('UNKNOWN');
     }
 }
+
+let debResizeTimer; // Used for resize debounce
+$(window).on('resize', function (e) {
+    clearTimeout(debResizeTimer);
+    debResizeTimer = setTimeout(function () {
+
+        var width = $(this).width(),
+            height = $(this).height(),
+            aspRatio = width / height;
+
+        console.log(parent.location.hash + " viewport resize. firing resize handler(s)");
+        switch (parent.location.hash) {
+            case "#menu":
+                onMenuViewportChange();
+                break;
+            case "#cli":
+
+                break;
+            case "#400":
+
+                break;
+            default:
+                console.warn("invalid location. unable to fire resize handler(s)");
+                break;
+        }
+
+    }, 250);
     
+});
+
 loadPath(parent.location.hash, function () { });

@@ -1,6 +1,6 @@
 var fadeInComplete = false;
 var videoReady = false;
-function fadeinandout(element) {
+function processWaitMsg(element) {
 
     $(element).delay(200).animate(
         { opacity: 'toggle' },
@@ -8,16 +8,22 @@ function fadeinandout(element) {
         function () {
             if (!fadeInComplete || !videoReady) {
                 console.log("fade in out active");
-                fadeinandout(element);
+                processWaitMsg(element);
             }
             else {
+                $("#waitmsg").text("Loading complete.");
+                // processWaitMsg(element);
                 delete fadeInComplete;
                 delete videoReady;
-                $(element).fadeOut();
+                $(element).fadeIn();
             }
 
         }
     );
+}
+
+function onMenuViewportChange() {
+    scene.offset(window.innerHeight);
 }
 
 $.getJSON('https://api.github.com/repos/EnumC/EnumC.com/git/refs/heads/master', function (data) {
@@ -102,8 +108,6 @@ var preloadVideo = (v, callback) => {
         console.warn(e);
     }
 };
-
-
 
 // startScrollAnimation();
 

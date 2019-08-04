@@ -18,7 +18,12 @@ let typeSpeed = 15;
 const textColor = "#FFFFFF";
 
 
-
+window.onbeforeunload = function () { 
+    // Set position to top prior to refresh, since this is a 
+    // single page application, and scroll should not persist
+    // across refreshes. 
+    window.scrollTo(0, 0); 
+};
 
 // On DOM ready.
 $(document).ready(function () {
@@ -123,9 +128,6 @@ $(document).ready(function () {
 
     infoText = "This site is undergoing a complete redesign, and therefore might be very incomplete. Please see https://bananiumlabs.com for past content.";
     type(infoText, 25, 25, 50, 10);
-
-    
-
 });
 
 function drawLine(input) {
@@ -134,7 +136,6 @@ function drawLine(input) {
 }
 
 // Adapted from https://codepen.io/tmrDevelops/pen/EaaBYB
-// remember to fix method asap
 /* type method
 * str - string to type on the canvas
 * startX - position X of the point to start from
@@ -167,9 +168,6 @@ function type(str, startX, startY, lineHeight, padding) {
         }
     }, typeSpeed);
 }
-
-
-
 
 // calc waypoints traveling along vertices
 function calcWaypoints(vertices) {
