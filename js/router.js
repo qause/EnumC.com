@@ -68,6 +68,7 @@ function loadPath(path, funct) {
         case "":
             $("#loaded-content").load("/html/menu.html", placeholderPrep);
             parent.location.hash = "menu";
+            path = "menu";
             break;
         case "menu":
             $("#loaded-content").load("/html/menu.html", placeholderPrep);
