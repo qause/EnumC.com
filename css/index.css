@@ -172,13 +172,13 @@ a svg rect {
     .portrait-warning {
         display: block;
         z-index: 1;
-        top: 50vw;
+        top: 75vw;
         left: 10vw;
         right: 10vw;
         width: 80vw;
-        /* position: relative; */
-        position: -webkit-sticky;
-        position: sticky;
+        position: absolute;
+        /* position: -webkit-sticky; */
+        /* position: sticky; */
         /* background: rgba(255, 255, 255, 1); */
         background: black;
     }

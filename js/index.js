@@ -212,9 +212,3 @@ function animate() {
 
     loc++;
 }
-
-
-
-
-
-
