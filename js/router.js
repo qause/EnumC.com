@@ -5,6 +5,25 @@
 */
 
 const entryPath = "menu";
+var rootDomain = location.host;
+var mainDomain = false;
+
+// Warn: if path hardcoded, some elm might not load 
+// due to XSS concerns***
+console.debug("router: root domain - " + rootDomain);
+
+if (rootDomain == "enumc.com") {
+    mainDomain = true;
+    console.log("router: Loaded on main domain.")
+}
+else if (rootDomain == "factorialize.com") {
+    console.log("router: Loaded on authorized alias.");
+}
+else {
+    console.warn("router: Loaded on alternate domain. Due to XSS limitations, please ensure resources are correctly loaded.");
+    console.warn("LICENSE: https://raw.githubusercontent.com/EnumC/EnumC.com/master/LICENSE");
+}
+
 let currentPath;
 function placeholderPrep() {
     processWaitMsg(".fadeinout");
@@ -41,6 +60,8 @@ function placeholderPrep() {
 }
 
 function loadPath(path, funct) {
+
+    
     var origPath = parent.location.hash;
     var validPath = true;
     if (path.charAt(0) == '#') {
@@ -49,18 +70,18 @@ function loadPath(path, funct) {
     if (origPath.charAt(0) == '#') {
         origPath = origPath.substr(1);
     }
-    console.log("Switching to path: " + path + " from path: " + origPath);
-    console.log("with callback: ");
+    console.log("router: Switching to path: " + path + " from path: " + origPath);
+    console.log("router : with callback: ");
     console.log(funct);
 
     if (origPath == "menu") {
         try {
-            console.log("destroying scrollmagic controller");
+            console.debug("router: destroying scrollmagic controller");
             controller.destroy(true);
             // Remove scrollmagic controller when navigating away.
         }
         catch (err) {
-            console.warn("failed to destroy scrollmagic controller. This is not fatal.");
+            console.warn("router: failed to destroy scrollmagic controller. This is not fatal.");
         }
         
     }
@@ -112,7 +133,7 @@ $(window).on('resize', function (e) {
             height = $(this).height(),
             aspRatio = width / height;
 
-        console.log(parent.location.hash + " viewport resize. firing resize handler(s)");
+        console.log("router: " + parent.location.hash + " viewport resize. firing resize handler(s)");
         switch (parent.location.hash) {
             case "#menu":
                 onMenuViewportChange();
@@ -124,7 +145,7 @@ $(window).on('resize', function (e) {
 
                 break;
             default:
-                console.warn("invalid location. unable to fire resize handler(s)");
+                console.warn("router: invalid location. unable to fire resize handler(s)");
                 break;
         }
 

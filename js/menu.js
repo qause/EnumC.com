@@ -7,7 +7,7 @@ function processWaitMsg(element) {
         1000,
         function () {
             if (!fadeInComplete || !videoReady) {
-                console.log("fade in out active");
+                console.debug("menu: fade in out active");
                 processWaitMsg(element);
             }
             else {
@@ -27,10 +27,10 @@ function onMenuViewportChange() {
 }
 
 $.getJSON('https://api.github.com/repos/EnumC/EnumC.com/git/refs/heads/master', function (data) {
-    console.info(data);
-    console.info("link: ", data.object.url);
+    console.debug(data);
+    console.debug("link: ", data.object.url);
     $.getJSON(data.object.url, function (commit) {
-        console.info("commit: ", JSON.stringify(commit, null, 2));
+        console.debug("commit: ", JSON.stringify(commit, null, 2));
         $("#commitData").text(JSON.stringify(commit, null, 2));
     });
 });
@@ -50,7 +50,7 @@ var title = document.getElementById('title-section');
 var scrollpos = 0;
 var lastpos;
 
-console.log("init");
+console.log("menu: init");
 // var controller = new ScrollMagic.Controller({ container: "#video-container"});
 var controller = new ScrollMagic.Controller({});
 var scene = new ScrollMagic.Scene({
@@ -81,7 +81,7 @@ var startScrollAnimation = () => {
             video.currentTime = video.duration * scrollpos;
             video.pause();
             lastpos = scrollpos;
-            console.log(video.currentTime, scrollpos);
+            console.debug("menu: " + video.currentTime, scrollpos);
         });
     }, 50);
 };
