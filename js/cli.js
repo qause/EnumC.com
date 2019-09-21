@@ -27,7 +27,6 @@ function typeText(content, delayTime, isInProg, inProgObj) {
         var typingElementComplete = $('<pre class="cli-text" style="overflow: visible; line-height: 0.5em;"></pre>').html(content);
         logContent.push(typingElementComplete);
         $('.log').append(typingElement);
-        // console.log(typingElement);
     }
     else {
         var typingElement = inProgObj;
@@ -37,8 +36,6 @@ function typeText(content, delayTime, isInProg, inProgObj) {
     }
     
     setTimeout(function () {
-        // console.debug("Now typing: " + content.charAt(0));
-
         typingElement.html(typingElement.html() + content.charAt(0));
         content = content.substr(1);
         typeText(content, delayTime, true, typingElement);
@@ -59,9 +56,6 @@ function initCLI() {
     logContent.forEach(element => {
         addLog(element);
     });
-
-    
-
 
     let validDirectories = ['SYSTEM', '/', '~/', '~/HOME'];
 
@@ -105,8 +99,7 @@ function initCLI() {
                         default:
                             $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\');
                     }
-                    
-                    // addLog("");
+
                     break;
 
                 case "time":
@@ -185,7 +178,6 @@ function initCLI() {
                             addLog("<div class='cli-text'>man page for " + args + " does not exist.</div>")
                             break;
                     }
-                    // addLog("not implemented");
                     break;
 
                 // Server-side requests
@@ -208,7 +200,7 @@ function initCLI() {
                     loadPath("menu", function() {});
                     break;
                 default:
-                    addLog("<div class='cli-text'>cd: " + command + ": command not found" + ".</div>");
+                    addLog("<div class='cli-text'>eCLI: " + command + ": command not found" + ".</div>");
             }
             addLog('<br><br>');
 

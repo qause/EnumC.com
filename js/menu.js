@@ -12,7 +12,6 @@ function processWaitMsg(element) {
             }
             else {
                 $("#waitmsg").text("Loading complete.");
-                // processWaitMsg(element);
                 delete fadeInComplete;
                 delete videoReady;
                 $(element).fadeIn();
@@ -113,7 +112,4 @@ var preloadVideo = (v, callback) => {
         console.warn(e);
     }
 };
-
-// startScrollAnimation();
-
 

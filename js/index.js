@@ -41,8 +41,6 @@ function updateCommitDetails(callback) {
             console.debug("lastauthored: ", commit.author.date);
             lastAuthored = commit.author.date;
             callback();
-            // $("#commitData").text(JSON.stringify(commit, null, 2));
-
         });
     });
 }
@@ -50,45 +48,7 @@ function updateCommitDetails(callback) {
 
 // On DOM ready.
 $(document).ready(function () {
-    // loadPath("placeholder", function(data) {
-
-    // video = document.getElementById('video');
-    // // console.log(document.getElementById('video'));
-    // long = document.getElementById('long');
-
-    // preloadVideo(video, startScrollAnimation);
-
-    // fadeinandout(".fadeinout");
-    // $(".main-center-header").fadeTo(5000, 1, function () {
-    //     fadeInComplete = true;
-    // });
-    // document.getElementById("video").addEventListener("canplaythrough", function () {
-    //     videoReady = true;
-    // });
-    // $("#autoSc").fadeTo(5000, 1);
-    // $("#experimental").fadeTo(5000, 1);
-    // $("#commitData").fadeTo(5000, 1);
-    // $(".container").fadeTo(5000, 1);
-
-
-    // $("#autoSc").click(function () {
-    //     console.log("Start auto scroll");
-    //     $([document.documentElement, document.body]).animate({
-    //         scrollTop: $("#end").offset().top
-    //     }, document.documentElement.scrollHeight);
-    // });
-
-    // $("#experimental").click(function () {
-    //     console.log("Loading experimental elements...");
-    //     loadPath("cli", function (data) {});
-    // });
-    // });
-
-
     canvas = document.getElementById("info-section");
-
-
-
     ctx = canvas.getContext("2d");
     ctx.lineCap = "round";
 
@@ -135,7 +95,6 @@ $(document).ready(function () {
     ];
 
     // set some style
-
     ctx.strokeStyle = textColor;
     ctx.fillStyle = textColor;
     ctx.font = "48px monospace";
@@ -212,7 +171,6 @@ function calcWaypoints(vertices) {
             });
         }
         arr.push({ x: vertices[i][1][0], y: vertices[i][1][1] });
-
         waypoints.push(arr);
     }
     return waypoints;
@@ -232,6 +190,5 @@ function animate() {
             ctx.stroke();
         }
     }
-
     loc++;
 }
