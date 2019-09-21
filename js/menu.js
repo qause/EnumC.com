@@ -26,13 +26,18 @@ function onMenuViewportChange() {
     scene.offset(window.innerHeight);
 }
 
-$.getJSON('https://api.github.com/repos/EnumC/EnumC.com/git/refs/heads/master', function (data) {
-    console.debug(data);
-    console.debug("link: ", data.object.url);
-    $.getJSON(data.object.url, function (commit) {
-        console.debug("commit: ", JSON.stringify(commit, null, 2));
-        $("#commitData").text(JSON.stringify(commit, null, 2));
+if (typeof commitText != "string") {
+    updateCommitDetails(function (){
+        $("#commitData").text(commitText);
     });
+} 
+else {
+    $("#commitData").text(commitText);
+}
+window.scroll({
+    top: 0,
+    left: 0
+    // behavior: 'smooth'
 });
 
 /**

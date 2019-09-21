@@ -16,6 +16,11 @@ let global_animate_numPoints = 100;
 let typeSpeed = 15;
 // const textColor = "#7B0000";
 const textColor = "#FFFFFF";
+let gCommit;
+let commitText;
+let lastAuthored;
+
+let logContent = [];
 
 
 window.onbeforeunload = function () { 
@@ -24,6 +29,24 @@ window.onbeforeunload = function () {
     // across refreshes. 
     window.scrollTo(0, 0); 
 };
+
+function updateCommitDetails(callback) {
+    $.getJSON('https://api.github.com/repos/EnumC/EnumC.com/git/refs/heads/master', function (data) {
+        console.debug(data);
+        console.debug("link: ", data.object.url);
+        $.getJSON(data.object.url, function (commit) {
+            console.debug("commit: ", JSON.stringify(commit, null, 2));
+            commitText = JSON.stringify(commit, null, 2);
+            gCommit = commit;
+            console.debug("lastauthored: ", commit.author.date);
+            lastAuthored = commit.author.date;
+            callback();
+            // $("#commitData").text(JSON.stringify(commit, null, 2));
+
+        });
+    });
+}
+
 
 // On DOM ready.
 $(document).ready(function () {

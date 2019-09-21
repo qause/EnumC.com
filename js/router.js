@@ -114,6 +114,9 @@ function loadPath(path, funct) {
             $("#loaded-content").load("/html/cli.html", funct);
             parent.location.hash = "cli";
             break;
+        case "resume":
+            window.open("/files/resume.pdf");
+            break;
         case "400":
             validPath = false;
             $("#loaded-content").load("/html/cli.html", function () {

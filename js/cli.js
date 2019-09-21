@@ -16,12 +16,16 @@ catch (err) {
 
 function addLog(content) {
     $('.log').append(content);
+    logContent.push(content);
+    window.scrollTo(0, document.body.scrollHeight);
 }
 
 function typeText(content, delayTime, isInProg, inProgObj) {
 
     if (isInProg != true) {
         var typingElement = $('<pre class="cli-text" style="overflow: visible; line-height: 0.5em;"></pre>');
+        var typingElementComplete = $('<pre class="cli-text" style="overflow: visible; line-height: 0.5em;"></pre>').html(content);
+        logContent.push(typingElementComplete);
         $('.log').append(typingElement);
         // console.log(typingElement);
     }
@@ -43,6 +47,22 @@ function typeText(content, delayTime, isInProg, inProgObj) {
 }
 
 function initCLI() {
+    if (typeof lastAuthored != "string") {
+        updateCommitDetails(function () {
+            $("#lastModElement").html($("#lastModElement").html() + lastAuthored);
+        });
+    }
+    else {
+        $("#lastModElement").html($("#lastModElement").html() + lastAuthored);
+    }
+
+    logContent.forEach(element => {
+        addLog(element);
+    });
+
+    
+
+
     let validDirectories = ['SYSTEM', '/', '~/', '~/HOME'];
 
     //CURRENTDIRECTORY MOVED TO INDEX.JS
@@ -96,8 +116,9 @@ function initCLI() {
                     addLog("<div class='cli-text'>" + args + "</div>");
                     break;
                 case "ls":
-                    addLog("<div class='blinking cli-text'>Access Denied.</div>");
-                    addLog("<img src='https://httpstatusdogs.com/img/401.jpg' style='height:20em' class='blinking'></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
+                    // addLog("<div class='blinking cli-text'>Access Denied.</div>");
+                    // addLog("<img src='https://httpstatusdogs.com/img/401.jpg' style='height:20em' class='blinking'></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
+                    addLog("<p class='cli-text' style='white-space: pre-line;'>resume\nprofile\nmenu\ncli</p>");
                     break;
                 case "fetch":
                     $.getJSON('https://dog.ceo/api/breeds/image/random', function (data) {
@@ -181,6 +202,7 @@ function initCLI() {
 
                 case "clear":
                     $('.log').html("");
+                    logContent = [];
                     break;
                 case "exit":
                     loadPath("menu", function() {});
