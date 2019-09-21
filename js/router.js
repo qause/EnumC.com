@@ -7,6 +7,7 @@
 const entryPath = "menu";
 var rootDomain = location.host;
 var mainDomain = false;
+var devMode = false;
 
 // Warn: if path hardcoded, some elm might not load 
 // due to XSS concerns***
@@ -14,14 +15,18 @@ console.debug("router: root domain - " + rootDomain);
 
 if (rootDomain == "enumc.com") {
     mainDomain = true;
-    console.log("router: Loaded on main domain.")
+    console.debug("router: Loaded on main domain.")
 }
 else if (rootDomain == "factorialize.com") {
-    console.log("router: Loaded on authorized alias.");
+    console.debug("router: Loaded on domain alias.");
 }
 else {
     console.warn("router: Loaded on alternate domain. Due to XSS limitations, please ensure resources are correctly loaded.");
     console.warn("LICENSE: https://raw.githubusercontent.com/EnumC/EnumC.com/master/LICENSE");
+}
+if (rootDomain.startsWith("localhost")) {
+    devMode = true;
+    console.warn("WARNING: The webpage has been served by localhost. Development mode is on.");
 }
 
 let currentPath;
@@ -59,6 +64,13 @@ function placeholderPrep() {
     });
 }
 
+function initInitialLoadSequence() {
+    // addLog("<div class='cli-text'>Loading initial .</div>");
+    // typeText("loading...", 500);
+    typeText("#     #                                                              #######                       #####  \n#  #  # ###### #       ####   ####  #    # ######    #####  ####     #       #    # #    # #    # #     # \n#  #  # #      #      #    # #    # ##  ## #           #   #    #    #       ##   # #    # ##  ## #       \n#  #  # #####  #      #      #    # # ## # #####       #   #    #    #####   # #  # #    # # ## # #       \n#  #  # #      #      #      #    # #    # #           #   #    #    #       #  # # #    # #    # #       \n#  #  # #      #      #    # #    # #    # #           #   #    #    #       #   ## #    # #    # #     # \n ## ##  ###### ######  ####   ####  #    # ######      #    ####     ####### #    #  ####  #    #  #####  \n                                                                                                          \n"
+            , 2);
+}
+
 function loadPath(path, funct) {
 
     
@@ -87,9 +99,12 @@ function loadPath(path, funct) {
     }
     switch (path) {
         case "":
-            $("#loaded-content").load("/html/menu.html", placeholderPrep);
-            parent.location.hash = "menu";
-            path = "menu";
+            // $("#loaded-content").load("/html/menu.html", placeholderPrep);
+            $("#loaded-content").load("/html/cli.html", function() {
+                initInitialLoadSequence();
+            });
+            parent.location.hash = "cli";
+            path = "cli";
             break;
         case "menu":
             $("#loaded-content").load("/html/menu.html", placeholderPrep);

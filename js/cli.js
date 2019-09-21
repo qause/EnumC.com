@@ -17,6 +17,31 @@ catch (err) {
 function addLog(content) {
     $('.log').append(content);
 }
+
+function typeText(content, delayTime, isInProg, inProgObj) {
+
+    if (isInProg != true) {
+        var typingElement = $('<pre class="cli-text" style="overflow: visible; line-height: 0.5em;"></pre>');
+        $('.log').append(typingElement);
+        // console.log(typingElement);
+    }
+    else {
+        var typingElement = inProgObj;
+    }
+    if (content.length === 0) {
+        return;
+    }
+    
+    setTimeout(function () {
+        // console.debug("Now typing: " + content.charAt(0));
+
+        typingElement.html(typingElement.html() + content.charAt(0));
+        content = content.substr(1);
+        typeText(content, delayTime, true, typingElement);
+        
+    }, delayTime);
+}
+
 function initCLI() {
     let validDirectories = ['SYSTEM', '/', '~/', '~/HOME'];
 
