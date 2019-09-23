@@ -134,7 +134,12 @@ function loadPath(path, funct) {
             break;
     }
     if (validPath) {
-        $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
+        if (currentDirectory == "/") {
+            $('#path').text('C:\\ENUMC.COM\\' + path.toUpperCase() + ".HTML");
+        }
+        else {
+            $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
+        }
         currentPath = path.toLowerCase();
     }
     else {
