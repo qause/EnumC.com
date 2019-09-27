@@ -117,6 +117,11 @@ function loadPath(path, funct) {
         case "resume":
             window.open("/files/resume.pdf");
             break;
+        case "EP-01":
+            $("#loaded-content").load("/html/cli.html", function () {
+                addLog("<div class='cli-text'>ELEV PITCH - NOT IMPLEMENTED.</div>");
+            })
+            break;
         case "400":
             validPath = false;
             $("#loaded-content").load("/html/cli.html", function () {
