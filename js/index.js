@@ -7,6 +7,7 @@ let points = undefined;
 let canvas = undefined;
 let ctx = undefined;
 
+// GLOBAL - Current directory
 let currentDirectory = "/";
 
 // Higher = slower animation.

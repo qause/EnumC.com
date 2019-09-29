@@ -15,12 +15,17 @@ catch (err) {
         "<p class='cli-text'>Please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
 }
 
+/* Add HTML content to log. */
 function addLog(content) {
     $('.log').append(content);
     logContent.push(content);
     window.scrollTo(0, document.body.scrollHeight);
 }
 
+/* Recursive method to type text to log with delay between each character.
+   content:     HTML content
+   delayTime:   Delay between character in ms
+*/
 function typeText(content, delayTime, isInProg, inProgObj) {
 
     if (isInProg != true) {
@@ -44,6 +49,7 @@ function typeText(content, delayTime, isInProg, inProgObj) {
     }, delayTime);
 }
 
+/* Initializes CLI and set up command, filesystem, and data. */
 function initCLI() {
     if (typeof lastAuthored != "string") {
         updateCommitDetails(function () {
@@ -58,14 +64,14 @@ function initCLI() {
         addLog(element);
     });
 
-    // let validDirectories = ['SYSTEM', '/', '~/', '~/HOME'];
+    // Define files in CLI filesystem. 
     let directoriesAndFiles = {
         "/": "SYSTEM\nHOME",
         SYSTEM: "..\nmenu\ncli",
         HOME: "..\nresume\nprofile"
     };
 
-    //CURRENTDIRECTORY MOVED TO INDEX.JS
+    // CURRENTDIRECTORY MOVED TO INDEX.JS
     $('#mark').text("$ [" + currentDirectory + "]");
     
     $('.commandline').keypress(function (event) {
@@ -89,6 +95,7 @@ function initCLI() {
                         break;
                     case "cd":
                         console.log("dir requested: " + args.trim());
+                        
                         if (args.trim().toUpperCase() == "..") {
                             currentDirectory = "/";
                         }
@@ -103,7 +110,10 @@ function initCLI() {
                                     fileFound = true;
                                 }
                             }); 
-                            if(!fileFound) {
+                            if (args.trim() == "") {
+                                addLog("<div class='cli-text'>cd: " + "No path specified. Type 'man cd' to display example syntax." + ".</div>");
+                            }
+                            else if(!fileFound) {
                                 addLog("<div class='cli-text'>cd: " + args + ": No such file or directory" + ".</div>");
                             }
                             else {
@@ -145,10 +155,28 @@ function initCLI() {
                         });
                         break;
                     case "open":
-                        loadPath(args, function() {});
+                        let files = directoriesAndFiles[currentDirectory].split("\n");
+                        let fileFound = false;
+                        files.forEach(element => {
+                            if (element == args) {
+                                fileFound = true;
+                            }
+                        });
+                        if (args.trim() == "") {
+                            addLog("<div class='cli-text'>open: " + "No file specified. Type 'man open' to display example syntax." + ".</div>");
+                        }
+                        else if (!fileFound) {
+                            addLog("<div class='cli-text'>cd: " + args + ": No such file. To open a directory, use cd. " + ".</div>");
+                        }
+                        else {
+                            loadPath(args, function () { });
+                        }
                         break;
                     case "man":
                         switch(args) {
+                            case "":
+                                addLog("<div class='cli-text'>No argument defined. Enter 'man command_name_here' for usage. </div>");
+                                break;
                             case "help":
                                 addLog("<div class='cli-text'>Display help page</div>");
                                 addLog("<div class='cli-text'>Usage: help</div>");
@@ -247,4 +275,6 @@ $(".log").bind("DOMSubtreeModified", function () {
 });
 
 document.getElementsByClassName("commandline")[0].select();
+
+// Log load completion.
 console.log("CLI loading completed.");
