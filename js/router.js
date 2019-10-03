@@ -72,10 +72,12 @@ function initInitialLoadSequence() {
 }
 
 function loadPath(path, funct) {
-
-    
     var origPath = parent.location.hash;
     var validPath = true;
+    if (typeof path === "undefined") {
+        console.warn("router: no object for path provided for loadPath(). Assuming path is empty.");
+        path = "";
+    }
     if (path.charAt(0) == '#') {
         path = path.substr(1);
     }

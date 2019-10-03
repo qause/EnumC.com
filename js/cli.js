@@ -13,6 +13,7 @@ try {
 catch (err) {
     $("#cli-container").html("<p class='cli-text'>CLI initialization error: " + err + ".</p>" +
         "<p class='cli-text'>Please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
+    throw new Error("CLI initialization error: " + err);
 }
 
 /* Add HTML content to log. */
@@ -245,6 +246,15 @@ function initCLI() {
                         break;
                     // End server-side requests
 
+                    // Exception testing.
+                    case "breakme":
+                        throw new Error("debug error"); 
+                        break;
+                    case "reseterror":
+                        document.getElementById("content-error-icon").style.display = "none";
+                        break;
+                    // End exception testing.
+
                     case "clear":
                         $('.log').html("");
                         logContent = [];
@@ -265,6 +275,7 @@ function initCLI() {
             $("#cli-container").html("<p class='cli-text'>CLI command error: " + err + ".</p>" + 
                 "<br><p class='cli-text'>Command: " + errCommand + ".</p>" +
                 "<p class='cli-text'>Please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
+            throw new Error("CLI command error: " + err);
         };
     });
 }

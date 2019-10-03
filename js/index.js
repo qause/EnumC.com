@@ -39,8 +39,8 @@ function updateCommitDetails(callback) {
             console.debug("commit: ", JSON.stringify(commit, null, 2));
             commitText = JSON.stringify(commit, null, 2);
             gCommit = commit;
-            console.debug("lastauthored: ", commit.author.date);
             lastAuthored = commit.author.date;
+            console.debug("lastAuthored: ", lastAuthored);
             callback();
         });
     });
