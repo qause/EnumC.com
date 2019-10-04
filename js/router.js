@@ -121,7 +121,8 @@ function loadPath(path, funct) {
             break;
         case "EP-01":
             $("#loaded-content").load("/html/cli.html", function () {
-                addLog("<div class='cli-text'>ELEV PITCH - NOT IMPLEMENTED.</div>");
+                addLog("<div class='cli-text'>Please wait... If nothing happens, click here: https://www.youtube.com/watch?v=7pK42-nQZ-4</div>");
+                window.location.href = "https://www.youtube.com/watch?v=7pK42-nQZ-4";
             })
             break;
         case "400":
