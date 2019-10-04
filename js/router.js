@@ -125,6 +125,11 @@ function loadPath(path, funct) {
                 window.location.href = "https://www.youtube.com/watch?v=7pK42-nQZ-4";
             })
             break;
+        case "gravity":
+            $("#loaded-content").load("/html/cli.html", function () {
+                typeText("GRAVITY: Thank you for your interest! Signup will open soon.", 25);
+            });
+            break;
         case "400":
             validPath = false;
             $("#loaded-content").load("/html/cli.html", function () {
