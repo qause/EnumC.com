@@ -127,7 +127,11 @@ function loadPath(path, funct) {
             break;
         case "gravity":
             $("#loaded-content").load("/html/cli.html", function () {
-                typeText("GRAVITY: Thank you for your interest! Signup will open soon.", 25);
+                typeText("GRAVITY: Thank you for your interest! To be kept up to date on club-related news," + 
+                        "enter the following information...", 25);
+                        commandHandler('signup', 'gravity');
+                
+
             });
             break;
         case "400":
