@@ -72,7 +72,7 @@ function initInitialLoadSequence() {
 }
 
 function loadPath(path, funct) {
-    var origPath = parent.location.hash;
+    var origPath = location.hash;
     var validPath = true;
     if (typeof path === "undefined") {
         console.warn("router: no object for path provided for loadPath(). Assuming path is empty.");
@@ -105,16 +105,16 @@ function loadPath(path, funct) {
             $("#loaded-content").load("/html/cli.html", function() {
                 initInitialLoadSequence();
             });
-            parent.location.hash = "cli";
+            location.hash = "cli";
             path = "cli";
             break;
         case "menu":
             $("#loaded-content").load("/html/menu.html", placeholderPrep);
-            parent.location.hash = "menu";
+            location.hash = "menu";
             break;
         case "cli":
             $("#loaded-content").load("/html/cli.html", funct);
-            parent.location.hash = "cli";
+            location.hash = "cli";
             break;
         case "resume":
             window.open("/files/resume.pdf");
@@ -127,7 +127,11 @@ function loadPath(path, funct) {
             break;
         case "gravity":
             $("#loaded-content").load("/html/cli.html", function () {
-                typeText("GRAVITY: Thank you for your interest! Signup will open soon.", 25);
+                typeText("GRAVITY: Thank you for your interest! To be kept up to date on club-related news," + 
+                        "enter the following information...", 25);
+                        commandHandler('signup', 'gravity');
+                
+
             });
             break;
         case "400":
@@ -169,8 +173,8 @@ $(window).on('resize', function (e) {
             height = $(this).height(),
             aspRatio = width / height;
 
-        console.log("router: " + parent.location.hash + " viewport resize. firing resize handler(s)");
-        switch (parent.location.hash) {
+        console.log("router: " + location.hash + " viewport resize. firing resize handler(s)");
+        switch (location.hash) {
             case "#menu":
                 onMenuViewportChange();
                 break;
@@ -189,4 +193,4 @@ $(window).on('resize', function (e) {
     
 });
 
-loadPath(parent.location.hash, function () { });
+loadPath(location.hash, function () { });
