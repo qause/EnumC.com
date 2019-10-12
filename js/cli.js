@@ -213,7 +213,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                         }
                         else {
                             addLog("<div class='cli-text'>Submitting information...</div>");
-
+                            addLog("<progress id='infoPendingProgressBar'></progress>");
                             $.getJSON('https://gravity.enumc.com/newSubscriber.php?email=' + commandData["email"] + '&fname=' + commandData["firstName"] + '&lname=' + commandData["lastName"], function (data) {
                                 let items = {};
                                 $.each(data, function (key, val) {
@@ -234,8 +234,14 @@ function commandHandler(command, args, directoriesAndFiles) {
                                 else {
                                     addLog("<div class='cli-text' style='word-break: break-all; width: 25em;'>An error occured. Reason: " + items["message"] + "</div>");
                                 }
+                                $('#infoPendingProgressBar').remove();
                                 console.log(items);
 
+                            }).fail(function(e) {
+                                $('#infoPendingProgressBar').remove();
+                                console.log(e);
+                                addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>");
+                                addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
                             });
                         }
 
@@ -403,3 +409,4 @@ $('#cli-container').click(function() {
 
 // Log load completion.
 console.log("CLI loading completed.");
+hideLoading();

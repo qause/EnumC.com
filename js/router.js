@@ -104,6 +104,7 @@ function loadPath(path, funct) {
             // $("#loaded-content").load("/html/menu.html", placeholderPrep);
             $("#loaded-content").load("/html/cli.html", function() {
                 initInitialLoadSequence();
+                hideLoading();
             });
             location.hash = "cli";
             path = "cli";

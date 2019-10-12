@@ -15,6 +15,35 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+
+  <div id="loaded-content-preload" style="position: relative;">
+    <progress></progress>
+    <h5 style="color: white" class="fadeInAndOut">Initializing program. Please wait...</h5>
+    <style>
+      .fadeInAndOut {
+        animation: fading 2s infinite;
+      }
+  
+      @keyframes fading {
+        0% {
+          /* opacity: 0; */
+          color: black;
+        }
+  
+        50% {
+          /* opacity: 1; */
+          color: white;
+        }
+  
+        100% {
+          /* opacity: 0; */
+          color: black;
+        }
+      }
+    </style>
+  </div>
+
+
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
@@ -29,35 +58,36 @@
 
   <!-- Javascript
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-      
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
-      integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     
-    <!-- <script type="text/javascript" src="node_modules/vivus/dist/vivus.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> -->
-    <script src="/node_modules/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
-    <script src="/node_modules/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
-    <script src="/node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
-    <!-- <script src="node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js"></script> -->
-    
-    <script src="https://kit.fontawesome.com/c6c09c283a.js"></script>
-    <!-- UI/UX Diag Start -->
-    <!-- Hotjar Tracking Code for https://enumc.com -->
-    
-    <script>
-        (function(h,o,t,j,a,r){
-            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-            h._hjSettings={hjid:1476385,hjsv:6};
-            a=o.getElementsByTagName('head')[0];
-            r=o.createElement('script');r.async=1;
-            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-            a.appendChild(r);
-        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>
-    <!-- UI/UX Diag End -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+  
+  <!-- <script type="text/javascript" src="node_modules/vivus/dist/vivus.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> -->
+  <script src="/node_modules/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
+  <script src="/node_modules/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+  <script src="/node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
+  <!-- <script src="node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js"></script> -->
+  
+  <script src="https://kit.fontawesome.com/c6c09c283a.js"></script>
+  <!-- UI/UX Diag Start -->
+  <!-- Hotjar Tracking Code for https://enumc.com -->
+  
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:1476385,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+  <!-- UI/UX Diag End -->
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="/images/favicon.png">
@@ -100,7 +130,7 @@
     <!-- Primary Page Layout
       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div class="main-content">
-    
+      
     
       <div class="top-right">
         <h4 style="margin-bottom: 0px; margin-top: 5%">Eric Qian</h4>
@@ -110,7 +140,6 @@
       <div class="bottom-right">
         <canvas id="info-section" style="background-color: #000000;"></canvas>
       </div>
-    
       <div id="loaded-content" style="position: relative;"></div>
     
     </div>
@@ -123,6 +152,7 @@
 <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <footer>
+    <script type="text/javascript" src="/js/preload.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript" src="/js/router.js"></script>
     <script type="text/javascript" src="/js/onerror.js"></script>
