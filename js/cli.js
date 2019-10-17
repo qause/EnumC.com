@@ -233,6 +233,8 @@ function commandHandler(command, args, directoriesAndFiles) {
                                 }
                                 else {
                                     addLog("<div class='cli-text' style='word-break: break-all; width: 25em;'>An error occured. Reason: " + items["message"] + "</div>");
+                                    addLog("<div class='cli-text' style='word-break: break-all; width: 25em;'>You may retry by either typing 'signup gravity' or by refreshing the page.</div");
+                                    commandData = undefined;
                                 }
                                 $('#infoPendingProgressBar').remove();
                                 console.log(items);
@@ -339,10 +341,8 @@ function commandHandler(command, args, directoriesAndFiles) {
                 default:
                     addLog("<div class='cli-text'>eCLI: " + command + ": command not found" + ".</div>");
             }
-            addLog('<br><br>');
-
-            
-        
+        addLog('<br><br>');
+        document.getElementsByClassName("commandline")[0].select();
     }
     catch (err) {
         let errCommand = $('.commandline').val().trim();
