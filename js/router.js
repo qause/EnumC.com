@@ -66,9 +66,49 @@ function placeholderPrep() {
 
 function initInitialLoadSequence() {
     // addLog("<div class='cli-text'>Loading initial .</div>");
-    // typeText("loading...", 500);
-    typeText("#     #                                                              #######                       #####  \n#  #  # ###### #       ####   ####  #    # ######    #####  ####     #       #    # #    # #    # #     # \n#  #  # #      #      #    # #    # ##  ## #           #   #    #    #       ##   # #    # ##  ## #       \n#  #  # #####  #      #      #    # # ## # #####       #   #    #    #####   # #  # #    # # ## # #       \n#  #  # #      #      #      #    # #    # #           #   #    #    #       #  # # #    # #    # #       \n#  #  # #      #      #    # #    # #    # #           #   #    #    #       #   ## #    # #    # #     # \n ## ##  ###### ######  ####   ####  #    # ######      #    ####     ####### #    #  ####  #    #  #####  \n                                                                                                          \n"
-            , 2);
+    typeText("$ [" + currentDirectory + "] " + "startx");
+    setTimeout(function () {
+        typeText("loading GUI...", 50);
+        setTimeout(function () {
+            addLog("<div class='cli-text'>GUI Not yet available.</div>");
+            addLog("<div class='cli-text'>Last revision on: " + lastAuthored + ".</div>");
+            // updateCommitDetails(function() {
+                
+            // });
+            
+
+            setTimeout(function () {
+                addLog("<div class='cli-text'>Dropping into shell.</div>");
+                setTimeout(function () {
+                    typeText("#     #                                                              #######                       #####  \n#  #  # ###### #       ####   ####  #    # ######    #####  ####     #       #    # #    # #    # #     # \n#  #  # #      #      #    # #    # ##  ## #           #   #    #    #       ##   # #    # ##  ## #       \n#  #  # #####  #      #      #    # # ## # #####       #   #    #    #####   # #  # #    # # ## # #       \n#  #  # #      #      #      #    # #    # #           #   #    #    #       #  # # #    # #    # #       \n#  #  # #      #      #    # #    # #    # #           #   #    #    #       #   ## #    # #    # #     # \n ## ##  ###### ######  ####   ####  #    # ######      #    ####     ####### #    #  ####  #    #  #####  \n                                                                                                          \n");
+                }, 1000);
+            }, 1000);
+        }, 1000);
+    }, 1000);
+    
+
+    // initGUILoadSequence();
+}
+
+function initGUILoadSequence() {
+    // typeText("$ [" + currentDirectory + "] " + "startx");
+    // setTimeout(function () { 
+    //     // addLog("<div class='cli-text'>loading GUI...</div>"); 
+    //     // setTimeout(function () {
+    //     //     addLog("<div class='cli-text'>loading content...</div>");
+            
+    //     //     commandHandler('startx', '');
+    //     //     setTimeout(function() {
+    //     //         typeText("#     #                                                              #######                       #####  \n#  #  # ###### #       ####   ####  #    # ######    #####  ####     #       #    # #    # #    # #     # \n#  #  # #      #      #    # #    # ##  ## #           #   #    #    #       ##   # #    # ##  ## #       \n#  #  # #####  #      #      #    # # ## # #####       #   #    #    #####   # #  # #    # # ## # #       \n#  #  # #      #      #      #    # #    # #           #   #    #    #       #  # # #    # #    # #       \n#  #  # #      #      #    # #    # #    # #           #   #    #    #       #   ## #    # #    # #     # \n ## ##  ###### ######  ####   ####  #    # ######      #    ####     ####### #    #  ####  #    #  #####  \n                                                                                                          \n"
+    //     //             , 2);
+    //     //         $("#loaded-content").load("/html/ui_begin.html", function() {
+    //     //             $("#gui-container").fadeIn(3000);
+    //     //         });
+                
+    //     //     }, 1500);
+    //     // }, 1500);
+    // }, 1500);    
+    
 }
 
 function loadPath(path, funct) {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server -o -a localhost -p 8000 -c-1"
+    "start": "live-server "
   },
   "repository": {
     "type": "git",
@@ -18,10 +18,10 @@
   },
   "homepage": "https://github.com/EnumC/EnumC.com#readme",
   "devDependencies": {
-    "eslint": "^6.1.0",
-    "http-server": "^0.11.1"
+    "eslint": "^6.1.0"
   },
   "dependencies": {
+    "react-grid-layout": "^0.17.1",
     "scrollmagic": "^2.0.7",
     "vivus": "^0.4.4"
   }

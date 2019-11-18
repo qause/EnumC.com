@@ -56,7 +56,6 @@ function typeText(content, delayTime, isInProg, inProgObj) {
 function commandHandler(command, args, directoriesAndFiles) {
     try {
             addLog("$ [" + currentDirectory + "] " + command + " " + args + "<br>");
-
             switch (command) {
                 case "help":
                     addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, man, clear, exit</div>');
@@ -87,7 +86,6 @@ function commandHandler(command, args, directoriesAndFiles) {
                         else {
                             addLog("<div class='cli-text'>cd: " + args + ": is a file" + ".</div>");
                         }
-
                     }
                     $('#mark').text("$ [" + currentDirectory + "]");
                     console.log("currentDirectory changed to: " + currentDirectory);
@@ -101,9 +99,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                         default:
                             $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\');
                     }
-
                     break;
-
                 case "time":
                     addLog(Date());
                     break;
@@ -248,6 +244,9 @@ function commandHandler(command, args, directoriesAndFiles) {
                         }
 
                     }
+                    break;
+                case "startx":
+
                     break;
                 case "man":
                     switch (args) {
