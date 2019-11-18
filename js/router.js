@@ -66,6 +66,8 @@ function placeholderPrep() {
 
 function initInitialLoadSequence() {
     // addLog("<div class='cli-text'>Loading initial .</div>");
+    addLog("<div class='cli-text'>This site is undergoing a complete redesign, and therefore might be very incomplete. Please see https://bananiumlabs.com for past content.</div>");
+    
     typeText("$ [" + currentDirectory + "] " + "startx");
     setTimeout(function () {
         typeText("loading GUI...", 50);
