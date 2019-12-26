@@ -155,6 +155,11 @@ function loadPath(path, funct) {
             $("#loaded-content").load("/html/menu.html", placeholderPrep);
             location.hash = "menu";
             break;
+        case "gui":
+            // $("#loaded-content").load("/html/mobile.html", function (){});
+            window.location.href = "/html/mobile.html";
+            location.hash = "gui";
+            break;
         case "cli":
             $("#loaded-content").load("/html/cli.html", funct);
             location.hash = "cli";

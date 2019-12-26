@@ -246,7 +246,8 @@ function commandHandler(command, args, directoriesAndFiles) {
                     }
                     break;
                 case "startx":
-
+                    addLog("<div class='cli-text'>Display loading...</div>");
+                    loadPath('gui');
                     break;
                 case "man":
                     switch (args) {
