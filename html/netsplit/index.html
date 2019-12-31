@@ -11,10 +11,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-        <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="/html/netsplit/css/normalize.min.css">
+        <link rel="stylesheet" href="/html/netsplit/css/main.css">
 
-        <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <script src="/html/netsplit/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -68,18 +68,46 @@
                         
                         
                         <div id='checkout' style="display: none; position:relative; top: 2vw; margin-bottom: 2vw;">
-                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                                <input type="hidden" name="cmd" value="_s-xclick">
-                                <input type="hidden" name="hosted_button_id" value="6AGJCA9P6BRJU">
-                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0"
-                                    name="submit" alt="PayPal - The safer, easier way to pay online!">
-                                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                            </form>
-                            <div style="margin-bottom: 2vw;"></div>
-                            <A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=XQ3EWQXQD9G3Y"
-                                style="position: relative;left: 17px;">
-                                <IMG SRC="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
-                            </A>
+                            
+
+                            
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <p>Quarterly</p>
+                                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                            <input type="hidden" name="cmd" value="_s-xclick">
+                                            <input type="hidden" name="hosted_button_id" value="6AGJCA9P6BRJU">
+                                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit"
+                                                alt="PayPal - The safer, easier way to pay online!">
+                                            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                        </form>    
+                                    </div>
+                                    <div class="col">
+                                        <p>Monthly</p>
+                                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                            <input type="hidden" name="cmd" value="_s-xclick">
+                                            <input type="hidden" name="hosted_button_id" value="KPS2L5V8M66H4">
+                                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit"
+                                                alt="PayPal - The safer, easier way to pay online!">
+                                            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                        </form>
+                                    </div>
+                                    <div class="col">
+                                        <!-- <div style="margin-bottom: 2vw;"></div> -->
+                                        <p>Unsubscribe</p>
+                                        <A HREF="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=XQ3EWQXQD9G3Y"
+                                            style="position: relative;left: 17px;">
+                                            <IMG SRC="https://www.paypalobjects.com/en_US/i/btn/btn_unsubscribe_LG.gif" BORDER="0">
+                                        </A>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
                         </div>
                     </footer>
                 </article>
@@ -102,7 +130,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
 
-        <script src="js/main.js"></script>
+        <script src="/html/netsplit/js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
