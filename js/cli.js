@@ -313,6 +313,48 @@ function commandHandler(command, args, directoriesAndFiles) {
                 // Server-side requests
                 case "login":
                     addLog("not implemented");
+                    addLog("<div class='cli-text'>enumc.com login: </div>");
+                    addLog("<input id='loginInfo' onblur='this.focus()' autofocus style='color:black'></input>")
+                    $('#loginInfo').keypress(function (event) {
+                        if ((event.keyCode ? event.keyCode : event.which) == '13') {
+                            document.getElementById("loginInfo").disabled = true;
+                            if ($('#loginInfo').val().trim().length > 0) {
+                                // commandData["firstName"] = $('#loginInfo').val().trim();
+                                var username = $('#loginInfo').val().trim();
+                                addLog("<div class='cli-text'>Submitting information...</div>");
+                                addLog("<progress id='infoPendingProgressBar'></progress>");
+                                $.getJSON('https://dyno.enumc.com/getLogin.php?login=' + username, function (data) {
+                                    let items = {};
+                                    $.each(data, function (key, val) {
+                                        items[key] = val;
+                                    });
+
+                                    if (items["message"]) {
+                                        addLog("<div class='cli-text'>" + items["message"] + "</div>");
+                                    }
+
+                                    $('#infoPendingProgressBar').remove();
+                                    console.log(items);
+
+                                }).fail(function (e) {
+                                    $('#infoPendingProgressBar').remove();
+                                    console.log(e);
+                                    addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>");
+                                    addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
+                                });
+                            }
+                            else {
+                                addLog("<div class='cli-text'>Invalid credentials.</div>");
+                                $(this).remove();
+                            }
+                            $('#loginInfo').unbind("keypress");
+                            $('#loginInfo').prop('id', '');
+                            console.log(username);
+                            // commandHandler("signup", "gravity");
+                        }
+
+                    });
+                    document.getElementById("loginInfo").select();
                     break;
                 case "su":
                     addLog("not implemented");
