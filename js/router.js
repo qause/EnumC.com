@@ -24,7 +24,7 @@ else {
     console.warn("router: Loaded on alternate domain. Due to XSS limitations, please ensure resources are correctly loaded.");
     console.warn("LICENSE: https://raw.githubusercontent.com/EnumC/EnumC.com/master/LICENSE");
 }
-if (rootDomain.startsWith("localhost")) {
+if (rootDomain.startsWith("localhost") || rootDomain.startsWith("127.0.0.1")) {
     devMode = true;
     console.warn("WARNING: The webpage has been served by localhost. Development mode is on.");
 }
