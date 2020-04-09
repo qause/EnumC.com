@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title>Get MD5 for a file</title>
+
+    <!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/md5.js"></script>
+
+    <script type="text/javascript">
+      function onFileSelect(){
+        var reader = new FileReader();
+
+        reader.addEventListener('load',function () {
+          var hash = CryptoJS.MD5(CryptoJS.enc.Latin1.parse(this.result));
+          var md5 = hash.toString(CryptoJS.enc.Hex)
+          var filename = document.getElementById("input").value.split('/').pop().split('\\').pop();
+          var output = "MD5 (" + filename + ") = " + md5
+          console.log(output);
+          document.getElementById("md5").innerText = output
+        });
+        reader.readAsBinaryString(document.getElementById("input").files[0]);
+      }
+    </script>
+</head>
+  <form>
+    <input type="file" id='input' onchange='onFileSelect();'>
+  </form>
+  <pre id="md5"></pre>
+
+</html>

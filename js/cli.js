@@ -75,14 +75,83 @@ function getCookie(cookieName) {
     return "";
 }
 
+function onMD5In(inputFile) {
+    addLog("<div class='cli-text'id='md5PendingProgressText'>Parsing. Please wait.</div><progress id='md5PendingProgressBar'></progress>");
+    var method = md5;
+    // try {
+    //     console.log(method(inputFile.files[0]));
+    // } catch (e) {
+    //     console.log(e);
+    // }
+    // var reader = new FileReader();
+
+    // reader.addEventListener('load', function () {
+    //     var hash = CryptoJS.MD5(CryptoJS.enc.Latin1.parse(this.result));
+    //     var md5 = hash.toString(CryptoJS.enc.Hex)
+    //     var filename = inputFile.value.split('/').pop().split('\\').pop();
+    //     var output = "MD5 (" + filename + ") = " + md5
+    //     console.log(output);
+    //     addLog("<div class='cli-text'>" + output + "</div");
+    //     $(inputFile).remove();
+    //     $('#md5PendingProgressBar').remove();
+    //     $('#md5PendingProgressText').remove();
+    // });
+    // reader.readAsArrayBuffer(inputFile.files[0]);
+
+    var file = inputFile.files[0];
+    var output = addLog;
+
+    var reader = new FileReader();
+    // var value = option.val();
+    var value = undefined;
+    if (method.update) {
+        var batch = 1024 * 1024 * 2;
+        var start = 0;
+        var total = file.size;
+        console.log(total);
+        var current = method;
+        reader.onload = function (event) {
+            try {
+                current = current.update(event.target.result, value);
+                asyncUpdate();
+            } catch (e) {
+                output(e);
+            }
+        };
+        var asyncUpdate = function () {
+            if (start < total) {
+                output('hashing...' + (start / total * 100).toFixed(2) + '%');
+                var end = Math.min(start + batch, total);
+                reader.readAsArrayBuffer(file.slice(start, end));
+                start = end;
+            } else {
+                output(current.hex());
+            }
+        };
+        asyncUpdate();
+    } else {
+        output('hashing...');
+        reader.onload = function (event) {
+            try {
+                output(method(event.target.result, value));
+            } catch (e) {
+                output(e);
+            }
+        };
+        reader.readAsArrayBuffer(file);
+    }
+}
+
 function commandHandler(command, args, directoriesAndFiles) {
     try {
             addLog("$ [" + currentDirectory + "] " + command + " " + args + "<br>");
             switch (command) {
                 case "help":
-                    addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, man, clear, exit</div>');
+                    addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, man, ping, pwd, login, su, whoami, md5, clear, exit</div>');
                     break;
-                case "cd":
+                case "cd": {
+
+                
                     console.log("dir requested: " + args.trim());
 
                     if (args.trim().toUpperCase() == "..") {
@@ -122,6 +191,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                             $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\');
                     }
                     break;
+                }
                 case "time":
                     addLog(Date());
                     break;
@@ -140,7 +210,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                         addLog("<img src='" + data.message + "' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://dog.ceo/dog-api/ <3</p>");
                     });
                     break;
-                case "open":
+                case "open": {
                     let files = directoriesAndFiles[currentDirectory].split("\n");
                     let fileFound = false;
                     files.forEach(element => {
@@ -148,16 +218,32 @@ function commandHandler(command, args, directoriesAndFiles) {
                             fileFound = true;
                         }
                     });
+
                     if (args.trim() == "") {
                         addLog("<div class='cli-text'>open: " + "No file specified. Type 'man open' to display example syntax." + ".</div>");
                     }
-                    else if (!fileFound) {
-                        addLog("<div class='cli-text'>cd: " + args + ": No such file. To open a directory, use cd. " + ".</div>");
+                    else if (!fileFound || args.trim().toUpperCase() in directoriesAndFiles) {
+                        addLog("<div class='cli-text'>open: " + args + ": No such file. To open a directory, use cd. " + ".</div>");
                     }
                     else {
                         loadPath(args, function () { });
                     }
                     break;
+                }
+                case "md5": {
+                    // $.getScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/core.js", function (data, textStatus, jqxhr) {
+                    //     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/md5.js", function (data, textStatus, jqxhr) {
+                    //         addLog("<form><input type='file' id='md5Input' onchange='onMD5In(document.getElementById(`md5Input`));'></form>");
+                    //     });
+                    // });
+
+                    $.getScript("https://cdn.jsdelivr.net/gh/emn178/js-md5/build/md5.min.js", function (data, textStatus, jqxhr) {
+                        console.log(md5('test'));
+                        addLog("<form><input type='file' id='md5Input' onchange='onMD5In(document.getElementById(`md5Input`));'></form>");
+                    });                  
+                    
+                    break;
+                }
                 case "signup":
                     if (args.trim() == "gravity") {
                         
@@ -271,6 +357,35 @@ function commandHandler(command, args, directoriesAndFiles) {
                     addLog("<div class='cli-text'>Display loading...</div>");
                     loadPath('gui');
                     break;
+                case "pwd":
+                    addLog("<div class='cli-text'>" + currentDirectory + "</div>");
+                    break;
+                case "ping": {
+                    addLog("<div class='cli-text'>Checking Ping...</div>");
+                    addLog("<progress id='infoPendingProgressBar'></progress>");
+                    let path = "https://dyno.enumc.com:443/latency.php";
+
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            addLog("<div class='cli-text'>latency to server:</div>");
+
+                            if (xhr.status === 200) {
+                                // success(JSON.parse(xhr.responseText));
+                                addLog("<div class='cli-text'>" + String(window.performance.now() - start) + "ms</div>");
+                            } else {
+                                addLog("<div class='cli-text'>ERROR. Request failed.</div>");
+                                // error(xhr);                    
+                            }
+                        }
+                        $('#infoPendingProgressBar').remove();
+                    };
+                    xhr.open('GET', path, true);
+                    let start = window.performance.now();
+                    xhr.send();
+                    break;
+                }
+                    
                 case "man":
                     switch (args) {
                         case "":
@@ -309,10 +424,28 @@ function commandHandler(command, args, directoriesAndFiles) {
                             addLog("<div class='cli-text'>Usage: man [commandname]</div>");
                             break;
                         case "login":
+                            addLog("<div class='cli-text'>Authenticate server-side</div>");
+                            addLog("<div class='cli-text'>Usage: login [credentials]</div>");
+                            break;
+                        case "ping":
+                            addLog("<div class='cli-text'>Check dynamic server response time</div>");
+                            addLog("<div class='cli-text'>Usage: ping</div>");
+                            break;
+                        case "pwd":
+                            addLog("<div class='cli-text'>Get current path</div>");
+                            addLog("<div class='cli-text'>Usage: pwd</div>");
                             break;
                         case "su":
+                            addLog("<div class='cli-text'>Authenticate server-side with privilege</div>");
+                            addLog("<div class='cli-text'>Usage: su [credentials]</div>");
                             break;
                         case "whoami":
+                            addLog("<div class='cli-text'>Get logged in user info</div>");
+                            addLog("<div class='cli-text'>Usage: whoami</div>");
+                            break;
+                        case "md5":
+                            addLog("<div class='cli-text'>Get md5 hash of input file</div>");
+                            addLog("<div class='cli-text'>Usage: md5</div>");
                             break;
                         case "command_name_here":
                             addLog("<div class='cli-text'>What did your instructor say about blindly copy pasting commands?!</div>");
@@ -334,7 +467,7 @@ function commandHandler(command, args, directoriesAndFiles) {
 
                 // Server-side requests
                 case "login":
-                    addLog("not implemented");
+                    // addLog("not implemented");
                     addLog("<div class='cli-text'>enumc.com login: </div>");
                     addLog("<input id='loginInfo' onblur='this.focus()' autofocus style='color:black'></input>")
                     $('#loginInfo').keypress(function (event) {
@@ -394,7 +527,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                     document.getElementById("loginInfo").select();
                     break;
                 case "su":
-                    addLog("not implemented");
+                    // addLog("not implemented");
                     addLog("<div class='cli-text'>enumc.com login: </div>");
                     addLog("<input id='loginInfo' onblur='this.focus()' autofocus style='color:black'></input>")
                     $('#loginInfo').keypress(function (event) {
@@ -453,11 +586,11 @@ function commandHandler(command, args, directoriesAndFiles) {
                     });
                     document.getElementById("loginInfo").select();
                     break;
-                case "whoami":
+                case "whoami": {
                     // addLog("not implemented");
                     // addLog("<div class='cli-text'>enumc.com login: </div>");
                     // addLog("<input id='loginInfo' onblur='this.focus()' autofocus style='color:black'></input>")
-                    
+
                     if (devMode) {
                         console.warn("su on test portal");
                         var loginPortal = "https://gravity.enumc.com/getLogin.php?login=";
@@ -495,6 +628,8 @@ function commandHandler(command, args, directoriesAndFiles) {
                     });
 
                     break;
+                }
+                    
                 // End server-side requests
 
                 // Exception testing.
@@ -545,9 +680,13 @@ function initCLI() {
 
     // Define files in CLI filesystem. 
     let directoriesAndFiles = {
-        "/": "SYSTEM\nHOME",
+        "/": "SYSTEM\nHOME\nTEST",
         SYSTEM: "..\nmenu\ncli",
-        HOME: "..\nresume\nprofile"
+        HOME: "..\nresume\nprofile",
+        TEST: "..\ndirTest\nfileTest",
+        DIRTEST: "..\nnestedDir",
+        NESTEDDIR: "..\nNESTED2",
+        NESTED2: "..\nfileTest"
     };
 
     // CURRENTDIRECTORY MOVED TO INDEX.JS

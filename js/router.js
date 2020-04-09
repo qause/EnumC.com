@@ -178,9 +178,19 @@ function loadPath(path, funct) {
                 typeText("GRAVITY: Thank you for your interest! To be kept up to date on club-related news," + 
                         "enter the following information...", 25);
                         commandHandler('signup', 'gravity');
-                
-
             });
+            break;
+        case "dirTest":
+            $("#loaded-content").load("/html/cli.html", function() {
+                addLog("<div class='cli-text'>directory routing test successful.</div>");
+            });
+            location.hash = "cli";
+            break;
+        case "fileTest":
+            $("#loaded-content").load("/html/cli.html", function () {
+                addLog("<div class='cli-text'>file routing test successful.</div>");
+            });
+            location.hash = "cli";
             break;
         case "400":
             validPath = false;
