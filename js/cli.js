@@ -77,69 +77,52 @@ function getCookie(cookieName) {
 
 function onMD5In(inputFile) {
     addLog("<div class='cli-text'id='md5PendingProgressText'>Parsing. Please wait.</div><progress id='md5PendingProgressBar'></progress>");
-    var method = md5;
-    // try {
-    //     console.log(method(inputFile.files[0]));
-    // } catch (e) {
-    //     console.log(e);
-    // }
-    // var reader = new FileReader();
+    console.log(inputFile);
+    var progBar = document.getElementById("md5PendingProgressBar");
 
-    // reader.addEventListener('load', function () {
-    //     var hash = CryptoJS.MD5(CryptoJS.enc.Latin1.parse(this.result));
-    //     var md5 = hash.toString(CryptoJS.enc.Hex)
-    //     var filename = inputFile.value.split('/').pop().split('\\').pop();
-    //     var output = "MD5 (" + filename + ") = " + md5
-    //     console.log(output);
-    //     addLog("<div class='cli-text'>" + output + "</div");
-    //     $(inputFile).remove();
-    //     $('#md5PendingProgressBar').remove();
-    //     $('#md5PendingProgressText').remove();
-    // });
-    // reader.readAsArrayBuffer(inputFile.files[0]);
+    var blobSlice = File.prototype.slice || File.prototype.mozSlice || File.prototype.webkitSlice,
+        file = inputFile.files[0],
+        chunkSize = 2097152,                             // Read in chunks of 2MB
+        chunks = Math.ceil(file.size / chunkSize),
+        currentChunk = 0,
+        spark = new SparkMD5.ArrayBuffer(),
+        fileReader = new FileReader();
 
-    var file = inputFile.files[0];
-    var output = addLog;
+        progBar.max = chunks;
 
-    var reader = new FileReader();
-    // var value = option.val();
-    var value = undefined;
-    if (method.update) {
-        var batch = 1024 * 1024 * 2;
-        var start = 0;
-        var total = file.size;
-        console.log(total);
-        var current = method;
-        reader.onload = function (event) {
-            try {
-                current = current.update(event.target.result, value);
-                asyncUpdate();
-            } catch (e) {
-                output(e);
-            }
-        };
-        var asyncUpdate = function () {
-            if (start < total) {
-                output('hashing...' + (start / total * 100).toFixed(2) + '%');
-                var end = Math.min(start + batch, total);
-                reader.readAsArrayBuffer(file.slice(start, end));
-                start = end;
-            } else {
-                output(current.hex());
-            }
-        };
-        asyncUpdate();
-    } else {
-        output('hashing...');
-        reader.onload = function (event) {
-            try {
-                output(method(event.target.result, value));
-            } catch (e) {
-                output(e);
-            }
-        };
-        reader.readAsArrayBuffer(file);
+    fileReader.onload = function (e) {
+        progBar.value = currentChunk;
+        console.log('read chunk nr', currentChunk + 1, 'of', chunks);
+        spark.append(e.target.result);                   // Append array buffer
+        currentChunk++;
+
+        if (currentChunk < chunks) {
+            loadNext();
+        } else {
+            console.log('finished loading');
+            // console.info('computed hash', spark.end());  // Compute hash
+            $('#md5PendingProgressText').remove();
+            $("#md5PendingProgressBar").remove();
+            addLog("<div class='cli-text'>" + inputFile.files[0].name + " -> " + 
+                    "MD5 -> " + spark.end().toUpperCase() + "</div>");
+            $("#md5Input").remove();
+        }
+    };
+
+    fileReader.onerror = function () {
+        console.warn('oops, something went wrong.');
+    };
+
+    function loadNext() {
+        var start = currentChunk * chunkSize,
+            end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize;
+
+        fileReader.readAsArrayBuffer(blobSlice.call(file, start, end));
     }
+
+    loadNext();
+
+    
 }
 
 function commandHandler(command, args, directoriesAndFiles) {
@@ -237,10 +220,14 @@ function commandHandler(command, args, directoriesAndFiles) {
                     //     });
                     // });
 
-                    $.getScript("https://cdn.jsdelivr.net/gh/emn178/js-md5/build/md5.min.js", function (data, textStatus, jqxhr) {
-                        console.log(md5('test'));
-                        addLog("<form><input type='file' id='md5Input' onchange='onMD5In(document.getElementById(`md5Input`));'></form>");
-                    });                  
+                    $.getScript(
+						"https://cdnjs.cloudflare.com/ajax/libs/spark-md5/3.0.0/spark-md5.min.js",
+						function (data, textStatus, jqxhr) {
+							addLog(
+								"<form><input type='file' id='md5Input' onchange='onMD5In(document.getElementById(`md5Input`));'></form>"
+							);
+						}
+					);                  
                     
                     break;
                 }
