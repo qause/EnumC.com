@@ -435,7 +435,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                             addLog("<div class='cli-text'>Usage: md5</div>");
                             break;
                         case "command_name_here":
-                            addLog("<div class='cli-text'>What did your instructor say about blindly copy pasting commands?!</div>");
+                            addLog("<div class='cli-text'>What did your parent teach you about blindly copy pasting commands?!</div>");
                             addLog("<div class='cli-text'>To request the manual for a command, use an actual command name.</div>");
                             break;
                         case "clear":
