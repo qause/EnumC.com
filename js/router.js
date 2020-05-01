@@ -165,7 +165,7 @@ function loadPath(path, funct) {
             location.hash = "cli";
             break;
         case "resume":
-            window.open("/files/resume.pdf");
+            window.open("/files/Eric_Qian_e_Resume_BW_0406_2.pdf");
             break;
         case "EP-01":
             $("#loaded-content").load("/html/cli.html", function () {
