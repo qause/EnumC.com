@@ -128,6 +128,8 @@ function onMD5In(inputFile) {
 function commandHandler(command, args, directoriesAndFiles) {
     try {
             addLog("$ [" + currentDirectory + "] " + command + " " + args + "<br>");
+            commandHistory.push([command, args]);
+            historyIndex += 1;
             switch (command) {
                 case "help":
                     addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, man, ping, pwd, login, su, whoami, md5, clear, exit</div>');
@@ -372,6 +374,12 @@ function commandHandler(command, args, directoriesAndFiles) {
                     xhr.send();
                     break;
                 }
+                case "history": {
+                    for (historyIndex = 0; historyIndex < commandHistory.length; historyIndex++) {
+                        addLog(historyIndex + "&nbsp;&nbsp;&nbsp;&nbsp;" + commandHistory[historyIndex][0] + " " + commandHistory[historyIndex][1] + "<br>");
+                    }
+                    break;
+                }
                     
                 case "man":
                     switch (args) {
@@ -397,6 +405,10 @@ function commandHandler(command, args, directoriesAndFiles) {
                         case "ls":
                             addLog("<div class='cli-text'>List files in current directory</div>");
                             addLog("<div class='cli-text'>Usage: ls</div>");
+                            break;
+                        case "history":
+                            addLog("<div class='cli-text'>List history of commands</div>");
+                            addLog("<div class='cli-text'>Usage: history</div>");
                             break;
                         case "fetch":
                             addLog("<div class='cli-text'>:3</div>");
@@ -679,8 +691,12 @@ function initCLI() {
     // CURRENTDIRECTORY MOVED TO INDEX.JS
     $('#mark').text("$ [" + currentDirectory + "]");
     
+    commandHistory = [];
+    historyIndex = 0;
+    
     $('.commandline').keypress(function (event) {
         let keycode = (event.keyCode ? event.keyCode : event.which);
+        // console.log("keycode: " + keycode);
         if (keycode == '13') {
             let command = $('.commandline').val().trim();
             let args = "";
@@ -696,6 +712,46 @@ function initCLI() {
         }
         
     });
+
+    $(document).bind("copy", function(e) {
+        e.preventDefault();
+        addLog("$ [" + currentDirectory + "] " + "<br>");
+        document.getElementsByClassName('commandline')[0].val = "";
+        document.getElementsByClassName('commandline')[0].focus();
+    });
+    
+    document.onkeydown = function(e) {
+        switch(e.which) {
+            case 38:
+            // Up arrow
+            // $('.commandline');
+            historyIndex -= 1;
+            if (historyIndex < 0) {
+                historyIndex = 0;
+            }
+            commandLineElem = document.getElementsByClassName('commandline')[0];
+            commandPrev = commandHistory[historyIndex][0] + " " + commandHistory[historyIndex][1];
+            commandLineElem.focus();
+            commandLineElem.value = commandPrev;
+            setTimeout(function(){ commandLineElem.selectionStart = commandLineElem.selectionEnd = 10000; }, 0);
+            console.log(commandPrev);
+            break;
+
+            case 40:
+                // Down arrow
+                historyIndex += 1;
+                if (historyIndex >= commandHistory.length) {
+                    historyIndex = commandHistory.length - 1;
+                }
+                commandLineElem = document.getElementsByClassName('commandline')[0];
+                commandNext = commandHistory[historyIndex][0] + " " + commandHistory[historyIndex][1];
+                commandLineElem.focus();
+                commandLineElem.value = commandNext;
+                setTimeout(function(){ commandLineElem.selectionStart = commandLineElem.selectionEnd = 10000; }, 0);
+                console.log(commandNext);
+                break;
+        }
+    }
 }
 
 $(".log").bind("DOMSubtreeModified", function () {
