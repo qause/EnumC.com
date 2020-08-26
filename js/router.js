@@ -66,7 +66,7 @@ function placeholderPrep() {
 
 function initInitialLoadSequence() {
     // addLog("<div class='cli-text'>Loading initial .</div>");
-    addLog("<div class='cli-text'>This site is undergoing a complete redesign, and therefore might be very incomplete. Please see https://bananiumlabs.com for past content.</div>");
+    addLog("<div class='cli-text'>This site is undergoing a complete redesign, and therefore might be very incomplete. Please see <a href='https://bananium.com' target='_blank' style='color:white; text-decoration:none;'>https://bananium.com</a> for past content.</div>");
     
     typeText("$ [" + currentDirectory + "] " + "startx");
     setTimeout(function () {

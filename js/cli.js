@@ -719,6 +719,10 @@ function initCLI() {
         document.getElementsByClassName('commandline')[0].val = "";
         document.getElementsByClassName('commandline')[0].focus();
     });
+
+    document.addEventListener("click", function(){
+        document.getElementsByClassName('commandline')[0].focus();
+    });
     
     document.onkeydown = function(e) {
         switch(e.which) {
