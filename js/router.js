@@ -192,6 +192,35 @@ function loadPath(path, funct) {
             });
             location.hash = "cli";
             break;
+        case "top-secret-hash":
+            $("#loaded-content").load("/html/cli.html", function () {
+                typeText("You have gained access to a top secret database.", 25);
+                addLog("<div class='cli-text'>There is a password hash hidden somewhere on this page.</div>");
+                addLog("<div class='cli-text'>If you are able to successfully decode it, a secret awaits!</div>");
+                addLog("<div class='cli-text'>programmers loves to use notepad in order to edit binary files, right? RIGHT?</div>");
+                addLog("<div class='cli-text'><img src='files/ben.png' style='height:25vh'></img></div>");
+                dateInPastArrow = (firstDate, secondDate) => firstDate.setHours(0, 0, 0, 0) <= secondDate.setHours(0, 0, 0, 0);
+                var today = new Date();
+                var targetDateInclusive = new Date('2020-10-15');
+                if (dateInPastArrow(targetDateInclusive, today)) {
+                    addLog("<div class='cli-text'>the database is under maintainence! Quick, use this oppotunity to break through validation!</div>");
+                    commandHandler('login', '');
+                }
+                else {
+                    addLog("<div class='cli-text'>Submission is disabled for " + new Date() + ". The IT department is on full alert today. Try again later.</div>");
+                }
+                
+            });
+            location.hash = "top-secret-hash";
+            break;
+        case "f0und-ha3h":
+            $("#loaded-content").load("/html/cli.html", function () {
+                typeText("WARN: Accessing restricted memory.", 25);
+                addLog("<div class='cli-text'>0d107d09f5bbe40cade3de5c71e9e9b7</div>");
+                commandHandler('login', '');
+            });
+            location.hash = "cli";
+            break;
         case "400":
             validPath = false;
             $("#loaded-content").load("/html/cli.html", function () {
