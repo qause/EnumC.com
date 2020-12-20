@@ -61,7 +61,9 @@ function maximizeWindows(source) {
     
 }
 
-$("#wrapper").draggable().resizable();
+$("#wrapper").draggable({
+    cancel: ".main-content" // Restrict dragging to title-bar only.
+  }).resizable();
 function updateCommitDetails(callback) {
     $.getJSON('https://api.github.com/repos/EnumC/EnumC.com/git/refs/heads/master', function (data) {
         console.debug(data);

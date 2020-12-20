@@ -56,6 +56,10 @@
   <link rel="stylesheet" href="/css/skeleton.css">
   <link rel="stylesheet" href="/css/index.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"
+  />
 
   <!-- Javascript
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -139,7 +143,7 @@
 
     <!-- Primary Page Layout
       –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div class="main-content">
+    <div class="main-content" style="height:90%">
       
     
       <div class="top-right">
@@ -150,7 +154,7 @@
       <div class="bottom-right">
         <canvas id="info-section" style="background-color: #000000; display: none;"></canvas>
       </div>
-      <div id="loaded-content" style="position: relative;"></div>
+      <div id="loaded-content" style="position: relative; height:100%;"></div>
     
     </div>
 
@@ -166,6 +170,7 @@
     <script type="text/javascript" src="/js/preload.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
     <script type="text/javascript" src="/js/router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
   </footer>
 </body>
 </html>

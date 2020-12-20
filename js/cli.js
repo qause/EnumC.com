@@ -24,6 +24,7 @@ function addLog(content) {
     $('.log').append(content);
     logContent.push(content);
     window.scrollTo(0, document.body.scrollHeight);
+    $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
 }
 
 /* Recursive method to type text to log with delay between each character.

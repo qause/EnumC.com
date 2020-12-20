@@ -160,6 +160,9 @@ a svg rect {
     transform: rotate(-90deg);
 }
 
+.simplebar-scrollbar::before {
+    background-color: white !important; 
+}
 
 @media screen and (orientation:portrait) {
     #info-section {
