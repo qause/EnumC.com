@@ -6,6 +6,9 @@
 */
 function showCustomError(message, source, lineno, colno, error) {
     console.log('Error: ', error);
+    // if (error == null) {
+    //     return;
+    // }
     try {
         document.getElementById("content-error-icon").style.display = "block";
     }
