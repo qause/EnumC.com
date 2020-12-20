@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/EnumC/EnumC.com#readme",
   "devDependencies": {
-    "eslint": "^6.1.0"
+    "eslint": "^6.1.0",
+    "live-server": "^1.2.1"
   },
   "dependencies": {
     "react-grid-layout": "^0.17.1",

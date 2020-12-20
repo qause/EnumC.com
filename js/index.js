@@ -23,6 +23,8 @@ let lastAuthored;
 
 let logContent = [];
 
+let prevWidth = 0;
+let prevHeight = 0;
 
 window.onbeforeunload = function () { 
     // Set position to top prior to refresh, since this is a 
@@ -30,7 +32,36 @@ window.onbeforeunload = function () {
     // across refreshes. 
     window.scrollTo(0, 0); 
 };
+function maximizeWindows(source) {
+    console.log(source);
+    initialHeight = $(source).outerHeight(false);
+    initalWidth = $(source).outerWidth(false);
 
+    targetHeight = $(window).height() - ($(source).outerHeight(true) - $(source).outerHeight(false));
+    targetWidth = $(window).width() - ($(source).outerWidth(true) - $(source).outerWidth(false));
+
+    if (initialHeight != targetHeight) {
+        source.style.height = targetHeight + "px";
+        prevHeight = initialHeight;
+        
+    }
+    else {
+        console.log("already maximized (Y)");
+        source.style.height = prevHeight + "px";
+    }
+
+    if (initalWidth != targetWidth) {
+        source.style.width = targetWidth + "px";
+        prevWidth = initalWidth;
+    }
+    else {
+        console.log("already maximized (X)");
+        source.style.width = prevWidth + "px";
+    }
+    
+}
+
+$("#wrapper").draggable().resizable();
 function updateCommitDetails(callback) {
     $.getJSON('https://api.github.com/repos/EnumC/EnumC.com/git/refs/heads/master', function (data) {
         console.debug(data);
