@@ -5,18 +5,18 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
 <url>
-  <loc>https://enumc.com/</loc>
+  <loc>https://ericqian.me/</loc>
 </url>
 <url>
-  <loc>https://enumc.com/#cli</loc>
+  <loc>https://ericqian.me/#cli</loc>
 </url>
 <url>
-  <loc>https://enumc.com/#gui</loc>
+  <loc>https://ericqian.me/#gui</loc>
 </url>
 <url>
   <loc>https://dyno.enumc.com/</loc>
 </url>
 <url>
-  <loc>https://enumc.com/files/Eric_Qian_e_Resume_BW_1210.pdf</loc>
+  <loc>https://ericqian.me/files/Eric_Qian_e_Resume_BW_1210.pdf</loc>
 </url>
 </urlset>

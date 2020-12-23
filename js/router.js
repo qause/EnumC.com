@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2019 Eric Qian.
-    <https://enumc.com/>
+    Copyright (C) 2020 Eric Qian.
+    <https://ericqian.me/>
     All rights reserved.
 */
 
@@ -13,21 +13,25 @@ var devMode = false;
 // due to XSS concerns***
 console.debug("router: root domain - " + rootDomain);
 
-if (rootDomain == "enumc.com") {
+if (rootDomain == "ericqian.me") {
     mainDomain = true;
     console.debug("router: Loaded on main domain.")
 }
 else if (rootDomain == "factorialize.com") {
     console.debug("router: Loaded on domain alias.");
 }
+else if (rootDomain == "enumc.com") {
+    console.debug("router: Loaded on domain alias.");
+}
+else if (rootDomain.startsWith("localhost") || rootDomain.startsWith("127.0.0.1")) {
+    devMode = true;
+    console.warn("WARNING: The webpage has been served by localhost. Development mode is on.");
+}
 else {
     console.warn("router: Loaded on alternate domain. Due to XSS limitations, please ensure resources are correctly loaded.");
     console.warn("LICENSE: https://raw.githubusercontent.com/EnumC/EnumC.com/master/LICENSE");
 }
-if (rootDomain.startsWith("localhost") || rootDomain.startsWith("127.0.0.1")) {
-    devMode = true;
-    console.warn("WARNING: The webpage has been served by localhost. Development mode is on.");
-}
+
 
 let currentPath;
 function placeholderPrep() {

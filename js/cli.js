@@ -1,6 +1,6 @@
 /*
-    Copyright (C) 2019 Eric Qian.
-    <https://enumc.com/>
+    Copyright (C) 2020 Eric Qian. 
+    <https://ericqian.me/>
     All rights reserved. 
 */
 
@@ -170,13 +170,13 @@ function commandHandler(command, args, directoriesAndFiles) {
                     console.log("currentDirectory changed to: " + currentDirectory);
                     switch (currentDirectory) {
                         case "/":
-                            $('#path').text('C:\\ENUMC.COM\\');
+                            $('#path').text('C:\\ERICQIAN.ME\\');
                             break;
                         case "~/":
-                            $('#path').text('C:\\ENUMC.COM\\SYSTEM\\');
+                            $('#path').text('C:\\ERICQIAN.ME\\SYSTEM\\');
                             break;
                         default:
-                            $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\');
+                            $('#path').text('C:\\ERICQIAN.ME\\' + currentDirectory + '\\');
                     }
                     break;
                 }
