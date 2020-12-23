@@ -38,6 +38,7 @@ function typeText(content, delayTime, isInProg, inProgObj) {
         var typingElementComplete = $('<pre class="cli-text" style="overflow: visible; line-height: 0.5em;"></pre>').html(content);
         logContent.push(typingElementComplete);
         $('.log').append(typingElement);
+        $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
     }
     else {
         var typingElement = inProgObj;
