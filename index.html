@@ -125,7 +125,7 @@
     <h3>This site has not been optimized for portrait view yet. Please rotate your device. </h3>
   </div> -->
   
-  <div id="wrapper" style="position:absolute;width:75vw;height:75vw;">
+  <div id="wrapper">
 
     <div class="" id="title-section" style="position: sticky; top:0; height:2em; background-color:white; margin: 0em; outline:solid 2px #7B0000; z-index:10;">
       <div class="" style="bottom:0; height: 0.5em; background-color: black; margin: 0em; width: 100%">
@@ -141,7 +141,8 @@
         <div style="position: absolute; right: 5px;">
           <i class="far fa-window-minimize" style="margin-left: 10px; margin-right:10px;"></i>
           <i class="far fa-window-maximize" onclick="maximizeWindows(this.parentNode.parentNode.parentNode.parentNode)" style="margin-left: 10px; margin-right:10px;"></i>
-          <a href="javascript:loadPath('menu');"><i class="fas fa-times" style="margin-left: 10px; margin-right:10px; color: black"></i></a>
+          <!-- <a href="javascript:loadPath('menu');"><i class="fas fa-times" style="margin-left: 10px; margin-right:10px; color: black"></i></a> -->
+          <i class="fas fa-times" onclick="$(this.parentNode.parentNode.parentNode.parentNode).remove();" style="margin-left: 10px; margin-right:10px; color: black"></i>
         </div>
       </div>
     </div>
@@ -155,20 +156,21 @@
     <div class="main-content" style="height:90%">
       
     
-      <div class="top-right">
-        <h4 style="margin-bottom: 0px; margin-top: 5%">Eric Qian</h4>
-        <h5 style="font-family: monospace; color: white">©2020</h5>
-        <i id="content-error-icon" class="fas fa-exclamation-triangle" style="color: #DDDDDD; display: none;"> Application Error. Please refer to console.</i>
-      </div>
-      <div class="bottom-right">
-        <canvas id="info-section" style="background-color: #000000; display: none;"></canvas>
-      </div>
+      
       <div id="loaded-content" style="position: relative; height:100%;"></div>
     
     </div>
 
   </div>
   
+  <div class="top-right">
+    <h4 style="margin-bottom: 0px; margin-top: 5%">Eric Qian</h4>
+    <h5 style="font-family: monospace; color: white">©2020</h5>
+    <i id="content-error-icon" class="fas fa-exclamation-triangle" style="color: #DDDDDD; display: none;"> Application Error. Please refer to console.</i>
+  </div>
+  <div class="bottom-right">
+    <canvas id="info-section" style="background-color: #000000; display: none;"></canvas>
+  </div>
   
   
 

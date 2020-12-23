@@ -38,7 +38,7 @@ function typeText(content, delayTime, isInProg, inProgObj) {
         var typingElementComplete = $('<pre class="cli-text" style="overflow: visible; line-height: 0.5em;"></pre>').html(content);
         logContent.push(typingElementComplete);
         $('.log').append(typingElement);
-        $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
+        
     }
     else {
         var typingElement = inProgObj;
@@ -50,6 +50,7 @@ function typeText(content, delayTime, isInProg, inProgObj) {
     setTimeout(function () {
         typingElement.html(typingElement.html() + content.charAt(0));
         content = content.substr(1);
+        $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
         typeText(content, delayTime, true, typingElement);
         
     }, delayTime);
@@ -759,6 +760,10 @@ function initCLI() {
         }
     }
 }
+
+// function centerCLI() {
+//     $("#wrapper").css("left", "");
+// }
 
 $(".log").bind("DOMSubtreeModified", function () {
     // Scroll to bottom whenever log is updated.
