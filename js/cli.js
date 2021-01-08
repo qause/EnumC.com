@@ -355,7 +355,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                 case "ping": {
                     addLog("<div class='cli-text'>Checking Ping...</div>");
                     addLog("<progress id='infoPendingProgressBar'></progress>");
-                    let path = "https://dyno.enumc.com:443/latency.php";
+                    let path = "https://node1.enumc.com:443/latency.php";
 
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange = function () {
@@ -483,10 +483,10 @@ function commandHandler(command, args, directoriesAndFiles) {
 
                                 if (devMode) {
                                     console.warn("su on test portal");
-                                    var loginPortal = "https://gravity.enumc.com/getLogin.php?login=";
+                                    var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
                                 }
                                 else {
-                                    var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
+                                    var loginPortal = "https://node1.enumc.com/getLogin.php?login=";
                                 }
 
                                 $.getJSON(loginPortal + username + '&action=login', function (data) {
@@ -543,10 +543,10 @@ function commandHandler(command, args, directoriesAndFiles) {
 
                                 if (devMode) {
                                     console.warn("su on test portal");
-                                    var loginPortal = "https://gravity.enumc.com/getLogin.php?login=";
+                                    var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
                                 }
                                 else {
-                                    var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
+                                    var loginPortal = "https://node1.enumc.com/getLogin.php?login=";
                                 }
 
                                 $.getJSON(loginPortal + username + '&action=su', function (data) {
@@ -595,10 +595,10 @@ function commandHandler(command, args, directoriesAndFiles) {
 
                     if (devMode) {
                         console.warn("su on test portal");
-                        var loginPortal = "https://gravity.enumc.com/getLogin.php?login=";
+                        var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
                     }
                     else {
-                        var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
+                        var loginPortal = "https://node1.enumc.com/getLogin.php?login=";
                     }
                     var user = getCookie('user');
                     if (user == "") {
