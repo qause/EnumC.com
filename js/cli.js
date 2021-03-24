@@ -40,11 +40,17 @@ function addLog(content, cliElm) {
             }
         });
     }
-    let logElm = $(cliElm).find('.log');
-    $(logElm).append(content);
-    logContent.push(content);
-    window.scrollTo(0, document.body.scrollHeight);
-    $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
+    let waitUntilExist = setInterval(function () {
+        if ($(cliElm).find('.log').length) {
+            let logElm = $(cliElm).find('.log');
+            $(logElm).append(content);
+            logContent.push(content);
+            window.scrollTo(0, document.body.scrollHeight);
+            $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
+            clearInterval(waitUntilExist);
+        }
+    }, 10)
+    
 }
 
 /* Add HTML content to container. */
@@ -58,24 +64,30 @@ function addContainerLog(content, cliElm) {
             }
         });
     }
-    let logElm = $(cliElm).find('.container');
-    $(logElm).append(content);
-    logContent.push(content);
-    window.scrollTo(0, document.body.scrollHeight);
-    $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
+    let waitUntilExist = setInterval(function () {
+        if ($(cliElm).find('.container').length) {
+            let logElm = $(cliElm).find('.container');
+            $(logElm).append(content);
+            logContent.push(content);
+            window.scrollTo(0, document.body.scrollHeight);
+            $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
+            clearInterval(waitUntilExist);
+        }
+    }, 10)
+    
 }
 
 /* Recursive method to type text to log with delay between each character.
    content:     HTML content
    delayTime:   Delay between character in ms
 */
-function typeText(content, delayTime, isInProg, inProgObj) {
+function typeText(content, elm, delayTime, isInProg, inProgObj) {
 
     if (isInProg != true) {
         var typingElement = $('<pre class="cli-text" style="overflow: visible; line-height: 0.5em;"></pre>');
         var typingElementComplete = $('<pre class="cli-text" style="overflow: visible; line-height: 0.5em;"></pre>').html(content);
         logContent.push(typingElementComplete);
-        $('.log').append(typingElement);
+        $(elm).find('.log').append(typingElement);
         
     }
     else {
@@ -89,7 +101,7 @@ function typeText(content, delayTime, isInProg, inProgObj) {
         typingElement.html(typingElement.html() + content.charAt(0));
         content = content.substr(1);
         $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
-        typeText(content, delayTime, true, typingElement);
+        typeText(content, elm, delayTime, true, typingElement);
         
     }, delayTime);
 }

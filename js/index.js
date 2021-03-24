@@ -259,7 +259,7 @@ function createWindow(path) {
     console.log(newElem[1]);
     
     
-    setTimeout(function () { $(newWindow).css("opacity", "1"); $(newWindow).children().resizable().hide().show("slow"); if (newElem[1]) { newElem[1](); };}, 20);
+    setTimeout(function () { $(newWindow).css("opacity", "1"); $(newWindow).children().resizable().hide().show("slow"); if (newElem[1]) { newElem[1]($(newWindow)); };}, 50);
     return newWindow;
 }
 

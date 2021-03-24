@@ -68,25 +68,25 @@ function placeholderPrep() {
     });
 }
 
-function initInitialLoadSequence() {
+function initInitialLoadSequence(e) {
     // addLog("<div class='cli-text'>Loading initial .</div>");
-    addLog("<div class='cli-text'>This site is undergoing a complete redesign, and therefore might be very incomplete. Please see <a href='https://bananium.com' target='_blank' style='color:white; text-decoration:none;'>https://bananium.com</a> for past content.</div>");
+    addLog("<div class='cli-text'>This site is undergoing a complete redesign, and therefore might be very incomplete. Please see <a href='https://bananium.com' target='_blank' style='color:white; text-decoration:none;'>https://bananium.com</a> for past content.</div>",e);
     
-    typeText("$ [" + currentDirectory + "] " + "startx");
+    typeText("$ [" + currentDirectory + "] " + "startx",e);
     setTimeout(function () {
-        typeText("loading GUI...", 50);
+        typeText("loading GUI...", e, 50);
         setTimeout(function () {
-            addLog("<div class='cli-text'>GUI Not yet available.</div>");
-            addLog("<div class='cli-text'>Last revision on: " + lastAuthored + ".</div>");
+            addLog("<div class='cli-text'>GUI Not yet available.</div>",e);
+            addLog("<div class='cli-text'>Last revision on: " + lastAuthored + ".</div>",e);
             // updateCommitDetails(function() {
                 
             // });
             
 
             setTimeout(function () {
-                addLog("<div class='cli-text'>Dropping into shell.</div>");
+                addLog("<div class='cli-text'>Dropping into shell.</div>",e);
                 setTimeout(function () {
-                    typeText("#     #                                                              #######                       #####  \n#  #  # ###### #       ####   ####  #    # ######    #####  ####     #       #    # #    # #    # #     # \n#  #  # #      #      #    # #    # ##  ## #           #   #    #    #       ##   # #    # ##  ## #       \n#  #  # #####  #      #      #    # # ## # #####       #   #    #    #####   # #  # #    # # ## # #       \n#  #  # #      #      #      #    # #    # #           #   #    #    #       #  # # #    # #    # #       \n#  #  # #      #      #    # #    # #    # #           #   #    #    #       #   ## #    # #    # #     # \n ## ##  ###### ######  ####   ####  #    # ######      #    ####     ####### #    #  ####  #    #  #####  \n                                                                                                          \n");
+                    typeText("#     #                                                              #######                       #####  \n#  #  # ###### #       ####   ####  #    # ######    #####  ####     #       #    # #    # #    # #     # \n#  #  # #      #      #    # #    # ##  ## #           #   #    #    #       ##   # #    # ##  ## #       \n#  #  # #####  #      #      #    # # ## # #####       #   #    #    #####   # #  # #    # # ## # #       \n#  #  # #      #      #      #    # #    # #           #   #    #    #       #  # # #    # #    # #       \n#  #  # #      #      #    # #    # #    # #           #   #    #    #       #   ## #    # #    # #     # \n ## ##  ###### ######  ####   ####  #    # ######      #    ####     ####### #    #  ####  #    #  #####  \n                                                                                                          \n", e);
                 }, 1000);
             }, 1000);
         }, 1000);
@@ -148,16 +148,16 @@ function loadPath(path, funct) {
     switch (path) {
         case "":
             // $("#loaded-content").load("/html/menu.html", placeholderPrep);
-            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), function() {
-                initInitialLoadSequence();
-                hideLoading();
-            }];
             location.hash = "cli";
             path = "cli";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), function (e) {
+                initInitialLoadSequence(e);
+                hideLoading();
+            }];
             break;
         case "menu":
-            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/menu.html"), placeholderPrep];
             location.hash = "menu";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/menu.html"), placeholderPrep];
             break;
         case "gui":
             // $("#loaded-content").load("/html/mobile.html", function (){});
@@ -165,83 +165,76 @@ function loadPath(path, funct) {
             location.hash = "gui";
             break;
         case "cli":
-            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), funct];
             location.hash = "cli";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), funct];
             break;
         case "resume":
             // window.open("/files/Eric_Qian_e_Resume_BW_1210.pdf");
-            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function () {
-                addContainerLog('<object style="width: inherit; height: inherit;" data="/files/Eric_Qian_e_Resume_BW_1210.pdf"></object>');
+            location.hash = "resume";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function (e) {
+                addContainerLog('<object style="width: inherit; height: inherit;" data="/files/Eric_Qian_e_Resume_BW_1210.pdf"></object>',e);
             }];
             break;
         case "EP-01":
-            $("#loaded-content").load("/html/cli.html", function () {
-                addLog("<div class='cli-text'>Please wait... If nothing happens, click here: https://www.youtube.com/watch?v=7pK42-nQZ-4</div>");
+            $("#loaded-content").load("/html/cli.html", function (e) {
+                addLog("<div class='cli-text'>Please wait... If nothing happens, click here: https://www.youtube.com/watch?v=7pK42-nQZ-4</div>",e);
                 window.location.href = "https://www.youtube.com/watch?v=7pK42-nQZ-4";
             })
             break;
         case "gravity":
-            $("#loaded-content").load("/html/cli.html", function () {
+            $("#loaded-content").load("/html/cli.html", function (e) {
                 typeText("GRAVITY: Thank you for your interest! To be kept up to date on club-related news," + 
-                        "enter the following information...", 25);
+                        "enter the following information...", e, 25);
                         commandHandler('signup', 'gravity');
             });
             break;
         case "dirTest":
-            $("#loaded-content").load("/html/cli.html", function() {
-                addLog("<div class='cli-text'>directory routing test successful.</div>");
-            });
             location.hash = "cli";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), function (e) {
+                addLog("<div class='cli-text'>directory routing test successful.</div>",e);
+            }];            
             break;
         case "fileTest":
-            $("#loaded-content").load("/html/cli.html", function () {
-                addLog("<div class='cli-text'>file routing test successful.</div>");
-            });
             location.hash = "cli";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), function (e) {
+                addLog("<div class='cli-text'>file routing test successful.</div>",e);
+            }];
             break;
         case "top-secret-hash":
-            $("#loaded-content").load("/html/cli.html", function () {
+            location.hash = "top-secret-hash";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), function (e) {
                 typeText("You have gained access to a top secret database.", 25);
-                addLog("<div class='cli-text'>There is a password hash hidden somewhere on this page.</div>");
-                addLog("<div class='cli-text'>If you are able to successfully decode it, a secret awaits!</div>");
-                addLog("<div class='cli-text'>programmers loves to use notepad in order to edit binary files, right? RIGHT?</div>");
-                addLog("<div class='cli-text'><img src='files/ben.png' style='height:25vh'></img></div>");
+                addLog("<div class='cli-text'>There is a password hash hidden somewhere on this page.</div>",e);
+                addLog("<div class='cli-text'>If you are able to successfully decode it, a secret awaits!</div>",e);
+                addLog("<div class='cli-text'>programmers loves to use notepad in order to edit binary files, right? RIGHT?</div>",e);
+                addLog("<div class='cli-text'><img src='files/ben.png' style='height:25vh'></img></div>",e);
                 dateInPastArrow = (firstDate, secondDate) => firstDate.setHours(0, 0, 0, 0) <= secondDate.setHours(0, 0, 0, 0);
                 var today = new Date();
                 var targetDateInclusive = new Date('2020-10-15');
                 if (dateInPastArrow(targetDateInclusive, today)) {
-                    addLog("<div class='cli-text'>the database is under maintainence! Quick, use this oppotunity to break through validation!</div>");
+                    addLog("<div class='cli-text'>the database is under maintainence! Quick, use this oppotunity to break through validation!</div>",e);
                     commandHandler('login', '');
                 }
                 else {
-                    addLog("<div class='cli-text'>Submission is disabled for " + new Date() + ". The IT department is on full alert today. Try again later.</div>");
+                    addLog("<div class='cli-text'>Submission is disabled for " + new Date() + ". The IT department is on full alert today. Try again later.</div>",e);
                 }
-                
-            });
-            location.hash = "top-secret-hash";
-            break;
-        case "f0und-ha3h":
-            $("#loaded-content").load("/html/cli.html", function () {
-                typeText("WARN: Accessing restricted memory.", 25);
-                addLog("<div class='cli-text'>0d107d09f5bbe40cade3de5c71e9e9b7</div>");
-                commandHandler('login', '');
-            });
-            location.hash = "cli";
+
+            }];
             break;
         case "400":
             validPath = false;
-            $("#loaded-content").load("/html/cli.html", function () {
-                addLog("<div class='cli-text'>400: requested path: |" + path + "| can not be processed. Please retry your request in the following format: https://enumc.com/requestedpath</div>");
-                addLog("<img src='https://httpstatusdogs.com/img/400.jpg' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
-            })
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), function (e) {
+                addLog("<div class='cli-text'>400: requested path: |" + path + "| can not be processed. Please retry your request in the following format: https://enumc.com/requestedpath</div>",e);
+                addLog("<img src='https://httpstatusdogs.com/img/400.jpg' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>",e);
+            }];
             break;
         default:
             // alert("404: requested path: |" + path + "| is invalid.");
             validPath = false;
-            $("#loaded-content").load("/html/cli.html", function() {
-                addLog("<div class='cli-text'>404: requested path: |" + path + "| is invalid.</div>");
-                addLog("<img src='https://httpstatusdogs.com/img/404.jpg' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
-            })
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), function (e) {
+                addLog("<div class='cli-text'>404: requested path: |" + path + "| is invalid.</div>",e);
+                addLog("<img src='https://httpstatusdogs.com/img/404.jpg' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>",e);
+            }];
             break;
     }
     if (validPath) {
