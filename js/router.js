@@ -172,7 +172,7 @@ function loadPath(path, funct) {
             // window.open("/files/Eric_Qian_e_Resume_BW_1210.pdf");
             location.hash = "resume";
             return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function (e) {
-                addContainerLog('<object style="width: inherit; height: inherit;" data="/files/Eric_Qian_e_Resume_BW_1210.pdf"></object>',e);
+                addContainerLog('<object style="width: inherit; height: inherit;" data="/files/Eric_Qian_e_Resume_BW_1210.pdf"><iframe src = "/libs/ViewerJS/#../../files/Eric_Qian_e_Resume_BW_1210.pdf" style="width: inherit; height: 100%" allowfullscreen webkitallowfullscreen></iframe></object>',e);
             }];
             break;
         case "EP-01":

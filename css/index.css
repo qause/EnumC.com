@@ -28,7 +28,7 @@
 }
 
 .icon-bar {
-    width: 90px;
+    width: auto;
     /* Set a specific width */
     background-color: #5554;
     /* Dark-grey background */

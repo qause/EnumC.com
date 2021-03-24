@@ -81,8 +81,11 @@ function updateCommitDetails(callback) {
 // On DOM ready.
 $(document).ready(function () {
     $('#wrapper').hide();
-    $('.desktop').show('slow');
-    createWindow(location.hash);
+    $('.desktop').show();
+    createWindow(location.hash, function () {
+        let appbarWidth = $('.desktop').width();
+        $("#windows").css('left', appbarWidth);
+    });
     canvas = document.getElementById("info-section");
     ctx = canvas.getContext("2d");
     ctx.lineCap = "round";
@@ -233,7 +236,7 @@ let xOffsetCoeff = 20;
 let yOffsetCoeff = 20;
 let maxOffset = 100;
 
-function createWindow(path) {
+function createWindow(path, callback) {
     numWindows++;
     let newElem = loadPath(path);
     let newWindow = $(newElem[0]).css("opacity", "0").appendTo($("#windows"));
@@ -259,7 +262,7 @@ function createWindow(path) {
     console.log(newElem[1]);
     
     
-    setTimeout(function () { $(newWindow).css("opacity", "1"); $(newWindow).children().resizable().hide().show("slow"); if (newElem[1]) { newElem[1]($(newWindow)); };}, 50);
+    setTimeout(function () { $(newWindow).css("opacity", "1"); $(newWindow).children().resizable().hide().show("slow", callback); if (newElem[1]) { newElem[1]($(newWindow)); };}, 50);
     return newWindow;
 }
 
