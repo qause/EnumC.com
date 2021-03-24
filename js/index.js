@@ -31,11 +31,11 @@ let previousY = 0;
 
 let initialTop = 0;
 let initialLeft = 0;
-window.onbeforeunload = function () { 
+window.onbeforeunload = function () {
     // Set position to top prior to refresh, since this is a 
     // single page application, and scroll should not persist
     // across refreshes. 
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
 };
 function maximizeWindows(source) {
     console.log($(source).find("#wrapper"));
@@ -53,7 +53,7 @@ function maximizeWindows(source) {
         $(source).css("top", "0");
         initialTop = wrapper.css("top");
         wrapper.css("top", "0");
-        
+
     }
     else {
         console.log("already maximized (Y)");
@@ -76,7 +76,7 @@ function maximizeWindows(source) {
         source.style.left = previousX;
         wrapper.css("left", initialLeft);
     }
-    
+
 }
 
 
@@ -259,7 +259,7 @@ function createWindow(path, callback) {
     let newElem = loadPath(path);
     let newWindow = $(newElem[0]).css("opacity", "0").appendTo($("#windows"));
     console.log(newWindow);
-    
+
     $(newWindow).draggable({
         cancel: ".main-content", // Restrict dragging to title-bar only.
         scroll: false,
@@ -267,20 +267,28 @@ function createWindow(path, callback) {
     }).resizable();
     zIndexHandler.call($(newWindow));
     $(newWindow).click(zIndexHandler);
-    let pos = $(newWindow).offset();
-    let newXOff = xOffsetCoeff * numWindows;
-    while (newXOff > maxOffset) {
-        newXOff = newXOff - maxOffset;
-    }
-    let newYOff = yOffsetCoeff * numWindows;
-    while (newYOff > maxOffset) {
-        newYOff = newYOff - maxOffset;
-    }
-    $(newWindow).children().first().css({ top: pos.top + newXOff, left: pos.left + newYOff});
+   
+
     console.log(newElem[1]);
-    
-    
-    setTimeout(function () { $(newWindow).css("opacity", "1"); $(newWindow).children().resizable().hide().show("slow", callback); if (newElem[1]) { newElem[1]($(newWindow)); };}, 50);
+
+
+    setTimeout(function () {
+        let pos = $(newWindow).children().offset();
+        let newXOff = xOffsetCoeff * numWindows;
+        while (newXOff > maxOffset) {
+            newXOff = newXOff - maxOffset;
+        }
+        let newYOff = yOffsetCoeff * numWindows;
+        while (newYOff > maxOffset) {
+            newYOff = newYOff - maxOffset;
+        }
+        $(newWindow).children().first().css({ top: pos.top + newXOff, left: pos.left + newYOff });
+        $(newWindow).css("opacity", "1");
+        $(newWindow).children().resizable().hide().show("slow", callback);
+        if (newElem[1]) {
+            newElem[1]($(newWindow));
+        };
+    }, 50);
     return newWindow;
 }
 
