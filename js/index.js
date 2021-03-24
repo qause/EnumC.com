@@ -264,31 +264,34 @@ function createWindow(path, callback) {
         cancel: ".main-content", // Restrict dragging to title-bar only.
         scroll: false,
         start: zIndexHandler // Call z index handler to set new z axis.
-    }).resizable();
+    });
     zIndexHandler.call($(newWindow));
     $(newWindow).click(zIndexHandler);
    
 
     console.log(newElem[1]);
 
-
-    setTimeout(function () {
-        let pos = $(newWindow).children().offset();
-        let newXOff = xOffsetCoeff * numWindows;
-        while (newXOff > maxOffset) {
-            newXOff = newXOff - maxOffset;
+    let waitUntilExist = setInterval(function () {
+        $(newWindow).children().resizable();
+        if ($(newWindow).children().is(".ui-resizable")) {
+            let pos = $(newWindow).children().offset();
+            let newXOff = xOffsetCoeff * numWindows;
+            while (newXOff > maxOffset) {
+                newXOff = newXOff - maxOffset;
+            }
+            let newYOff = yOffsetCoeff * numWindows;
+            while (newYOff > maxOffset) {
+                newYOff = newYOff - maxOffset;
+            }
+            $(newWindow).children().first().css({ top: pos.top + newXOff, left: pos.left + newYOff });
+            $(newWindow).css("opacity", "1");
+            $(newWindow).children().resizable().hide().show("slow", callback);
+            if (newElem[1]) {
+                newElem[1]($(newWindow));
+            };
+            clearInterval(waitUntilExist);
         }
-        let newYOff = yOffsetCoeff * numWindows;
-        while (newYOff > maxOffset) {
-            newYOff = newYOff - maxOffset;
-        }
-        $(newWindow).children().first().css({ top: pos.top + newXOff, left: pos.left + newYOff });
-        $(newWindow).css("opacity", "1");
-        $(newWindow).children().resizable().hide().show("slow", callback);
-        if (newElem[1]) {
-            newElem[1]($(newWindow));
-        };
-    }, 50);
+    }, 50)
     return newWindow;
 }
 
