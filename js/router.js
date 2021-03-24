@@ -74,9 +74,9 @@ function initInitialLoadSequence(e) {
     
     typeText("$ [" + currentDirectory + "] " + "startx",e);
     setTimeout(function () {
-        typeText("loading GUI...", e, 50);
+        // typeText("loading GUI...", e, 10);
         setTimeout(function () {
-            addLog("<div class='cli-text'>GUI Not yet available.</div>",e);
+            // addLog("<div class='cli-text'>GUI Not yet available.</div>",e);
             addLog("<div class='cli-text'>Last revision on: " + lastAuthored + ".</div>",e);
             // updateCommitDetails(function() {
                 
@@ -86,11 +86,11 @@ function initInitialLoadSequence(e) {
             setTimeout(function () {
                 addLog("<div class='cli-text'>Dropping into shell.</div>",e);
                 setTimeout(function () {
-                    typeText("#     #                                                              #######                       #####  \n#  #  # ###### #       ####   ####  #    # ######    #####  ####     #       #    # #    # #    # #     # \n#  #  # #      #      #    # #    # ##  ## #           #   #    #    #       ##   # #    # ##  ## #       \n#  #  # #####  #      #      #    # # ## # #####       #   #    #    #####   # #  # #    # # ## # #       \n#  #  # #      #      #      #    # #    # #           #   #    #    #       #  # # #    # #    # #       \n#  #  # #      #      #    # #    # #    # #           #   #    #    #       #   ## #    # #    # #     # \n ## ##  ###### ######  ####   ####  #    # ######      #    ####     ####### #    #  ####  #    #  #####  \n                                                                                                          \n", e);
-                }, 1000);
-            }, 1000);
-        }, 1000);
-    }, 1000);
+                    typeText("#     #                                                              #######                       #####  \n#  #  # ###### #       ####   ####  #    # ######    #####  ####     #       #    # #    # #    # #     # \n#  #  # #      #      #    # #    # ##  ## #           #   #    #    #       ##   # #    # ##  ## #       \n#  #  # #####  #      #      #    # # ## # #####       #   #    #    #####   # #  # #    # # ## # #       \n#  #  # #      #      #      #    # #    # #           #   #    #    #       #  # # #    # #    # #       \n#  #  # #      #      #    # #    # #    # #           #   #    #    #       #   ## #    # #    # #     # \n ## ##  ###### ######  ####   ####  #    # ######      #    ####     ####### #    #  ####  #    #  #####  \n                                                                                                          \n", e, 0);
+                }, 500);
+            }, 500);
+        }, 500);
+    }, 0);
     
 
     // initGUILoadSequence();
@@ -179,7 +179,7 @@ function loadPath(path, funct) {
             $("#loaded-content").load("/html/cli.html", function (e) {
                 addLog("<div class='cli-text'>Please wait... If nothing happens, click here: https://www.youtube.com/watch?v=7pK42-nQZ-4</div>",e);
                 window.location.href = "https://www.youtube.com/watch?v=7pK42-nQZ-4";
-            })
+            });
             break;
         case "gravity":
             $("#loaded-content").load("/html/cli.html", function (e) {
@@ -192,7 +192,7 @@ function loadPath(path, funct) {
             location.hash = "cli";
             return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), function (e) {
                 addLog("<div class='cli-text'>directory routing test successful.</div>",e);
-            }];            
+            }];
             break;
         case "fileTest":
             location.hash = "cli";
