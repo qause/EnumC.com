@@ -6,6 +6,16 @@
 
 console.log("CLI loading stated.");
 window.scrollTo(0, 0);
+// Define files in CLI filesystem. 
+let directoriesAndFiles = {
+    "/": "SYSTEM\nHOME\nTEST",
+    SYSTEM: "..\nmenu\ncli",
+    HOME: "..\nresume\nprofile",
+    TEST: "..\ndirTest\nfileTest",
+    DIRTEST: "..\nnestedDir",
+    NESTEDDIR: "..\nNESTED2",
+    NESTED2: "..\nfileTest"
+};
 
 if (typeof commandData == "undefined") {
     let commandData = {};
@@ -20,8 +30,36 @@ catch (err) {
 }
 
 /* Add HTML content to log. */
-function addLog(content) {
-    $('.log').append(content);
+function addLog(content, cliElm) {
+    if (!cliElm) {
+        console.warn("addLog() missing cliElm. Adding to top CLI.");
+        cliElm = $("#windows").children().first();
+        $("#windows").children().each(function () {
+            if (((parseInt($(this).css('z-index')) || 0) > (cliElm.css('z-index')) || 0)) {
+                cliElm = this;
+            }
+        });
+    }
+    let logElm = $(cliElm).find('.log');
+    $(logElm).append(content);
+    logContent.push(content);
+    window.scrollTo(0, document.body.scrollHeight);
+    $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
+}
+
+/* Add HTML content to container. */
+function addContainerLog(content, cliElm) {
+    if (!cliElm) {
+        console.warn("addContainerLog() missing cliElm. Adding to top CLI.");
+        cliElm = $("#windows").children().first();
+        $("#windows").children().each(function () {
+            if (((parseInt($(this).css('z-index')) || 0) > (cliElm.css('z-index')) || 0)) {
+                cliElm = this;
+            }
+        });
+    }
+    let logElm = $(cliElm).find('.container');
+    $(logElm).append(content);
     logContent.push(content);
     window.scrollTo(0, document.body.scrollHeight);
     $(".simplebar-content-wrapper").scrollTop(Number.MAX_SAFE_INTEGER);
@@ -128,14 +166,14 @@ function onMD5In(inputFile) {
     
 }
 
-function commandHandler(command, args, directoriesAndFiles) {
+function commandHandler(command, args, directoriesAndFiles, cliElm) {
     try {
-            addLog("$ [" + currentDirectory + "] " + command + " " + args + "<br>");
+        addLog("$ [" + currentDirectory + "] " + command + " " + args + "<br>", cliElm);
             commandHistory.push([command, args]);
             historyIndex += 1;
             switch (command) {
                 case "help":
-                    addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, man, ping, pwd, login, su, whoami, md5, clear, exit</div>');
+                    addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, man, ping, pwd, login, su, whoami, md5, clear, exit</div>', cliElm);
                     break;
                 case "cd": {
 
@@ -157,13 +195,13 @@ function commandHandler(command, args, directoriesAndFiles) {
                             }
                         });
                         if (args.trim() == "") {
-                            addLog("<div class='cli-text'>cd: " + "No path specified. Type 'man cd' to display example syntax." + ".</div>");
+                            addLog("<div class='cli-text'>cd: " + "No path specified. Type 'man cd' to display example syntax." + ".</div>", cliElm);
                         }
                         else if (!fileFound) {
-                            addLog("<div class='cli-text'>cd: " + args + ": No such file or directory" + ".</div>");
+                            addLog("<div class='cli-text'>cd: " + args + ": No such file or directory" + ".</div>", cliElm);
                         }
                         else {
-                            addLog("<div class='cli-text'>cd: " + args + ": is a file" + ".</div>");
+                            addLog("<div class='cli-text'>cd: " + args + ": is a file" + ".</div>", cliElm);
                         }
                     }
                     $('#mark').text("$ [" + currentDirectory + "]");
@@ -181,21 +219,21 @@ function commandHandler(command, args, directoriesAndFiles) {
                     break;
                 }
                 case "time":
-                    addLog(Date());
+                    addLog(Date(), cliElm);
                     break;
                 case "echo":
-                    addLog("<div class='cli-text'>" + args + "</div>");
+                    addLog("<div class='cli-text'>" + args + "</div>", cliElm);
                     break;
                 case "ls":
                     // addLog("<div class='blinking cli-text'>Access Denied.</div>");
                     // addLog("<img src='https://httpstatusdogs.com/img/401.jpg' style='height:20em' class='blinking'></img> <p style='font-size: 6px;'>Image supplied by https://httpstatusdogs.com/ <3</p>");
-                    addLog("<p class='cli-text' style='white-space: pre-line;'>" + directoriesAndFiles[currentDirectory] + "</p>");
+                    addLog("<p class='cli-text' style='white-space: pre-line;'>" + directoriesAndFiles[currentDirectory] + "</p>", cliElm);
                     // addLog("<p class='cli-text' style='white-space: pre-line;'>resume\nprofile\nmenu\ncli</p>");
                     break;
                 case "fetch":
                     $.getJSON('https://dog.ceo/api/breeds/image/random', function (data) {
                         console.info(data.message);
-                        addLog("<img src='" + data.message + "' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://dog.ceo/dog-api/ <3</p>");
+                        addLog("<img src='" + data.message + "' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://dog.ceo/dog-api/ <3</p>", cliElm);
                     });
                     break;
                 case "open": {
@@ -208,10 +246,10 @@ function commandHandler(command, args, directoriesAndFiles) {
                     });
 
                     if (args.trim() == "") {
-                        addLog("<div class='cli-text'>open: " + "No file specified. Type 'man open' to display example syntax." + ".</div>");
+                        addLog("<div class='cli-text'>open: " + "No file specified. Type 'man open' to display example syntax." + ".</div>", cliElm);
                     }
                     else if (!fileFound || args.trim().toUpperCase() in directoriesAndFiles) {
-                        addLog("<div class='cli-text'>open: " + args + ": No such file. To open a directory, use cd. " + ".</div>");
+                        addLog("<div class='cli-text'>open: " + args + ": No such file. To open a directory, use cd. " + ".</div>", cliElm);
                     }
                     else {
                         loadPath(args, function () { });
@@ -230,7 +268,7 @@ function commandHandler(command, args, directoriesAndFiles) {
 						function (data, textStatus, jqxhr) {
 							addLog(
 								"<form><input type='file' id='md5Input' onchange='onMD5In(document.getElementById(`md5Input`));'></form>"
-							);
+                                , cliElm);
 						}
 					);                  
                     
@@ -244,8 +282,8 @@ function commandHandler(command, args, directoriesAndFiles) {
                         } 
                         console.log(commandData);
                         if(commandData["email"] == undefined) {
-                            addLog("<div class='cli-text'>What is your email?</div>");
-                            addLog("<input id='emailIn' onblur='this.focus()' autofocus style='color:black'></input>")
+                            addLog("<div class='cli-text'>What is your email?</div>", cliElm);
+                            addLog("<input id='emailIn' onblur='this.focus()' autofocus style='color:black'></input>", cliElm)
                             $('#emailIn').keypress(function (event) {
                                 if ((event.keyCode ? event.keyCode : event.which) == '13') {
                                     
@@ -254,7 +292,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                                         commandData["email"] = $('#emailIn').val().trim();
                                     }
                                     else {
-                                        addLog("<div class='cli-text'>invalid email address. Please try again.</div>");
+                                        addLog("<div class='cli-text'>invalid email address. Please try again.</div>", cliElm);
                                         $(this).remove(); 
                                     }
                                     $('#emailIn').unbind("keypress");
@@ -266,8 +304,8 @@ function commandHandler(command, args, directoriesAndFiles) {
                             document.getElementById("emailIn").select();
                         }
                         else if (commandData["firstName"] == undefined) {
-                            addLog("<div class='cli-text'>What is your first name?</div>");
-                            addLog("<input id='fNameIn' onblur='this.focus()' autofocus style='color:black'></input>")
+                            addLog("<div class='cli-text'>What is your first name?</div>", cliElm);
+                            addLog("<input id='fNameIn' onblur='this.focus()' autofocus style='color:black'></input>", cliElm)
                             $('#fNameIn').keypress(function (event) {
                                 if ((event.keyCode ? event.keyCode : event.which) == '13') {
                                     document.getElementById("fNameIn").disabled = true;
@@ -275,7 +313,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                                         commandData["firstName"] = $('#fNameIn').val().trim();
                                     }
                                     else {
-                                        addLog("<div class='cli-text'>First name cannot be blank. Please try again.</div>");
+                                        addLog("<div class='cli-text'>First name cannot be blank. Please try again.</div>", cliElm);
                                         $(this).remove();
                                     }
                                     $('#fNameIn').unbind("keypress");
@@ -287,8 +325,8 @@ function commandHandler(command, args, directoriesAndFiles) {
                             document.getElementById("fNameIn").select();
                         }
                         else if (commandData["lastName"] == undefined) {
-                            addLog("<div class='cli-text'>What is your last name?</div>");
-                            addLog("<input id='lNameIn' onblur='this.focus()' autofocus style='color:black'></input>")
+                            addLog("<div class='cli-text'>What is your last name?</div>", cliElm);
+                            addLog("<input id='lNameIn' onblur='this.focus()' autofocus style='color:black'></input>", cliElm)
                             $('#lNameIn').keypress(function (event) {
                                 if ((event.keyCode ? event.keyCode : event.which) == '13') {
                                     document.getElementById("lNameIn").disabled = true;
@@ -308,8 +346,8 @@ function commandHandler(command, args, directoriesAndFiles) {
                             document.getElementById("lNameIn").select();
                         }
                         else {
-                            addLog("<div class='cli-text'>Submitting information...</div>");
-                            addLog("<progress id='infoPendingProgressBar'></progress>");
+                            addLog("<div class='cli-text'>Submitting information...</div>", cliElm);
+                            addLog("<progress id='infoPendingProgressBar'></progress>", cliElm);
                             $.getJSON('https://gravity.enumc.com/newSubscriber.php?email=' + commandData["email"] + '&fname=' + commandData["firstName"] + '&lname=' + commandData["lastName"], function (data) {
                                 let items = {};
                                 $.each(data, function (key, val) {
@@ -318,9 +356,9 @@ function commandHandler(command, args, directoriesAndFiles) {
 
                                 if (items["success"] == true) {
                                     if (items["message"] == "pending") {
-                                        addLog("<div class='cli-text'>One last step!</div>");
-                                        addLog("<div class='cli-text'>Email confirmation is required.</div>");
-                                        addLog("<div class='cli-text'>You will receive a confirmation email within a couple minutes.</div>");
+                                        addLog("<div class='cli-text'>One last step!</div>", cliElm);
+                                        addLog("<div class='cli-text'>Email confirmation is required.</div>", cliElm);
+                                        addLog("<div class='cli-text'>You will receive a confirmation email within a couple minutes.</div>", cliElm);
                                     }
                                     else {
                                         addLog("<div class='cli-text'>You have been successfully added to the mailing list!</div>");
@@ -328,49 +366,49 @@ function commandHandler(command, args, directoriesAndFiles) {
                                     
                                 }
                                 else {
-                                    addLog("<div class='cli-text' style='word-break: break-all; width: 25em;'>An error occured. Reason: " + items["message"] + "</div>");
-                                    addLog("<div class='cli-text' style='word-break: break-all; width: 25em;'>You may retry by either typing 'signup gravity' or by refreshing the page.</div");
+                                    addLog("<div class='cli-text' style='word-break: break-all; width: 25em;'>An error occured. Reason: " + items["message"] + "</div>", cliElm);
+                                    addLog("<div class='cli-text' style='word-break: break-all; width: 25em;'>You may retry by either typing 'signup gravity' or by refreshing the page.</div", cliElm);
                                     commandData = undefined;
                                 }
-                                $('#infoPendingProgressBar').remove();
+                                $(cliElm).find('#infoPendingProgressBar').remove();
                                 console.log(items);
 
                             }).fail(function(e) {
-                                $('#infoPendingProgressBar').remove();
+                                $(cliElm).find('#infoPendingProgressBar').remove();
                                 console.log(e);
-                                addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>");
-                                addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
+                                addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>", cliElm);
+                                addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>", cliElm);
                             });
                         }
 
                     }
                     break;
                 case "startx":
-                    addLog("<div class='cli-text'>Display loading...</div>");
+                    addLog("<div class='cli-text'>Display loading...</div>", cliElm);
                     loadPath('gui');
                     break;
                 case "pwd":
-                    addLog("<div class='cli-text'>" + currentDirectory + "</div>");
+                    addLog("<div class='cli-text'>" + currentDirectory + "</div>", cliElm);
                     break;
                 case "ping": {
-                    addLog("<div class='cli-text'>Checking Ping...</div>");
-                    addLog("<progress id='infoPendingProgressBar'></progress>");
+                    addLog("<div class='cli-text'>Checking Ping...</div>", cliElm);
+                    addLog("<progress id='infoPendingProgressBar'></progress>", cliElm);
                     let path = "https://node1.enumc.com:443/latency.php";
 
                     var xhr = new XMLHttpRequest();
                     xhr.onreadystatechange = function () {
                         if (xhr.readyState === XMLHttpRequest.DONE) {
-                            addLog("<div class='cli-text'>latency to server:</div>");
+                            addLog("<div class='cli-text'>latency to server:</div>", cliElm);
 
                             if (xhr.status === 200) {
                                 // success(JSON.parse(xhr.responseText));
-                                addLog("<div class='cli-text'>" + String(window.performance.now() - start) + "ms</div>");
+                                addLog("<div class='cli-text'>" + String(window.performance.now() - start) + "ms</div>", cliElm);
                             } else {
-                                addLog("<div class='cli-text'>ERROR. Request failed.</div>");
+                                addLog("<div class='cli-text'>ERROR. Request failed.</div>", cliElm);
                                 // error(xhr);                    
                             }
                         }
-                        $('#infoPendingProgressBar').remove();
+                        $(cliElm).find('#infoPendingProgressBar').remove();
                     };
                     xhr.open('GET', path, true);
                     let start = window.performance.now();
@@ -379,7 +417,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                 }
                 case "history": {
                     for (historyIndex = 0; historyIndex < commandHistory.length; historyIndex++) {
-                        addLog(historyIndex + "&nbsp;&nbsp;&nbsp;&nbsp;" + commandHistory[historyIndex][0] + " " + commandHistory[historyIndex][1] + "<br>");
+                        addLog(historyIndex + "&nbsp;&nbsp;&nbsp;&nbsp;" + commandHistory[historyIndex][0] + " " + commandHistory[historyIndex][1] + "<br>", cliElm);
                     }
                     break;
                 }
@@ -387,82 +425,82 @@ function commandHandler(command, args, directoriesAndFiles) {
                 case "man":
                     switch (args) {
                         case "":
-                            addLog("<div class='cli-text'>No argument defined. Enter 'man command_name_here' for usage. </div>");
+                            addLog("<div class='cli-text'>No argument defined. Enter 'man command_name_here' for usage. </div>", cliElm);
                             break;
                         case "help":
-                            addLog("<div class='cli-text'>Display help page</div>");
-                            addLog("<div class='cli-text'>Usage: help</div>");
+                            addLog("<div class='cli-text'>Display help page</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: help</div>", cliElm);
                             break;
                         case "cd":
-                            addLog("<div class='cli-text'>Set directory</div>");
-                            addLog("<div class='cli-text'>Usage: cd [directoryname]</div>");
+                            addLog("<div class='cli-text'>Set directory</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: cd [directoryname]</div>", cliElm);
                             break;
                         case "time":
-                            addLog("<div class='cli-text'>Display current time</div>");
+                            addLog("<div class='cli-text'>Display current time</div>", cliElm);
                             addLog("<div class='cli-text'>Usage: time</div>");
                             break;
                         case "echo":
-                            addLog("<div class='cli-text'>Echo arg</div>");
-                            addLog("<div class='cli-text'>Usage: echo [arg]</div>");
+                            addLog("<div class='cli-text'>Echo arg</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: echo [arg]</div>", cliElm);
                             break;
                         case "ls":
-                            addLog("<div class='cli-text'>List files in current directory</div>");
-                            addLog("<div class='cli-text'>Usage: ls</div>");
+                            addLog("<div class='cli-text'>List files in current directory</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: ls</div>", cliElm);
                             break;
                         case "history":
-                            addLog("<div class='cli-text'>List history of commands</div>");
-                            addLog("<div class='cli-text'>Usage: history</div>");
+                            addLog("<div class='cli-text'>List history of commands</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: history</div>", cliElm);
                             break;
                         case "fetch":
-                            addLog("<div class='cli-text'>:3</div>");
-                            addLog("<div class='cli-text'>Usage: fetch</div>");
+                            addLog("<div class='cli-text'>:3</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: fetch</div>", cliElm);
                             break;
                         case "open":
-                            addLog("<div class='cli-text'>Open file</div>");
-                            addLog("<div class='cli-text'>Usage: open [filename]</div>");
+                            addLog("<div class='cli-text'>Open file</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: open [filename]</div>", cliElm);
                             break;
                         case "man":
-                            addLog("<div class='cli-text'>Get command usage</div>");
-                            addLog("<div class='cli-text'>Usage: man [commandname]</div>");
+                            addLog("<div class='cli-text'>Get command usage</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: man [commandname]</div>", cliElm);
                             break;
                         case "login":
-                            addLog("<div class='cli-text'>Authenticate server-side</div>");
-                            addLog("<div class='cli-text'>Usage: login [credentials]</div>");
+                            addLog("<div class='cli-text'>Authenticate server-side</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: login [credentials]</div>", cliElm);
                             break;
                         case "ping":
-                            addLog("<div class='cli-text'>Check dynamic server response time</div>");
-                            addLog("<div class='cli-text'>Usage: ping</div>");
+                            addLog("<div class='cli-text'>Check dynamic server response time</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: ping</div>", cliElm);
                             break;
                         case "pwd":
-                            addLog("<div class='cli-text'>Get current path</div>");
-                            addLog("<div class='cli-text'>Usage: pwd</div>");
+                            addLog("<div class='cli-text'>Get current path</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: pwd</div>", cliElm);
                             break;
                         case "su":
-                            addLog("<div class='cli-text'>Authenticate server-side with privilege</div>");
-                            addLog("<div class='cli-text'>Usage: su [credentials]</div>");
+                            addLog("<div class='cli-text'>Authenticate server-side with privilege</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: su [credentials]</div>", cliElm);
                             break;
                         case "whoami":
-                            addLog("<div class='cli-text'>Get logged in user info</div>");
-                            addLog("<div class='cli-text'>Usage: whoami</div>");
+                            addLog("<div class='cli-text'>Get logged in user info</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: whoami</div>", cliElm);
                             break;
                         case "md5":
-                            addLog("<div class='cli-text'>Get md5 hash of input file</div>");
-                            addLog("<div class='cli-text'>Usage: md5</div>");
+                            addLog("<div class='cli-text'>Get md5 hash of input file</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: md5</div>", cliElm);
                             break;
                         case "command_name_here":
-                            addLog("<div class='cli-text'>What did your parent teach you about blindly copy pasting commands?!</div>");
-                            addLog("<div class='cli-text'>To request the manual for a command, use an actual command name.</div>");
+                            addLog("<div class='cli-text'>What did your parent teach you about blindly copy pasting commands?!</div>", cliElm);
+                            addLog("<div class='cli-text'>To request the manual for a command, use an actual command name.</div>", cliElm);
                             break;
                         case "clear":
-                            addLog("<div class='cli-text'>Clear terminal</div>");
-                            addLog("<div class='cli-text'>Usage: clear</div>");
+                            addLog("<div class='cli-text'>Clear terminal</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: clear</div>", cliElm);
                             break;
                         case "exit":
-                            addLog("<div class='cli-text'>Exit terminal</div>");
-                            addLog("<div class='cli-text'>Usage: exit</div>");
+                            addLog("<div class='cli-text'>Exit terminal</div>", cliElm);
+                            addLog("<div class='cli-text'>Usage: exit</div>", cliElm);
                             break;
                         default:
-                            addLog("<div class='cli-text'>man page for " + args + " does not exist.</div>")
+                            addLog("<div class='cli-text'>man page for " + args + " does not exist.</div>", cliElm)
                             break;
                     }
                     break;
@@ -470,123 +508,127 @@ function commandHandler(command, args, directoriesAndFiles) {
                 // Server-side requests
                 case "login":
                     // addLog("not implemented");
-                    addLog("<div class='cli-text'>enumc.com login: </div>");
-                    addLog("<input id='loginInfo' onblur='this.focus()' autofocus style='color:black'></input>")
-                    $('#loginInfo').keypress(function (event) {
-                        if ((event.keyCode ? event.keyCode : event.which) == '13') {
-                            document.getElementById("loginInfo").disabled = true;
-                            if ($('#loginInfo').val().trim().length > 0) {
-                                // commandData["firstName"] = $('#loginInfo').val().trim();
-                                var username = $('#loginInfo').val().trim();
-                                addLog("<div class='cli-text'>Submitting information...</div>");
-                                addLog("<progress id='infoPendingProgressBar'></progress>");
+                    addLog("<div class='cli-text'>enumc.com login: </div>", cliElm);
+                    addLog("<input id='loginInfo' onblur='this.focus()' autofocus style='color:black'></input>", cliElm);
+                    window.setTimeout(function () { 
+                        $(cliElm).find('#loginInfo').keypress(function (event) {
+                            if ((event.keyCode ? event.keyCode : event.which) == '13') {
+                                this.disabled = true;
+                                if ($(this).val().trim().length > 0) {
+                                    // commandData["firstName"] = $(cliElm).find('#loginInfo').val().trim();
+                                    var username = $(this).val().trim();
+                                    addLog("<div class='cli-text'>Submitting information...</div>", cliElm);
+                                    addLog("<progress id='infoPendingProgressBar'></progress>", cliElm);
 
-                                if (devMode) {
-                                    console.warn("su on test portal");
-                                    var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
-                                }
-                                else {
-                                    var loginPortal = "https://node1.enumc.com/getLogin.php?login=";
-                                }
-
-                                $.getJSON(loginPortal + username + '&action=login', function (data) {
-                                    let items = {};
-                                    $.each(data, function (key, val) {
-                                        items[key] = val;
-                                    });
-                                    if (items["message"] != "invalid" && items["message"] != "undefined" && items["message"] != "unknown") {
-                                        addLog("<div class='cli-text'>" + items["message"] + "</div>");
-                                    }
-                                    else if (items["message"] == "unknown") {
-                                        addLog("<div class='cli-text'>User Not Found.</div>");
+                                    if (devMode) {
+                                        console.warn("su on test portal");
+                                        var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
                                     }
                                     else {
-                                        addLog("<div class='cli-text'>Invalid user" + "</div>");
+                                        var loginPortal = "https://node1.enumc.com/getLogin.php?login=";
                                     }
 
-                                    $('#infoPendingProgressBar').remove();
-                                    console.log(items);
+                                    $.getJSON(loginPortal + username + '&action=login', function (data) {
+                                        let items = {};
+                                        $.each(data, function (key, val) {
+                                            items[key] = val;
+                                        });
+                                        if (items["message"] != "invalid" && items["message"] != "undefined" && items["message"] != "unknown") {
+                                            addLog("<div class='cli-text'>" + items["message"] + "</div>", cliElm);
+                                        }
+                                        else if (items["message"] == "unknown") {
+                                            addLog("<div class='cli-text'>User Not Found.</div>", cliElm);
+                                        }
+                                        else {
+                                            addLog("<div class='cli-text'>Invalid user" + "</div>", cliElm);
+                                        }
 
-                                }).fail(function (e) {
-                                    $('#infoPendingProgressBar').remove();
-                                    console.log(e);
-                                    addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>");
-                                    addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
-                                });
-                            }
-                            else {
-                                addLog("<div class='cli-text'>Invalid credentials.</div>");
-                                $(this).remove();
-                            }
-                            $('#loginInfo').unbind("keypress");
-                            $('#loginInfo').prop('id', '');
-                            console.log(username);
-                            document.getElementsByClassName("commandline")[0].select();
-                            // commandHandler("signup", "gravity");
-                        }
+                                        $(cliElm).find('#infoPendingProgressBar').remove();
+                                        console.log(items);
 
-                    });
-                    document.getElementById("loginInfo").select();
+                                    }).fail(function (e) {
+                                        $(cliElm).find('#infoPendingProgressBar').remove();
+                                        console.log(e);
+                                        addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>", cliElm);
+                                        addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>", cliElm);
+                                    });
+                                }
+                                else {
+                                    addLog("<div class='cli-text'>Invalid credentials.</div>", cliElm);
+                                    $(this).remove();
+                                }
+                                $(this).unbind("keypress");
+                                $(this).prop('id', '');
+                                console.log(username);
+                                $(cliElm).find(".commandline")[0].select();
+                                // commandHandler("signup", "gravity");
+                            }
+
+                        });
+                        $(cliElm).find("#loginInfo").select();
+                    }, 0);  // chrome workaround - wait until DOM update.
                     break;
                 case "su":
                     // addLog("not implemented");
-                    addLog("<div class='cli-text'>enumc.com login: </div>");
-                    addLog("<input id='loginInfo' onblur='this.focus()' autofocus style='color:black'></input>")
-                    $('#loginInfo').keypress(function (event) {
-                        if ((event.keyCode ? event.keyCode : event.which) == '13') {
-                            document.getElementById("loginInfo").disabled = true;
-                            if ($('#loginInfo').val().trim().length > 0) {
-                                // commandData["firstName"] = $('#loginInfo').val().trim();
-                                var username = $('#loginInfo').val().trim();
-                                addLog("<div class='cli-text'>Submitting information...</div>");
-                                addLog("<progress id='infoPendingProgressBar'></progress>");
+                    addLog("<div class='cli-text'>enumc.com login: </div>", cliElm);
+                    addLog("<input id='loginInfo' onblur='this.focus()' autofocus style='color:black'></input>", cliElm)
+                    window.setTimeout(function () {
+                        $(cliElm).find('#loginInfo').keypress(function (event) {
+                            if ((event.keyCode ? event.keyCode : event.which) == '13') {
+                                this.disabled = true;
+                                if ($(this).val().trim().length > 0) {
+                                    // commandData["firstName"] = $(cliElm).find('#loginInfo').val().trim();
+                                    var username = $(this).val().trim();
+                                    addLog("<div class='cli-text'>Submitting information...</div>", cliElm);
+                                    addLog("<progress id='infoPendingProgressBar'></progress>", cliElm);
 
-                                if (devMode) {
-                                    console.warn("su on test portal");
-                                    var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
-                                }
-                                else {
-                                    var loginPortal = "https://node1.enumc.com/getLogin.php?login=";
-                                }
-
-                                $.getJSON(loginPortal + username + '&action=su', function (data) {
-                                    let items = {};
-                                    $.each(data, function (key, val) {
-                                        items[key] = val;
-                                    });
-
-                                    if (items["message"] != "invalid" && items["message"] != "undefined" && items["message"] != "unknown") {
-                                        setCookie('user', items["message"], 1);
-                                        addLog("<div class='cli-text'>Logged in as: " + username + "</div>");
+                                    if (devMode) {
+                                        console.warn("su on test portal");
+                                        var loginPortal = "https://dyno.enumc.com/getLogin.php?login=";
                                     }
                                     else {
-                                        addLog("<div class='cli-text'>Invalid user" + "</div>");
+                                        var loginPortal = "https://node1.enumc.com/getLogin.php?login=";
                                     }
 
-                                    $('#infoPendingProgressBar').remove();
-                                    console.log(items);
-                                    
+                                    $.getJSON(loginPortal + username + '&action=su', function (data) {
+                                        let items = {};
+                                        $.each(data, function (key, val) {
+                                            items[key] = val;
+                                        });
 
-                                }).fail(function (e) {
-                                    $('#infoPendingProgressBar').remove();
-                                    console.log(e);
-                                    addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>");
-                                    addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
-                                });
-                            }
-                            else {
-                                addLog("<div class='cli-text'>Invalid credentials.</div>");
-                                $(this).remove();
-                            }
-                            $('#loginInfo').unbind("keypress");
-                            $('#loginInfo').prop('id', '');
-                            console.log(username);
-                            // commandHandler("signup", "gravity");
-                            document.getElementsByClassName("commandline")[0].select();
-                        }
+                                        if (items["message"] != "invalid" && items["message"] != "undefined" && items["message"] != "unknown") {
+                                            setCookie('user', items["message"], 1);
+                                            addLog("<div class='cli-text'>Logged in as: " + username + "</div>", cliElm);
+                                        }
+                                        else {
+                                            addLog("<div class='cli-text'>Invalid user" + "</div>", cliElm);
+                                        }
 
-                    });
-                    document.getElementById("loginInfo").select();
+                                        $(cliElm).find('#infoPendingProgressBar').remove();
+                                        console.log(items);
+                                        
+
+                                    }).fail(function (e) {
+                                        $(cliElm).find('#infoPendingProgressBar').remove();
+                                        console.log(e);
+                                        addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>", cliElm);
+                                        addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>", cliElm);
+                                    });
+                                }
+                                else {
+                                    addLog("<div class='cli-text'>Invalid credentials.</div>", cliElm);
+                                    $(this).remove();
+                                }
+                                $(this).unbind("keypress");
+                                $(this).prop('id', '');
+                                console.log(username);
+                                // commandHandler("signup", "gravity");
+                                document.getElementsByClassName("commandline")[0].select();
+                            }
+
+                        });
+                    }, 0);
+                    $(cliElm).find('#loginInfo').select();
                     break;
                 case "whoami": {
                     // addLog("not implemented");
@@ -603,7 +645,7 @@ function commandHandler(command, args, directoriesAndFiles) {
                     var user = getCookie('user');
                     if (user == "") {
                         user = "undefined";
-                        addLog("<div class='cli-text'>Not logged in" + "</div>");
+                        addLog("<div class='cli-text'>Not logged in" + "</div>", cliElm);
                         break;
                     }
                     $.getJSON(loginPortal + user + '&action=whoami', function (data) {
@@ -613,20 +655,20 @@ function commandHandler(command, args, directoriesAndFiles) {
                         });
 
                         if (items["message"] != "invalid" && items["message"] != "undefined") {
-                            addLog("<div class='cli-text'>Current user: " + items["message"] + "</div>");
+                            addLog("<div class='cli-text'>Current user: " + items["message"] + "</div>", cliElm);
                         }
                         else {
-                            addLog("<div class='cli-text'>Invalid user" + "</div>");
+                            addLog("<div class='cli-text'>Invalid user" + "</div>", cliElm);
                         }
 
-                        $('#infoPendingProgressBar').remove();
+                        $(cliElm).find('#infoPendingProgressBar').remove();
                         console.log(items);
 
                     }).fail(function (e) {
-                        $('#infoPendingProgressBar').remove();
+                        $(cliElm).find('#infoPendingProgressBar').remove();
                         console.log(e);
-                        addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>");
-                        addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
+                        addLog("<div class='cli-text'>Error: AJAX request failed. Please check your internet connection and try again in a few minutes. If it still doesn't work,</div>", cliElm);
+                        addLog("<p class='cli-text'>please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>", cliElm);
                     });
 
                     break;
@@ -651,9 +693,9 @@ function commandHandler(command, args, directoriesAndFiles) {
                     loadPath("menu", function () { });
                     break;
                 default:
-                    addLog("<div class='cli-text'>eCLI: " + command + ": command not found" + ".</div>");
+                    addLog("<div class='cli-text'>eCLI: " + command + ": command not found" + ".</div>", cliElm);
             }
-        addLog('<br><br>');
+        addLog('<br><br>', cliElm);
         document.getElementsByClassName("commandline")[0].select();
     }
     catch (err) {
@@ -666,7 +708,7 @@ function commandHandler(command, args, directoriesAndFiles) {
 }
 
 /* Initializes CLI and set up command, filesystem, and data. */
-function initCLI() {
+function initCLI(cliElm) {
     if (typeof lastAuthored != "string") {
         updateCommitDetails(function () {
             $("#lastModElement").html($("#lastModElement").html() + lastAuthored);
@@ -677,19 +719,10 @@ function initCLI() {
     }
 
     logContent.forEach(element => {
-        addLog(element);
+        addLog(element, cliElm);
     });
 
-    // Define files in CLI filesystem. 
-    let directoriesAndFiles = {
-        "/": "SYSTEM\nHOME\nTEST",
-        SYSTEM: "..\nmenu\ncli",
-        HOME: "..\nresume\nprofile",
-        TEST: "..\ndirTest\nfileTest",
-        DIRTEST: "..\nnestedDir",
-        NESTEDDIR: "..\nNESTED2",
-        NESTED2: "..\nfileTest"
-    };
+    
 
     // CURRENTDIRECTORY MOVED TO INDEX.JS
     $('#mark').text("$ [" + currentDirectory + "]");
@@ -697,34 +730,21 @@ function initCLI() {
     commandHistory = [];
     historyIndex = 0;
     
-    $('.commandline').keypress(function (event) {
-        let keycode = (event.keyCode ? event.keyCode : event.which);
-        // console.log("keycode: " + keycode);
-        if (keycode == '13') {
-            let command = $('.commandline').val().trim();
-            let args = "";
-            console.log('New command entered.');
-            if (command.indexOf(' ') != -1) {
-                args = command.substr(command.indexOf(' ') + 1);
-                command = command.substr(0, command.indexOf(' '));
-            }
-            console.log("command: " + command);
-            console.log("args: " + args);
-            commandHandler(command, args, directoriesAndFiles);
-            $('.commandline').val("");
-        }
-        
-    });
+    
+    
 
     $(document).bind("copy", function(e) {
         e.preventDefault();
-        addLog("$ [" + currentDirectory + "] " + "<br>");
+        addLog("$ [" + currentDirectory + "] " + "<br>", cliElm);
         document.getElementsByClassName('commandline')[0].val = "";
-        document.getElementsByClassName('commandline')[0].focus();
+        // document.getElementsByClassName('commandline')[0].focus();
     });
 
     document.addEventListener("click", function(){
-        document.getElementsByClassName('commandline')[0].focus();
+        // if (document.getElementsByClassName('commandline')[0]) {
+        //     document.getElementsByClassName('commandline')[0].focus();
+        // }
+        
     });
     
     document.onkeydown = function(e) {
@@ -761,6 +781,24 @@ function initCLI() {
     }
 }
 
+function keyPressHandler(event, elm) {
+    let keycode = (event.keyCode ? event.keyCode : event.which);
+    // console.log("keycode: " + keycode);
+    if (keycode == '13') {
+        let command = $(elm).val().trim();
+        let args = "";
+        console.log('New command entered.');
+        if (command.indexOf(' ') != -1) {
+            args = command.substr(command.indexOf(' ') + 1);
+            command = command.substr(0, command.indexOf(' '));
+        }
+        console.log("command: " + command);
+        console.log("args: " + args);
+        commandHandler(command, args, directoriesAndFiles, elm.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode);
+        $(elm).val("");
+    }
+
+}
 // function centerCLI() {
 //     $("#wrapper").css("left", "");
 // }
@@ -769,11 +807,13 @@ $(".log").bind("DOMSubtreeModified", function () {
     // Scroll to bottom whenever log is updated.
     window.scrollTo(0, document.body.scrollHeight);
 });
+// if (document.getElementsByClassName("commandline")[0]) {
+//     document.getElementsByClassName("commandline")[0].select();
+// }
 
-document.getElementsByClassName("commandline")[0].select();
-$('#cli-container').click(function() {
-    document.getElementsByClassName("commandline")[0].select();
-});
+// $('#cli-container').click(function() {
+//     document.getElementsByClassName("commandline")[0].select();
+// });
 
 // Log load completion.
 console.log("CLI loading completed.");

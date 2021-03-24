@@ -61,9 +61,7 @@ function maximizeWindows(source) {
     
 }
 
-$("#wrapper").draggable({
-    cancel: ".main-content" // Restrict dragging to title-bar only.
-  }).resizable();
+
 function updateCommitDetails(callback) {
     $.getJSON('https://api.github.com/repos/EnumC/EnumC.com/git/refs/heads/master', function (data) {
         console.debug(data);
@@ -82,6 +80,9 @@ function updateCommitDetails(callback) {
 
 // On DOM ready.
 $(document).ready(function () {
+    $('#wrapper').hide();
+    $('.desktop').show('slow');
+    createWindow(location.hash);
     canvas = document.getElementById("info-section");
     ctx = canvas.getContext("2d");
     ctx.lineCap = "round";
@@ -225,4 +226,62 @@ function animate() {
         }
     }
     loc++;
+}
+let numWindows = 0;
+
+let xOffsetCoeff = 20;
+let yOffsetCoeff = 20;
+let maxOffset = 100;
+
+function createWindow(path) {
+    numWindows++;
+    let newElem = loadPath(path);
+    let newWindow = $(newElem[0]).css("opacity", "0").appendTo($("#windows"));
+    console.log(newWindow);
+    
+    $(newWindow).draggable({
+        cancel: ".main-content", // Restrict dragging to title-bar only.
+        scroll: false,
+        start: zIndexHandler // Call z index handler to set new z axis.
+    }).resizable();
+    zIndexHandler.call($(newWindow));
+    $(newWindow).click(zIndexHandler);
+    let pos = $(newWindow).offset();
+    let newXOff = xOffsetCoeff * numWindows;
+    while (newXOff > maxOffset) {
+        newXOff = newXOff - maxOffset;
+    }
+    let newYOff = yOffsetCoeff * numWindows;
+    while (newYOff > maxOffset) {
+        newYOff = newYOff - maxOffset;
+    }
+    $(newWindow).css({ top: pos.top + newXOff, left: pos.left + newYOff});
+    console.log(newElem[1]);
+    
+    
+    setTimeout(function () { $(newWindow).css("opacity", "1"); $(newWindow).children().resizable().hide().show("slow"); if (newElem[1]) { newElem[1](); };}, 20);
+    return newWindow;
+}
+
+function destroyWindow(cliElem) {
+    $(cliElem).remove();
+    numWindows--;
+}
+function zIndexHandler() {
+    $(this).css("z-index", numWindows);
+    var needReIndex = false;
+    $("#windows").children().not(this).each(function () {
+        if ((parseInt($(this).css('z-index')) || 0) == numWindows) {
+            needReIndex = true;
+        }
+    });
+    if (needReIndex) {
+        $("#windows").children().not(this).each(function () {
+            var newIndex = (parseInt($(this).css('z-index')) || 0) - 1;
+            if (newIndex < 0) {
+                newIndex = 0;
+            }
+            $(this).css("z-index", newIndex);
+        });
+    }
 }

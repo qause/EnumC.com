@@ -148,15 +148,15 @@ function loadPath(path, funct) {
     switch (path) {
         case "":
             // $("#loaded-content").load("/html/menu.html", placeholderPrep);
-            $("#loaded-content").load("/html/cli.html", function() {
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), function() {
                 initInitialLoadSequence();
                 hideLoading();
-            });
+            }];
             location.hash = "cli";
             path = "cli";
             break;
         case "menu":
-            $("#loaded-content").load("/html/menu.html", placeholderPrep);
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/menu.html"), placeholderPrep];
             location.hash = "menu";
             break;
         case "gui":
@@ -165,11 +165,14 @@ function loadPath(path, funct) {
             location.hash = "gui";
             break;
         case "cli":
-            $("#loaded-content").load("/html/cli.html", funct);
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), funct];
             location.hash = "cli";
             break;
         case "resume":
-            window.open("/files/Eric_Qian_e_Resume_BW_1210.pdf");
+            // window.open("/files/Eric_Qian_e_Resume_BW_1210.pdf");
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function () {
+                addContainerLog('<object style="width: inherit; height: inherit;" data="/files/Eric_Qian_e_Resume_BW_1210.pdf"></object>');
+            }];
             break;
         case "EP-01":
             $("#loaded-content").load("/html/cli.html", function () {
@@ -284,4 +287,3 @@ $(window).on('resize', function (e) {
     
 });
 
-loadPath(location.hash, function () { });

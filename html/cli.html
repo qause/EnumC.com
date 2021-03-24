@@ -4,39 +4,89 @@
     This component manages the
     menu/command interface. 
 -->
+<div id="wrapper" style="background-color: #0C0C0C; height: 80vh; top: 5vh;">
 
-<div class="container" style="top: 0px; opacity: 1; margin-left: 0.5em;height:100%;width:100%;">
-    <div id="cli-loading">
-        <!-- <progress></progress> -->
-    </div>
-    
-    <div data-simplebar id="cli-container" style="color: white;height:90%;display: flex;flex-direction: column-reverse;overflow-y:auto;overflow-x:hidden;">
-        <div class="log">
-            <p class="cli-text" style="margin-bottom: 0px;">Welcome to EricQian.me, the home for Eric Qian's collection of handy tools and portfolio! To navigate, please enter a command.</p>
-            <p class="cli-text" style="margin-bottom: 0px;">Enter "help" for available commands. </p>
-            <p class="cli-text" style="margin-bottom: 0px;">Enter "man command_name_here" for command usage. </p>
-            <p class="cli-text" style="margin-bottom: 0px;">Enter "ls" to list available files/pages, cd to navigate to folders, open to open files. </p>
-            <p class="cli-text" style="margin-bottom: 0px;"><b>Enter "exit" to return to the graphical main menu (WIP).</b></p>
-            <p class="cli-text" style="margin-bottom: 0px;" id="lastModElement"><i>Last modified: </i></p>
-            <br><br>
-            </div>
+    <div class="" id="title-section"
+        style="position: sticky; top:0; height:2em; background-color:white; margin: 0em; outline:solid 2px #7B0000; ">
+        <div class="" style="bottom:0; height: 0.5em; background-color: black; margin: 0em; width: 100%">
+
         </div>
-        <div class="row" style="color:white">
-            <div id="mark" style="white-space: nowrap; display:inline-block;">$</div>
-            <div style="display:inline-block;">
-                <input class="commandline" style="
-                            outline: none;
-                            background-color: transparent;
-                            margin: 0;
-                            width: 100%;
-                            font: inherit;
-                            border: none;
-                            color: inherit;" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-                </input>
+
+        <div class="row">
+            <div style="position: absolute; left: 5px; text-align: center;">
+                <i class="fas fa-window-restore"></i>
+                <p id="path" style="color: black; font-family: 'Segoe UI', 'Lucida Console'; display: inline-block;">
+                    C:\ericqian.me\SYSTEM\INDEX.HTML</p>
+            </div>
+            <div style="position: absolute; right: 5px;">
+                <i class="far fa-window-minimize" style="margin-left: 10px; margin-right:10px;"></i>
+                <i class="far fa-window-maximize"
+                    onclick="maximizeWindows(this.parentNode.parentNode.parentNode.parentNode)"
+                    style="margin-left: 10px; margin-right:10px;"></i>
+                <!-- <a href="javascript:loadPath('menu');"><i class="fas fa-times" style="margin-left: 10px; margin-right:10px; color: black"></i></a> -->
+                <i class="fas fa-times" onclick="destroyWindow(this.parentNode.parentNode.parentNode.parentNode.parentNode)"
+                    style="margin-left: 10px; margin-right:10px; color: black"></i>
             </div>
         </div>
     </div>
-    
-    <script type="text/javascript" src="/js/cli.js"></script>
-    <link rel="stylesheet" href="/css/cli.css">
+
+    <!-- <div style="position: sticky; bottom:0; height:0.5em; background-color:black;">
+
+      </div> -->
+
+    <!-- Primary Page Layout
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="main-content" style="height:90%">
+
+
+
+        <div id="loaded-content" style="position: relative; height:100%;">
+            <div class="container" style="top: 0px; opacity: 1; margin-left: 0.5em;height:100%;width:100%;">
+                <div id="cli-loading">
+                    <!-- <progress></progress> -->
+                </div>
+
+                <div data-simplebar id="cli-container"
+                    style="color: white;height:90%;display: flex;flex-direction: column-reverse;overflow-y:auto;overflow-x:hidden;">
+                    <div class="log">
+                        <p class="cli-text" style="margin-bottom: 0px;">Welcome to EricQian.me, the home for Eric Qian's
+                            collection
+                            of handy tools and portfolio! To navigate, please enter a command.</p>
+                        <p class="cli-text" style="margin-bottom: 0px;">Enter "help" for available commands. </p>
+                        <p class="cli-text" style="margin-bottom: 0px;">Enter "man command_name_here" for command usage.
+                        </p>
+                        <p class="cli-text" style="margin-bottom: 0px;">Enter "ls" to list available files/pages, cd to
+                            navigate to
+                            folders, open to open files. </p>
+                        <p class="cli-text" style="margin-bottom: 0px;"><b>Enter "exit" to return to the graphical main
+                                menu
+                                (WIP).</b></p>
+                        <p class="cli-text" style="margin-bottom: 0px;" id="lastModElement"><i>Last modified: </i></p>
+                        <br><br>
+                    </div>
+                </div>
+                <div class="row" style="color:white">
+                    <div id="mark" style="white-space: nowrap; display:inline-block;">$</div>
+                    <div style="display:inline-block;">
+                        <input class="commandline" style="
+                                    outline: none;
+                                    background-color: transparent;
+                                    margin: 0;
+                                    width: 100%;
+                                    font: inherit;
+                                    border: none;
+                                    color: inherit;" autofocus autocomplete="off" autocorrect="off"
+                            autocapitalize="off" spellcheck="false" onkeydown="keyPressHandler(event, this)">
+                        </input>
+                    </div>
+                </div>
+            </div>
+
+            
+            <link rel="stylesheet" href="/css/cli.css">
+        </div>
+    </div>
+
+</div>
+
 </div>

@@ -17,12 +17,48 @@
 
 @media (orientation: portrait) {
     #wrapper {
-      width: 95%;
-      height: 75%;
-      left: 0vw;
+        width: 95%;
+        height: 75%;
+        left: 0vw;
     }
-  }
+}
 
+.ui-effects-transfer {
+    border: 2px dotted white;
+}
+
+.icon-bar {
+    width: 90px;
+    /* Set a specific width */
+    background-color: #5554;
+    /* Dark-grey background */
+}
+
+.icon-bar a {
+    display: block;
+    /* Make the links appear below each other instead of side-by-side */
+    text-align: center;
+    /* Center-align text */
+    padding: 16px;
+    /* Add some padding */
+    transition: all 0.3s ease;
+    /* Add transition for hover effects */
+    color: white;
+    /* White text color */
+    font-size: 36px;
+    /* Increased font-size */
+}
+
+.icon-bar a:hover {
+    background-color: #000;
+    /* Add a hover color */
+}
+
+.active {
+
+    background-color: #000;
+    /* Add an active/current color */
+}
 
 .bottom-right {
     position: fixed;
@@ -175,7 +211,7 @@ a svg rect {
 }
 
 .simplebar-scrollbar::before {
-    background-color: white !important; 
+    background-color: white !important;
 }
 
 @media screen and (orientation:portrait) {

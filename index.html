@@ -6,19 +6,21 @@
 <html class="ie ie8" lang="en-US" prefix="og: http://ogp.me/ns#">
 <![endif]-->
 <!--[if !(IE 7) | !(IE 8)  ]><!-->
-<html lang="en-US" prefix="og: http://ogp.me/ns#" >
+<html lang="en-US" prefix="og: http://ogp.me/ns#">
 
 <!--<![endif]-->
 <!-- Welcome to EricQian.me! -->
+
 <head>
 
   <!-- Metadata!
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   <title>Eric Qian | Electrical Engineer</title>
-  <meta name="description" content="The home for Eric Qian's collection of handy tools and portfolio! To navigate, please enter a command.">
+  <meta name="description"
+    content="The home for Eric Qian's collection of handy tools and portfolio! To navigate, please enter a command.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <script type="application/ld+json">
     {
         "@context" : "http://schema.org",
@@ -34,7 +36,8 @@
 </script>
 
   <meta property="og:title" content="Eric Qian | Electrical Engineer">
-  <meta property="og:description" content="Welcome to ericqian.me, the home for Eric Qian's collection of handy tools and portfolio! To navigate, please enter a command.">
+  <meta property="og:description"
+    content="Welcome to ericqian.me, the home for Eric Qian's collection of handy tools and portfolio! To navigate, please enter a command.">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ericqian.me">
@@ -49,7 +52,7 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="/images/icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/images/icons/favicon.ico">
-  <link rel="shortcut icon" type="image/png" href="/images/icons/favicon.ico"/>
+  <link rel="shortcut icon" type="image/png" href="/images/icons/favicon.ico" />
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
@@ -63,18 +66,18 @@
       .fadeInAndOut {
         animation: fading 2s infinite;
       }
-  
+
       @keyframes fading {
         0% {
           /* opacity: 0; */
           color: black;
         }
-  
+
         50% {
           /* opacity: 1; */
           color: white;
         }
-  
+
         100% {
           /* opacity: 0; */
           color: black;
@@ -96,26 +99,24 @@
   <link rel="stylesheet" href="/css/skeleton.css">
   <link rel="stylesheet" href="/css/index.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" />
 
   <!-- Javascript
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-    
+    integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+    crossorigin="anonymous"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
     integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
   <script src="/js/jquery.ui.touch-punch.js"></script>
-    
+
   <!-- Experimental Implementation - Load React. replace cdn to cf if moving to permanent. -->
   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-  
+
   <!-- <script type="text/javascript" src="node_modules/vivus/dist/vivus.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script> -->
@@ -127,93 +128,92 @@
   <script src="/node_modules/scrollmagic/scrollmagic/minified/plugins/debug.addIndicators.min.js"></script>
   <script src="/node_modules/scrollmagic/scrollmagic/minified/plugins/animation.gsap.min.js"></script>
   <!-- <script src="node_modules/scrollmagic/scrollmagic/minified/ScrollMagic.min.js"></script> -->
-  
+
   <script src="https://kit.fontawesome.com/c6c09c283a.js"></script>
   <!-- UI/UX Diag Start -->
   <!-- Hotjar Tracking Code for https://ericqian.me -->
-  
+
   <script>
-      (function(h,o,t,j,a,r){
-          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-          h._hjSettings={hjid:1476385,hjsv:6};
-          a=o.getElementsByTagName('head')[0];
-          r=o.createElement('script');r.async=1;
-          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-          a.appendChild(r);
-      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    (function (h, o, t, j, a, r) {
+      h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+      h._hjSettings = { hjid: 1476385, hjsv: 6 };
+      a = o.getElementsByTagName('head')[0];
+      r = o.createElement('script'); r.async = 1;
+      r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
   </script>
   <!-- UI/UX Diag End -->
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  
+
 
 </head>
-<body style="background-color: #0c0c0c; overflow-x: hidden;">
+
+<body style="background-color: #0c0c0c; overflow-x: hidden;overflow-y: hidden;">
 
   <div id="loading">
-    
+
   </div>
   <!-- <div class="portrait-warning">
     <h3>This site has not been optimized for portrait view yet. Please rotate your device. </h3>
   </div> -->
-  
-  <div id="wrapper">
 
-    <div class="" id="title-section" style="position: sticky; top:0; height:2em; background-color:white; margin: 0em; outline:solid 2px #7B0000; z-index:10;">
-      <div class="" style="bottom:0; height: 0.5em; background-color: black; margin: 0em; width: 100%">
+  <div class="desktop" style="color: black;
+              left: 0%;
+              top: 10%;
+              height: 65%;
+              position: absolute;
+              border-color: black;
+              width: 5%; display: none;">
 
-      </div>
+    </img>
+    <div class="icon-bar">
+      <a class="active"><i id="term" class="fa fa-terminal"
+          onclick="let newWindow = createWindow('cli');let that=this;setTimeout(function(){$(that).transfer({to: $(newWindow).children(), duration: 'slow'});},10);"></i></a>
+      <!-- <a onclick="event.preventDefault();window.open('files/Eric_Qian_e_Resume_BW_1210.pdf', '_blank')"><i
+          class="fa fa-file"></i></a> -->
 
-      <div class="row">
-        <div style="position: absolute; left: 5px; text-align: center;">
-          <i class="fas fa-window-restore"></i>
-          <p id="path" style="color: black; font-family: 'Segoe UI', 'Lucida Console'; display: inline-block;">
-            C:\ericqian.me\SYSTEM\INDEX.HTML</p>
-        </div>
-        <div style="position: absolute; right: 5px;">
-          <i class="far fa-window-minimize" style="margin-left: 10px; margin-right:10px;"></i>
-          <i class="far fa-window-maximize" onclick="maximizeWindows(this.parentNode.parentNode.parentNode.parentNode)" style="margin-left: 10px; margin-right:10px;"></i>
-          <!-- <a href="javascript:loadPath('menu');"><i class="fas fa-times" style="margin-left: 10px; margin-right:10px; color: black"></i></a> -->
-          <i class="fas fa-times" onclick="$(this.parentNode.parentNode.parentNode.parentNode).remove();" style="margin-left: 10px; margin-right:10px; color: black"></i>
-        </div>
-      </div>
+      <a onclick="let newWindow = createWindow('resume');let that=this;setTimeout(function(){$(that).transfer({to: $(newWindow).children(), duration: 'slow'});},10);"><i
+          class="fa fa-file"></i></a>
+
+      <a onclick="event.preventDefault();window.open('mailto:eric@enumc.com', '_blank')"><i
+          class="fa fa-envelope"></i></a>
+      <a onclick="event.preventDefault();window.open('https://www.linkedin.com/in/enumc/', '_blank')"><i
+          class="fa fa-linkedin"></i></a>
+      <a onclick="$('#windows').children().each(function () {destroyWindow(this)});"><i class="fa fa-trash"></i></a>
     </div>
-
-    <!-- <div style="position: sticky; bottom:0; height:0.5em; background-color:black;">
-
-    </div> -->
-
-    <!-- Primary Page Layout
-      –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div class="main-content" style="height:90%">
-      
-    
-      
-      <div id="loaded-content" style="position: relative; height:100%;"></div>
-    
-    </div>
+  </div>
+  <div id="windows" style="left:5%; width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;">
 
   </div>
-  
-  <div class="top-right">
+
+  <div class="top-right" style="z-index: -1;">
     <h4 style="margin-bottom: 0px; margin-top: 5%">Eric Qian</h4>
-    <h5 style="font-family: monospace; color: white">©2020</h5>
-    <i id="content-error-icon" class="fas fa-exclamation-triangle" style="color: #DDDDDD; display: none;"> Application Error. Please refer to console.</i>
+    <h5 style="font-family: monospace; color: white">©2021</h5>
+    <i id="content-error-icon" class="fas fa-exclamation-triangle" style="color: #DDDDDD; display: none;"> Application
+      Error. Please refer to console.</i>
   </div>
   <div class="bottom-right">
     <canvas id="info-section" style="background-color: #000000; display: none;"></canvas>
   </div>
-  
-  
 
-<!-- End Document
+
+
+  <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <footer>
     <script type="text/javascript" src="/js/onerror.js"></script>
     <script type="text/javascript" src="/js/preload.js"></script>
     <script type="text/javascript" src="/js/index.js"></script>
+    <script type="text/javascript" src="/js/cli.js"></script>
     <script type="text/javascript" src="/js/router.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
   </footer>
 </body>
+
 </html>

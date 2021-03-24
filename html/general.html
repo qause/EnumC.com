@@ -1,0 +1,54 @@
+<!-- Welcome to the general component.
+    Copyright (C) 2020 Eric Qian. 
+    <https://ericqian.me/>
+    This component manages a general interface. 
+-->
+<div id="wrapper" style="background-color: #0C0C0C; height: 80vh; top: 5vh;">
+
+    <div class="" id="title-section"
+        style="position: sticky; top:0; height:2em; background-color:white; margin: 0em; outline:solid 2px #7B0000; ">
+        <div class="" style="bottom:0; height: 0.5em; background-color: black; margin: 0em; width: 100%">
+
+        </div>
+
+        <div class="row">
+            <div style="position: absolute; left: 5px; text-align: center;">
+                <i class="fas fa-window-restore"></i>
+                <p id="path" style="color: black; font-family: 'Segoe UI', 'Lucida Console'; display: inline-block;">
+                    C:\ericqian.me\SYSTEM\INDEX.HTML</p>
+            </div>
+            <div style="position: absolute; right: 5px;">
+                <i class="far fa-window-minimize" style="margin-left: 10px; margin-right:10px;"></i>
+                <i class="far fa-window-maximize"
+                    onclick="maximizeWindows(this.parentNode.parentNode.parentNode.parentNode)"
+                    style="margin-left: 10px; margin-right:10px;"></i>
+                <!-- <a href="javascript:loadPath('menu');"><i class="fas fa-times" style="margin-left: 10px; margin-right:10px; color: black"></i></a> -->
+                <i class="fas fa-times"
+                    onclick="destroyWindow(this.parentNode.parentNode.parentNode.parentNode.parentNode)"
+                    style="margin-left: 10px; margin-right:10px; color: black"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div style="position: sticky; bottom:0; height:0.5em; background-color:black;">
+
+      </div> -->
+
+    <!-- Primary Page Layout
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="main-content" style="height:calc(90% - 2em)">
+
+
+        <div id="loaded-content" style="position: relative; height:100%;">
+            <div class="container" style="top: 0px; opacity: 1; height:100%;width:100%;margin:0; max-width: none;">
+
+            </div>
+
+
+            <link rel="stylesheet" href="/css/cli.css">
+        </div>
+    </div>
+
+</div>
+
+</div>
