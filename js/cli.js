@@ -36,7 +36,7 @@ function addLog(content, cliElm) {
         cliElm = $("#windows").children().first();
         $("#windows").children().each(function () {
             if (((parseInt($(this).css('z-index')) || 0) > (cliElm.css('z-index')) || 0)) {
-                cliElm = this;
+                cliElm = $(this);
             }
         });
     }
