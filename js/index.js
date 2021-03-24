@@ -26,6 +26,11 @@ let logContent = [];
 let prevWidth = 0;
 let prevHeight = 0;
 
+let previousX = 0;
+let previousY = 0;
+
+let initialTop = 0;
+let initialLeft = 0;
 window.onbeforeunload = function () { 
     // Set position to top prior to refresh, since this is a 
     // single page application, and scroll should not persist
@@ -33,30 +38,43 @@ window.onbeforeunload = function () {
     window.scrollTo(0, 0); 
 };
 function maximizeWindows(source) {
-    console.log(source);
-    initialHeight = $(source).outerHeight(false);
-    initalWidth = $(source).outerWidth(false);
+    console.log($(source).find("#wrapper"));
+    let wrapper = $(source).find("#wrapper");
+    initialHeight = $(source).children().first().outerHeight(false);
+    initalWidth = $(source).children().first().outerWidth(false);
 
-    targetHeight = $(window).height() - ($(source).outerHeight(true) - $(source).outerHeight(false));
-    targetWidth = $(window).width() - ($(source).outerWidth(true) - $(source).outerWidth(false));
+    targetHeight = $(window).height() - (wrapper.outerHeight(true) - wrapper.outerHeight(false));
+    targetWidth = $(window).width() - (wrapper.outerWidth(true) - wrapper.outerWidth(false));
 
     if (initialHeight != targetHeight) {
-        source.style.height = targetHeight + "px";
+        wrapper.css("height", targetHeight);
         prevHeight = initialHeight;
+        previousY = $(source).css("top");
+        $(source).css("top", "0");
+        initialTop = wrapper.css("top");
+        wrapper.css("top", "0");
         
     }
     else {
         console.log("already maximized (Y)");
-        source.style.height = prevHeight + "px";
+        wrapper.css("height", prevHeight);
+        source.style.top = previousY;
+        wrapper.css("top", initialTop);
     }
 
     if (initalWidth != targetWidth) {
-        source.style.width = targetWidth + "px";
+        wrapper.css("width", targetWidth);
         prevWidth = initalWidth;
+        previousX = $(source).css("left");
+        $(source).css("left", "0");
+        initialLeft = wrapper.css("left");
+        wrapper.css("left", "0");
     }
     else {
         console.log("already maximized (X)");
-        source.style.width = prevWidth + "px";
+        wrapper.css("width", prevWidth);
+        source.style.left = previousX;
+        wrapper.css("left", initialLeft);
     }
     
 }
@@ -258,7 +276,7 @@ function createWindow(path, callback) {
     while (newYOff > maxOffset) {
         newYOff = newYOff - maxOffset;
     }
-    $(newWindow).css({ top: pos.top + newXOff, left: pos.left + newYOff});
+    $(newWindow).children().first().css({ top: pos.top + newXOff, left: pos.left + newYOff});
     console.log(newElem[1]);
     
     
