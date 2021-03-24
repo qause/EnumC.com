@@ -84,7 +84,7 @@ $(document).ready(function () {
     $('.desktop').show();
     createWindow(location.hash, function () {
         let appbarWidth = $('.desktop').width();
-        $("#windows").css('left', appbarWidth);
+        // $("#windows").css('left', appbarWidth);
     });
     canvas = document.getElementById("info-section");
     ctx = canvas.getContext("2d");

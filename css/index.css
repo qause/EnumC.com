@@ -78,6 +78,10 @@ body {
     /* Dark-grey background */
 }
 
+.desktop {
+    z-index: 9999;
+}
+
 .icon-bar a {
     display: block;
     /* Make the links appear below each other instead of side-by-side */
