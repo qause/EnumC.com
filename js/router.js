@@ -175,6 +175,13 @@ function loadPath(path, funct) {
                 addContainerLog('<object style="width: inherit; height: inherit;" data="/files/Eric_Qian_e_Resume_BW_1210.pdf"><iframe src = "/libs/ViewerJS/#../../files/Eric_Qian_e_Resume_BW_1210.pdf" style="width: inherit; height: 100%" allowfullscreen webkitallowfullscreen></iframe></object>',e);
             }];
             break;
+        case "projects":
+            // window.open("/files/Eric_Qian_e_Resume_BW_1210.pdf");
+            location.hash = "projects";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function (e) {
+                addContainerLog('<iframe src = "https://bananium.com/projects" style="width: inherit; height: 100%" allowfullscreen webkitallowfullscreen></iframe>', e);
+            }];
+            break;
         case "EP-01":
             $("#loaded-content").load("/html/cli.html", function (e) {
                 addLog("<div class='cli-text'>Please wait... If nothing happens, click here: https://www.youtube.com/watch?v=7pK42-nQZ-4</div>",e);

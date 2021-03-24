@@ -184,7 +184,7 @@
           class="fa fa-envelope"></i><span class="tooltiptext">Email</span></a>
       <a class="tooltip" onclick="event.preventDefault();window.open('https://www.linkedin.com/in/enumc/', '_blank')"><i
           class="fa fa-linkedin"></i><span class="tooltiptext">LinkedIn</span></a>
-      <a class="tooltip" onclick="event.preventDefault();window.open('https://bananium.com/projects', '_blank')"><i
+      <a class="tooltip" onclick="let newWindow = createWindow('projects');let that=this;setTimeout(function(){$(that).transfer({to: $(newWindow).children(), duration: 'slow'});},250);"><i
           class="fa fa-rocket"></i><span class="tooltiptext">Projects</span></a>
       <a class="tooltip" onclick="$('#windows').children().each(function () {destroyWindow(this)});"><i
           class="fa fa-trash"></i><span class="tooltiptext">Clear</span></a>
