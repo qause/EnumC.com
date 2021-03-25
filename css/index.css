@@ -310,8 +310,8 @@ a svg rect {
         /* Full-width */
         /* background-color: #555; */
         /* Dark-grey background */
-        overflow: auto;
-        /* Overflow due to float */
+        overflow: visible; 
+        /* allow tooltip text to show up outside of div. */
     }
 
     .icon-bar a {
@@ -329,5 +329,32 @@ a svg rect {
         /* White text color */
         font-size: min(10vw, 5vh);
         /* Increased font size */
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        bottom: 110%;
+        z-index: 9999;
+        top:auto;
+        left: 50%;
+        margin-left: -60px;
+    }
+
+    .tooltip .tooltiptext::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: black transparent transparent transparent;
     }
 }
