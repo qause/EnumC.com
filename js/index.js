@@ -292,11 +292,14 @@ function createWindow(path, callback) {
             if (path.charAt(0) == '#') {
                 path = path.substr(1);
             }
+            if (path == "") {
+                path = "index";
+            }
             if (currentDirectory == "/") {
-                $(newWindow).find("#path").text('C:\\ENUMC.COM\\' + path.toUpperCase() + ".HTML");
+                $(newWindow).find("#path").text('C:\\ERICQIAN.ME\\' + path.toUpperCase() + ".HTML");
             }
             else {
-                $(newWindow).find("#path").text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
+                $(newWindow).find("#path").text('C:\\ERICQIAN.ME\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
             }
             
             clearInterval(waitUntilExist);
