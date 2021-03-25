@@ -702,17 +702,18 @@ function commandHandler(command, args, directoriesAndFiles, cliElm) {
                     logContent = [];
                     break;
                 case "exit":
-                    loadPath("menu", function () { });
+                    // loadPath("menu", function () { });
+                    destroyWindow(cliElm);
                     break;
                 default:
                     addLog("<div class='cli-text'>eCLI: " + command + ": command not found" + ".</div>", cliElm);
             }
         addLog('<br><br>', cliElm);
-        document.getElementsByClassName("commandline")[0].select();
+        $(cliElm).find("commandline").select();
     }
     catch (err) {
-        let errCommand = $('.commandline').val().trim();
-        $("#cli-container").html("<p class='cli-text'>CLI command error: " + err + ".</p>" +
+        let errCommand = $(cliElm).find('.commandline').val().trim();
+        $(cliElm).find("#cli-container").html("<p class='cli-text'>CLI command error: " + err + ".</p>" +
             "<br><p class='cli-text'>Command: " + errCommand + ".</p>" +
             "<p class='cli-text'>Please report this issue with the abovementioned error message here: \n<a href='https://github.com/EnumC/EnumC.com/issues'>https://github.com/EnumC/EnumC.com/issues</a></p>");
         throw new Error("CLI command error: " + err);

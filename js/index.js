@@ -267,12 +267,14 @@ function createWindow(path, callback) {
     });
     zIndexHandler.call($(newWindow));
     $(newWindow).click(zIndexHandler);
-   
+
 
     console.log(newElem[1]);
 
     let waitUntilExist = setInterval(function () {
-        $(newWindow).children().resizable();
+        $(newWindow).children().resizable({
+            handles: "all"
+        });
         if ($(newWindow).children().is(".ui-resizable")) {
             let pos = $(newWindow).children().offset();
             let newXOff = xOffsetCoeff * numWindows;
@@ -285,7 +287,9 @@ function createWindow(path, callback) {
             }
             $(newWindow).children().first().css({ top: pos.top + newXOff, left: pos.left + newYOff });
             $(newWindow).css("opacity", "1");
-            $(newWindow).children().resizable().hide().show("slow", callback);
+            $(newWindow).children().resizable({
+                handles: "all"
+            }).hide().show("slow", callback);
             if (newElem[1]) {
                 newElem[1]($(newWindow));
             };
@@ -301,7 +305,7 @@ function createWindow(path, callback) {
             else {
                 $(newWindow).find("#path").text('C:\\ERICQIAN.ME\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
             }
-            
+
             clearInterval(waitUntilExist);
         }
     }, 50)
@@ -329,4 +333,14 @@ function zIndexHandler() {
             $(this).css("z-index", newIndex);
         });
     }
+}
+
+function openWithTransfer(path, elm) {
+    let newWindow = createWindow(path);
+    let waitUntilExist = setInterval(function () {
+        if ($(newWindow).children().length && $(elm).length) {
+            $(elm).transfer({ to: $(newWindow).children(), duration: 'slow' });
+            clearInterval(waitUntilExist);
+        }
+    }, 10);
 }
