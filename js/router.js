@@ -182,6 +182,12 @@ function loadPath(path, funct) {
                 addContainerLog('<iframe src = "https://bananium.com/projects" style="width: inherit; height: 100%" allowfullscreen webkitallowfullscreen></iframe>', e);
             }];
             break;
+        case "linkedin":
+            location.hash = "linkedin";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function (e) {
+                addContainerLog('<iframe src = "https://www.linkedin.com/in/enumc" style="width: inherit; height: 100%" allowfullscreen webkitallowfullscreen></iframe>', e);
+            }];
+            break;
         case "EP-01":
             $("#loaded-content").load("/html/cli.html", function (e) {
                 addLog("<div class='cli-text'>Please wait... If nothing happens, click here: https://www.youtube.com/watch?v=7pK42-nQZ-4</div>",e);
@@ -244,18 +250,18 @@ function loadPath(path, funct) {
             }];
             break;
     }
-    if (validPath) {
-        if (currentDirectory == "/") {
-            $('#path').text('C:\\ENUMC.COM\\' + path.toUpperCase() + ".HTML");
-        }
-        else {
-            $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
-        }
-        currentPath = path.toLowerCase();
-    }
-    else {
-        $('#path').text('UNKNOWN');
-    }
+    // if (validPath) {
+    //     if (currentDirectory == "/") {
+    //         $('#path').text('C:\\ENUMC.COM\\' + path.toUpperCase() + ".HTML");
+    //     }
+    //     else {
+    //         $('#path').text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
+    //     }
+    //     currentPath = path.toLowerCase();
+    // }
+    // else {
+    //     $('#path').text('UNKNOWN');
+    // }
 }
 
 let debResizeTimer; // Used for resize debounce

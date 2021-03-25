@@ -289,6 +289,16 @@ function createWindow(path, callback) {
             if (newElem[1]) {
                 newElem[1]($(newWindow));
             };
+            if (path.charAt(0) == '#') {
+                path = path.substr(1);
+            }
+            if (currentDirectory == "/") {
+                $(newWindow).find("#path").text('C:\\ENUMC.COM\\' + path.toUpperCase() + ".HTML");
+            }
+            else {
+                $(newWindow).find("#path").text('C:\\ENUMC.COM\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
+            }
+            
             clearInterval(waitUntilExist);
         }
     }, 50)

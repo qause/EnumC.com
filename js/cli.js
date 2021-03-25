@@ -218,16 +218,16 @@ function commandHandler(command, args, directoriesAndFiles, cliElm) {
                     }
                     $('#mark').text("$ [" + currentDirectory + "]");
                     console.log("currentDirectory changed to: " + currentDirectory);
-                    switch (currentDirectory) {
-                        case "/":
-                            $('#path').text('C:\\ERICQIAN.ME\\');
-                            break;
-                        case "~/":
-                            $('#path').text('C:\\ERICQIAN.ME\\SYSTEM\\');
-                            break;
-                        default:
-                            $('#path').text('C:\\ERICQIAN.ME\\' + currentDirectory + '\\');
-                    }
+                    // switch (currentDirectory) {
+                    //     case "/":
+                    //         $('#path').text('C:\\ERICQIAN.ME\\');
+                    //         break;
+                    //     case "~/":
+                    //         $('#path').text('C:\\ERICQIAN.ME\\SYSTEM\\');
+                    //         break;
+                    //     default:
+                    //         $('#path').text('C:\\ERICQIAN.ME\\' + currentDirectory + '\\');
+                    // }
                     break;
                 }
                 case "time":
