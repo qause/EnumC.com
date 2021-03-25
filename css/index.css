@@ -80,6 +80,14 @@ body {
 
 .desktop {
     z-index: 9999;
+    color: black;
+    left: 0%;
+    top: 10%;
+    height: 90%;
+    position: absolute;
+    border-color: black;
+    width: auto;
+    display: none;
 }
 
 .icon-bar a {
@@ -285,5 +293,41 @@ a svg rect {
 
     body {
         background: url(/images/bliss.jpg) center center fixed;
+    }
+
+    .desktop {
+        left: 10%;
+        top: 90%;
+        width: 80%;
+        height: auto;
+        position: absolute;
+        border-color: black;
+        display: none;
+    }
+
+    .icon-bar {
+        width: 100%;
+        /* Full-width */
+        /* background-color: #555; */
+        /* Dark-grey background */
+        overflow: auto;
+        /* Overflow due to float */
+    }
+
+    .icon-bar a {
+        float: left;
+        /* Float links side by side */
+        text-align: center;
+        /* Center-align text */
+        width: 16.6%;
+        /* Equal width (5 icons with 20% width each = 100%) */
+        padding: 12px 0;
+        /* Some top and bottom padding */
+        transition: all 0.3s ease;
+        /* Add transition for hover effects */
+        color: white;
+        /* White text color */
+        font-size: min(10vw, 5vh);
+        /* Increased font size */
     }
 }
