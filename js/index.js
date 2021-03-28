@@ -255,7 +255,7 @@ let yOffsetCoeff = 20;
 let maxOffset = 100;
 
 function createWindow(path, callback) {
-    numWindows++;
+    
     let newElem = loadPath(path);
     let newWindow = $(newElem[0]).css("opacity", "0").appendTo($("#windows"));
     console.log(newWindow);
@@ -305,6 +305,8 @@ function createWindow(path, callback) {
             else {
                 $(newWindow).find("#path").text('C:\\ERICQIAN.ME\\' + currentDirectory + '\\' + path.toUpperCase() + ".HTML");
             }
+
+            numWindows++;
 
             clearInterval(waitUntilExist);
         }
