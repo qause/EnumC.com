@@ -169,14 +169,14 @@ function loadPath(path, funct) {
             return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/cli.html"), funct];
             break;
         case "resume":
-            // window.open("/files/Eric_Qian_e_Resume_BW_1210.pdf");
+            // window.open("/files/Eric_Qian_e_Resume_BW_040221.pdf");
             location.hash = "resume";
             return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function (e) {
-                addContainerLog('<object type="application/pdf" style="width: inherit; height: inherit;" data="/files/Eric_Qian_e_Resume_BW_1210.pdf"><iframe src = "/libs/ViewerJS/?zoom=page-width#../../files/Eric_Qian_e_Resume_BW_1210.pdf" style="width: 100%; height: 100%" allowfullscreen webkitallowfullscreen></iframe></object>',e);
+                addContainerLog('<object type="application/pdf" style="width: inherit; height: inherit;" data="/files/Eric_Qian_e_Resume_BW_040221.pdf"><iframe src = "/libs/ViewerJS/?zoom=page-width#../../files/Eric_Qian_e_Resume_BW_040221.pdf" style="width: 100%; height: 100%" allowfullscreen webkitallowfullscreen></iframe></object>',e);
             }];
             break;
         case "projects":
-            // window.open("/files/Eric_Qian_e_Resume_BW_1210.pdf");
+            // window.open("/files/Eric_Qian_e_Resume_BW_040221.pdf");
             location.hash = "projects";
             return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function (e) {
                 addContainerLog('<iframe src = "https://bananium.com/projects" style="width: inherit; height: 100%" allowfullscreen webkitallowfullscreen></iframe>', e);
