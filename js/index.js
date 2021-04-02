@@ -263,6 +263,7 @@ function createWindow(path, callback) {
     $(newWindow).draggable({
         cancel: ".main-content", // Restrict dragging to title-bar only.
         scroll: false,
+        zIndex: 10000,
         start: zIndexHandler // Call z index handler to set new z axis.
     });
     zIndexHandler.call($(newWindow));
