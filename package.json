@@ -22,6 +22,7 @@
     "live-server": "^1.2.1"
   },
   "dependencies": {
+    "@simonwep/selection-js": "^2.1.0",
     "react-grid-layout": "^0.17.1",
     "scrollmagic": "^2.0.7",
     "vivus": "^0.4.4"

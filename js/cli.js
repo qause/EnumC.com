@@ -185,7 +185,7 @@ function commandHandler(command, args, directoriesAndFiles, cliElm) {
         historyIndex += 1;
         switch (command) {
             case "help":
-                addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, open, echo, fetch, time, man, ping, pwd, login, su, whoami, md5, clear, exit</div>', cliElm);
+                addLog('<div class="cli-text">available commands: </div><br><div class="cli-text">cd, ls, cat, open, echo, fetch, time, man, ping, pwd, login, su, whoami, md5, clear, exit</div>', cliElm);
                 break;
             case "cd": {
 
@@ -248,6 +248,7 @@ function commandHandler(command, args, directoriesAndFiles, cliElm) {
                     addLog("<img src='" + data.message + "' style='height:20em' class=''></img> <p style='font-size: 6px;'>Image supplied by https://dog.ceo/dog-api/ <3</p>", cliElm);
                 });
                 break;
+            case "cat":
             case "open": {
                 let files = directoriesAndFiles[currentDirectory].split("\n");
                 let fileFound = false;
@@ -578,7 +579,7 @@ function commandHandler(command, args, directoriesAndFiles, cliElm) {
 
                     });
                     $(cliElm).find("#loginInfo").select();
-                }, 0);  // chrome workaround - wait until DOM update.
+                }, 10);  // chrome workaround - wait until DOM update.
                 break;
             case "su":
                 // addLog("not implemented");
@@ -639,8 +640,9 @@ function commandHandler(command, args, directoriesAndFiles, cliElm) {
                         }
 
                     });
-                }, 0);
-                $(cliElm).find('#loginInfo').select();
+                    $(cliElm).find('#loginInfo').select();
+                }, 10);
+                
                 break;
             case "whoami": {
                 // addLog("not implemented");
@@ -811,6 +813,10 @@ function keyPressHandler(event, elm) {
         $(elm).val("");
     }
 
+}
+
+function focusElm(elm) {
+    $(elm).focus();
 }
 // function centerCLI() {
 //     $("#wrapper").css("left", "");
