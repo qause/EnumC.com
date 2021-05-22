@@ -182,6 +182,12 @@ function loadPath(path, funct) {
                 addContainerLog('<iframe src = "https://bananium.com/projects" style="width: inherit; height: 100%" allowfullscreen webkitallowfullscreen></iframe>', e);
             }];
             break;
+        case "blog":
+            location.hash = "blog";
+            return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function (e) {
+                addContainerLog('<iframe src = "https://blog.ericqian.me" style="width: inherit; height: 100%" allowfullscreen webkitallowfullscreen></iframe>', e);
+            }];
+            break;
         case "linkedin":
             location.hash = "linkedin";
             return [$("<div style='width: 100 %; height: auto;'></div>").load("/html/general.html"), function (e) {
