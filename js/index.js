@@ -3,6 +3,7 @@
     <https://ericqian.me/>
     All rights reserved.
 */
+
 let points = undefined;
 let canvas = undefined;
 let ctx = undefined;
