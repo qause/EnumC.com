@@ -265,7 +265,8 @@ function commandHandler(command, args, directoriesAndFiles, cliElm) {
                     addLog("<div class='cli-text'>open: " + args + ": No such file. To open a directory, use cd. " + ".</div>", cliElm);
                 }
                 else {
-                    loadPath(args, function () { });
+                    // loadPath(args, function () { });
+                    createWindow(args);
                 }
                 break;
             }

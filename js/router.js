@@ -131,7 +131,7 @@ function loadPath(path, funct) {
         origPath = origPath.substr(1);
     }
     console.log("router: Switching to path: " + path + " from path: " + origPath);
-    console.log("router : with callback: ");
+    console.log("router: with callback: ");
     console.log(funct);
 
     if (origPath == "menu") {
