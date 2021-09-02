@@ -5,6 +5,37 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 
 <url>
+  <loc>https://enumc.com/</loc>
+</url>
+<url>
+  <loc>https://enumc.com/#cli</loc>
+</url>
+<url>
+  <loc>https://enumc.com/#gui</loc>
+</url>
+<url>
+  <loc>https://node1.enumc.com/</loc>
+</url>
+<url>
+  <loc>https://enumc.com/files/Eric_Qian_e_Resume_BW_040221.pdf</loc>
+</url>
+<url>
+  <loc>https://enumc.com/files/Eric_Qian_e_Resume_latest.pdf</loc>
+</url>
+<url>
+  <loc>https://blog.enumc.com</loc>
+</url>
+<url>
+  <loc>https://blog.enumc.com/barracuda/</loc>
+</url>
+<url>
+  <loc>https://blog.enumc.com/u-are-u/</loc>
+</url>
+<url>
+  <loc>https://blog.enumc.com/hello-world/</loc>
+</url>
+
+<url>
   <loc>https://ericqian.me/</loc>
 </url>
 <url>
@@ -18,6 +49,9 @@
 </url>
 <url>
   <loc>https://ericqian.me/files/Eric_Qian_e_Resume_BW_040221.pdf</loc>
+</url>
+<url>
+  <loc>https://ericqian.me/files/Eric_Qian_e_Resume_latest.pdf</loc>
 </url>
 <url>
   <loc>https://blog.ericqian.me</loc>
